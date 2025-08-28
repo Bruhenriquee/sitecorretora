@@ -9,13 +9,17 @@ function initializeApp() {
     setupSmoothScrolling();
     setupFormHandlers();
     setupCarousel();
-    setupNavbarScroll();
     loadFipeBrands();
+    setupActiveLinkHighlighting();
     setupAddressSearch();
     setupFormValidation();
     setupAnimations();
     setupFAQ();
+    setupQuizForm();
     setupInsuranceTypeSelection();
+    setupPlanSelection();
+    setupPrivacyConsent();
+    setupRecalculate();
 }
 
 // Configuração do menu mobile
@@ -60,17 +64,32 @@ function setupSmoothScrolling() {
     });
 }
 
-// Configuração da navbar no scroll
-function setupNavbarScroll() {
-    const navbar = document.querySelector('nav');
-    
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 100) {
-            navbar.classList.add('navbar-scrolled');
-        } else {
-            navbar.classList.remove('navbar-scrolled');
-        }
-    });
+// Configuração do destaque de link ativo na navbar
+function setupActiveLinkHighlighting() {
+    const sections = Array.from(document.querySelectorAll('section[id]'));
+    const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+    const nav = document.querySelector('nav');
+    if (!nav) return;
+    const navHeight = nav.offsetHeight;
+
+    const activateLink = (id) => {
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${id}` && !link.classList.contains('bg-blue-600')) {
+                link.classList.add('active');
+            }
+        });
+    };
+
+    const onScroll = () => {
+        const scrollPosition = window.pageYOffset;
+        const currentSection = sections.find(section => scrollPosition >= (section.offsetTop - navHeight - 1));
+        
+        activateLink(currentSection ? currentSection.id : 'home');
+    };
+
+    window.addEventListener('scroll', onScroll);
+    onScroll(); // Chama uma vez para definir o estado inicial
 }
 
 // Configuração do carrossel
@@ -163,6 +182,19 @@ async function validateCep(cep) {
     }
 }
 
+// --- FUNÇÕES DE UI PARA API FIPE ---
+function setFipeLoadingState(isLoading) {
+    const modeloContainer = document.getElementById('modelo').parentNode;
+    const anoContainer = document.getElementById('ano').parentNode;
+
+    [modeloContainer, anoContainer].forEach(container => {
+        const label = container.querySelector('label');
+        const select = container.querySelector('select');
+        label.classList.toggle('skeleton', isLoading);
+        select.classList.toggle('skeleton', isLoading);
+    });
+}
+
 // Carregar marcas da FIPE
 async function loadFipeBrands() {
     const marcaSelect = document.getElementById('marca');
@@ -208,12 +240,10 @@ async function loadFipeModels(brandCode) {
     }
     
     try {
-        modeloSelect.innerHTML = '<option value="">Carregando modelos...</option>';
+        setFipeLoadingState(true);
         modeloSelect.disabled = false;
-        
         const response = await fetch(`https://parallelum.com.br/fipe/api/v1/carros/marcas/${brandCode}/modelos`);
         const data = await response.json();
-        
         modeloSelect.innerHTML = '<option value="">Selecione o modelo</option>';
         
         data.modelos.forEach(model => {
@@ -230,6 +260,8 @@ async function loadFipeModels(brandCode) {
     } catch (error) {
         console.error('Erro ao carregar modelos FIPE:', error);
         modeloSelect.innerHTML = '<option value="">Erro ao carregar modelos</option>';
+    } finally {
+        setFipeLoadingState(false);
     }
 }
 
@@ -244,12 +276,12 @@ async function loadFipeYears(brandCode, modelCode) {
     }
     
     try {
-        anoSelect.innerHTML = '<option value="">Carregando anos...</option>';
+        // Apenas o campo de ano precisa do skeleton aqui
+        document.getElementById('ano').parentNode.querySelector('label').classList.add('skeleton');
+        document.getElementById('ano').classList.add('skeleton');
         anoSelect.disabled = false;
-        
         const response = await fetch(`https://parallelum.com.br/fipe/api/v1/carros/marcas/${brandCode}/modelos/${modelCode}/anos`);
         const years = await response.json();
-        
         anoSelect.innerHTML = '<option value="">Selecione o ano</option>';
         
         years.forEach(year => {
@@ -262,6 +294,9 @@ async function loadFipeYears(brandCode, modelCode) {
     } catch (error) {
         console.error('Erro ao carregar anos FIPE:', error);
         anoSelect.innerHTML = '<option value="">Erro ao carregar anos</option>';
+    } finally {
+        document.getElementById('ano').parentNode.querySelector('label').classList.remove('skeleton');
+        document.getElementById('ano').classList.remove('skeleton');
     }
 }
 
@@ -622,113 +657,176 @@ async function handleQuoteSubmission(e) {
     const resultDiv = document.getElementById('quote-result');
     const resultContent = document.getElementById('quote-result-content');
     
-    // Validar todos os campos
-    const form = e.target;
-    const formData = new FormData(form);
-    let isValid = true;
-    
-    // Obter tipo de seguro selecionado
-    const insuranceType = document.querySelector('input[name="insurance-type"]:checked').value;
-    
-    // Validar campos obrigatórios baseados no tipo de seguro
-    const commonFields = ['nome', 'cpf', 'nascimento', 'telefone', 'email', 'cep', 'rua', 'numero', 'bairro', 'cidade', 'estado'];
-    let specificFields = [];
-    
-    if (insuranceType === 'auto') {
-        specificFields = ['marca', 'modelo', 'ano', 'chassi', 'cep-pernoite', 'tipo-uso'];
-    } else if (insuranceType === 'residencial') {
-        specificFields = ['tipo-imovel', 'area-construida', 'valor-imovel', 'ano-construcao', 'finalidade-imovel'];
-    } else if (insuranceType === 'vida') {
-        specificFields = ['capital-segurado', 'profissao', 'renda-mensal'];
-    }
-    
-    const requiredFields = [...commonFields, ...specificFields];
-    
-    requiredFields.forEach(fieldId => {
-        const field = document.getElementById(fieldId);
-        if (field && !validateField(field)) {
-            isValid = false;
-        }
-    });
-    
-    if (!isValid) {
+    // Valida todos os passos visíveis do quiz antes de submeter
+    if (!quizManager.validateAllVisibleSteps()) {
         alert('Por favor, corrija os erros no formulário antes de continuar.');
         return;
     }
     
+    // Coletar todos os dados do formulário em um objeto
+    const insuranceType = document.querySelector('input[name="insurance-type"]:checked').value;
+    const quoteData = {
+        insuranceType: insuranceType,
+        nome: document.getElementById('nome').value,
+        cpf: document.getElementById('cpf').value,
+        nascimento: document.getElementById('nascimento').value,
+        telefone: document.getElementById('telefone').value,
+        email: document.getElementById('email').value,
+        cep: document.getElementById('cep').value,
+        // Auto
+        marca: document.getElementById('marca').value,
+        modelo: document.getElementById('modelo').value,
+        ano: document.getElementById('ano').value,
+        tipoUso: document.getElementById('tipo-uso').value,
+        cepPernoite: document.getElementById('cep-pernoite').value,
+        // Residencial
+        valorImovel: document.getElementById('valor-imovel').value,
+        valorConteudo: document.getElementById('valor-conteudo').value,
+        areaConstruida: document.getElementById('area-construida').value,
+        anoConstrucao: document.getElementById('ano-construcao').value,
+        tipoImovel: document.getElementById('tipo-imovel').value,
+        finalidadeImovel: document.getElementById('finalidade-imovel').value,
+        tipoConstrucao: document.getElementById('tipo-construcao').value,
+        coberturas: Array.from(document.querySelectorAll('input[name="coberturas"]:checked')).map(cb => cb.value),
+        seguranca: Array.from(document.querySelectorAll('input[name="seguranca"]:checked')).map(cb => cb.value),
+        // Vida
+        capitalSegurado: document.getElementById('capital-segurado').value,
+        profissao: document.getElementById('profissao').value,
+        rendaMensal: document.getElementById('renda-mensal').value,
+        esportesRadicais: document.getElementById('esportes-radicais').value,
+        fumante: document.getElementById('fumante').value,
+        doencasGraves: document.getElementById('doencas-graves').value,
+    };
+
     // Mostrar loading
     submitButton.innerHTML = '<div class="loading-spinner"></div>Calculando...';
     submitButton.disabled = true;
     
-    try {
+    // Usamos um pequeno timeout para garantir que o spinner seja renderizado antes do cálculo pesado.
+    setTimeout(async () => {
+        try {
         let insuranceData;
-        
+        const insuranceType = quoteData.insuranceType;
+
         if (insuranceType === 'auto') {
-            // Obter valor FIPE
-            const marca = document.getElementById('marca').value;
-            const modelo = document.getElementById('modelo').value;
-            const ano = document.getElementById('ano').value;
-            
-            const fipeValue = await getFipeValue(marca, modelo, ano);
-            
-            if (!fipeValue) {
-                throw new Error('Não foi possível obter o valor FIPE do veículo');
-            }
-            
-            insuranceData = calculateAutoInsurance(fipeValue, form);
-            
+            const fipeValue = await getFipeValue(quoteData.marca, quoteData.modelo, quoteData.ano);
+            if (!fipeValue) throw new Error('Não foi possível obter o valor FIPE do veículo');
+            quoteData.fipeValue = fipeValue;
+            insuranceData = calculateAutoInsurance(quoteData);
+            resultContent.innerHTML = generatePlansHtml(insuranceData.plans);
         } else if (insuranceType === 'residencial') {
-            insuranceData = calculateResidentialInsurance(form);
-            
+            insuranceData = calculateResidentialInsurance(quoteData);
+            resultContent.innerHTML = insuranceData.resultHTML;
         } else if (insuranceType === 'vida') {
-            insuranceData = calculateLifeInsurance(form);
+            insuranceData = calculateLifeInsurance(quoteData);
+            resultContent.innerHTML = insuranceData.resultHTML;
         }
-        
-        // Mostrar resultado
-        resultContent.innerHTML = insuranceData.resultHTML;
-        
+
         resultDiv.classList.remove('hidden');
         resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        
-    } catch (error) {
-        console.error('Erro ao calcular cotação:', error);
-        alert('Erro ao calcular cotação. Tente novamente ou entre em contato conosco.');
-    } finally {
-        submitButton.innerHTML = 'Calcular Cotação';
-        submitButton.disabled = false;
+
+        } catch (error) {
+            console.error('Erro ao calcular cotação:', error);
+            alert('Erro ao calcular cotação. Tente novamente ou entre em contato conosco.');
+        } finally {
+            submitButton.innerHTML = 'Calcular Cotação';
+            submitButton.disabled = false;
+        }
+    }, 100);
+}
+
+// Configuração do botão para recalcular
+function setupRecalculate() {
+    const recalculateBtn = document.getElementById('recalculate-btn');
+    if (recalculateBtn) {
+        recalculateBtn.addEventListener('click', resetQuoteForm);
     }
 }
 
+// Função para resetar o formulário de cotação
+function resetQuoteForm() {
+    const form = document.getElementById('quote-form');
+    const resultDiv = document.getElementById('quote-result');
+    const quoteSection = document.getElementById('cotacao');
+
+    // 1. Esconder a seção de resultados
+    resultDiv.classList.add('hidden');
+    // Restaura a estrutura original da área de resultado, caso tenha sido alterada pela tela de confirmação.
+    resultDiv.innerHTML = `
+        <div class="text-center">
+            <h3 class="text-2xl font-bold text-green-800 mb-4">Cotação Calculada</h3>
+            <div id="quote-result-content"></div>
+            <p class="text-sm text-green-600 mt-4">Esta é uma estimativa baseada nos dados fornecidos. Nossa equipe entrará em contato para finalizar sua cotação oficial.</p>
+            <div class="mt-6">
+                <button id="recalculate-btn" type="button" class="bg-gray-500 text-white px-6 py-2 rounded-lg font-semibold hover:bg-gray-600 transition duration-300"><i class="fas fa-redo-alt mr-2"></i>Calcular Novamente</button>
+            </div>
+        </div>
+    `;
+
+    // 2. Resetar os campos do formulário
+    form.reset();
+
+    // 3. Limpar estilos de validação
+    form.querySelectorAll('.field-invalid, .field-valid').forEach(field => {
+        field.classList.remove('field-invalid', 'field-valid');
+    });
+    form.querySelectorAll('.error-message').forEach(msg => msg.classList.add('hidden'));
+
+    // Resetar o consentimento e desabilitar o formulário
+    const consentCheckbox = document.getElementById('privacy-consent');
+    const quoteFieldset = document.getElementById('quote-fieldset');
+    if (consentCheckbox) consentCheckbox.checked = false;
+    if (quoteFieldset) quoteFieldset.disabled = true;
+
+    // 4. Esconder todas as seções de seguro específicas
+    document.querySelectorAll('.insurance-section').forEach(section => {
+        section.classList.add('hidden');
+    });
+
+    // 5. Atualizar os campos obrigatórios para o estado inicial (nenhum)
+    updateRequiredFields(null);
+
+    // 6. Resetar o quiz para o primeiro passo
+    quizManager.reset();
+
+    // 7. Rolar a tela de volta para o formulário
+    quoteSection.scrollIntoView({ behavior: 'smooth' });
+}
+
 // Calcular valor do seguro auto
-function calculateAutoInsurance(fipeValue, form) {
-    const formData = new FormData(form);
+function calculateAutoInsurance(data) {
+    // --- Fatores de Cálculo ---
+    // A lógica abaixo é uma SIMULAÇÃO. Em um cenário real, os cálculos seriam feitos por um sistema de backend seguro.
+    // Os multiplicadores aumentam ou diminuem o valor base do seguro.
+
+    // Calcular idade do condutor principal
+    const birthDate = new Date(data.nascimento);
+    const age = new Date().getFullYear() - birthDate.getFullYear();    
     
-    // Calcular idade
-    const birthDate = new Date(formData.get('nascimento') || document.getElementById('nascimento').value);
-    const age = new Date().getFullYear() - birthDate.getFullYear();
+    // Fator base: Define o ponto de partida do prêmio do seguro.
+    let basePercentage = 0.07; // 7% do valor FIPE como base.
     
-    // Fatores de cálculo
-    let basePercentage = 0.07; // 7% base
-    
-    // Ajuste por idade
+    // 1. Ajuste por Idade do Condutor
+    // Condutores mais jovens tendem a ter um prêmio mais alto devido à percepção de maior risco.
     let ageMultiplier = 1;
     let ageGroup = '';
     if (age < 25) {
-        ageMultiplier = 1.4;
+        ageMultiplier = 1.4; // +40%
         ageGroup = 'Jovem (maior risco)';
     } else if (age >= 25 && age <= 40) {
-        ageMultiplier = 1;
+        ageMultiplier = 1; // Fator neutro
         ageGroup = 'Adulto (risco médio)';
     } else if (age > 40 && age <= 60) {
-        ageMultiplier = 0.9;
+        ageMultiplier = 0.9; // -10%
         ageGroup = 'Experiente (menor risco)';
     } else {
-        ageMultiplier = 1.1;
+        ageMultiplier = 1.1; // +10%
         ageGroup = 'Senior (risco médio-alto)';
     }
     
-    // Ajuste por tipo de uso
-    const tipoUso = formData.get('tipo-uso') || document.getElementById('tipo-uso').value;
+    // 2. Ajuste por Tipo de Uso do Veículo
+    // O uso comercial ou por aplicativo aumenta a exposição ao risco (mais tempo na rua).
+    const tipoUso = data.tipoUso;
     let usageMultiplier = 1;
     let usageType = '';
     switch (tipoUso) {
@@ -737,216 +835,211 @@ function calculateAutoInsurance(fipeValue, form) {
             usageType = 'Uso particular';
             break;
         case 'aplicativo':
-            usageMultiplier = 1.6;
+            usageMultiplier = 1.6; // +60%
             usageType = 'Aplicativo (maior risco)';
             break;
         case 'empresarial':
-            usageMultiplier = 1.3;
+            usageMultiplier = 1.3; // +30%
             usageType = 'Empresarial (risco elevado)';
             break;
     }
     
-    // Ajuste por CEP (simulado baseado na região)
-    const cepPernoite = (formData.get('cep-pernoite') || document.getElementById('cep-pernoite').value).replace(/\D/g, '');
+    // 3. Ajuste por Localização (CEP de Pernoite)
+    // Simulação baseada no primeiro dígito do CEP para representar diferentes níveis de risco (roubo, furto) por região.
+    const cepPernoite = data.cepPernoite.replace(/\D/g, '');
     let locationMultiplier = 1;
     let location = '';
     
     const firstDigit = parseInt(cepPernoite[0]);
     if (firstDigit <= 1) {
-        locationMultiplier = 1.3; // São Paulo - maior risco
+        locationMultiplier = 1.3; // +30%
         location = 'Grande São Paulo (alto risco)';
     } else if (firstDigit <= 2) {
-        locationMultiplier = 1.2; // Rio de Janeiro
+        locationMultiplier = 1.2; // +20%
         location = 'Rio de Janeiro (risco elevado)';
     } else if (firstDigit <= 5) {
-        locationMultiplier = 1.1; // Outras capitais
+        locationMultiplier = 1.1; // +10%
         location = 'Capital/Região metropolitana';
     } else {
-        locationMultiplier = 0.9; // Interior
+        locationMultiplier = 0.9; // -10%
         location = 'Interior (menor risco)';
     }
     
-    // Ajuste por ano do veículo
-    const anoVeiculo = parseInt((formData.get('ano') || document.getElementById('ano').options[document.getElementById('ano').selectedIndex]?.text)?.split(' ')[0] || new Date().getFullYear());
+    // 4. Ajuste por Idade do Veículo
+    // Carros mais antigos podem ter peças mais difíceis de encontrar, mas o valor do veículo é menor.
+    const anoVeiculo = parseInt(document.getElementById('ano').options[document.getElementById('ano').selectedIndex]?.text?.split(' ')[0] || new Date().getFullYear());
     const currentYear = new Date().getFullYear();
     const vehicleAge = currentYear - anoVeiculo;
     
     let ageVehicleMultiplier = 1;
     let vehicleAgeGroup = '';
     if (vehicleAge <= 3) {
-        ageVehicleMultiplier = 1.2; // Carro novo - valor alto
+        ageVehicleMultiplier = 1.2; // +20% (peças caras, visado para roubo)
         vehicleAgeGroup = 'Veículo novo (0-3 anos)';
     } else if (vehicleAge <= 8) {
-        ageVehicleMultiplier = 1; // Seminovo
+        ageVehicleMultiplier = 1; // Fator neutro
         vehicleAgeGroup = 'Veículo seminovo (4-8 anos)';
     } else if (vehicleAge <= 15) {
-        ageVehicleMultiplier = 0.8; // Usado
+        ageVehicleMultiplier = 0.8; // -20%
         vehicleAgeGroup = 'Veículo usado (9-15 anos)';
     } else {
-        ageVehicleMultiplier = 0.6; // Muito antigo
+        ageVehicleMultiplier = 0.6; // -40%
         vehicleAgeGroup = 'Veículo antigo (15+ anos)';
     }
     
-    // Cálculo final
+    // --- Cálculo Final ---
+    // Multiplica o percentual base por todos os fatores de ajuste.
     const finalPercentage = basePercentage * ageMultiplier * usageMultiplier * locationMultiplier * ageVehicleMultiplier;
-    const annualValue = fipeValue * finalPercentage;
-    const monthlyValue = annualValue / 12;
-    
-    const resultHTML = `
-        <div class="grid md:grid-cols-2 gap-6">
-            <div class="bg-blue-50 p-4 rounded-lg">
-                <h4 class="font-bold text-blue-800 mb-2">Valor FIPE do Veículo</h4>
-                <p class="text-2xl font-bold text-blue-600">R$ ${fipeValue.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>
-            </div>
-            <div class="bg-green-50 p-4 rounded-lg">
-                <h4 class="font-bold text-green-800 mb-2">Estimativa do Seguro Anual</h4>
-                <p class="text-2xl font-bold text-green-600">R$ ${annualValue.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>
-                <p class="text-sm text-green-700 mt-1">Aproximadamente R$ ${monthlyValue.toLocaleString('pt-BR', {minimumFractionDigits: 2})}/mês</p>
-            </div>
-        </div>
-        <div class="mt-4 p-4 bg-gray-50 rounded-lg">
-            <h4 class="font-bold text-gray-800 mb-2">Fatores Considerados no Cálculo:</h4>
-            <ul class="text-sm text-gray-600 space-y-1">
-                <li>• Valor FIPE do veículo: R$ ${fipeValue.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</li>
-                <li>• Idade do condutor: ${ageGroup}</li>
-                <li>• Tipo de uso: ${usageType}</li>
-                <li>• CEP de pernoite: ${location}</li>
-                <li>• Ano do veículo: ${vehicleAgeGroup}</li>
-            </ul>
-        </div>
-    `;
-    
-    return {
-        resultHTML,
-        annualValue,
-        monthlyValue,
-        ageGroup,
-        usageType,
-        location,
-        vehicleAge: vehicleAgeGroup
+    // Aplica o percentual final sobre o valor FIPE do veículo para obter o prêmio base.
+    const premioBase = data.fipeValue * finalPercentage;
+
+    // --- Geração de Planos Realista ---
+    // Define custos para coberturas adicionais. Podem ser fixos ou um % do valor do veículo.
+    const custosAdicionais = {
+        colisaoIncendio: data.fipeValue * 0.015, // 1.5% do valor FIPE
+        carroReserva: 120, // Custo fixo
+        vidrosFarois: 180, // Custo fixo
+        danosMorais: 90, // Custo fixo
     };
+
+    const planoEssencial = {
+        name: 'Essencial',
+        price: premioBase,
+        features: ['Roubo e Furto', 'Assistência 24h', 'Cobertura para Terceiros'],
+        isRecommended: false,
+    };
+
+    const planoCompleto = {
+        name: 'Completo',
+        price: premioBase + custosAdicionais.colisaoIncendio + custosAdicionais.carroReserva,
+        features: [...planoEssencial.features, 'Colisão e Incêndio', 'Carro Reserva'],
+        isRecommended: true,
+    };
+
+    const planoPremium = {
+        name: 'Premium',
+        price: planoCompleto.price + custosAdicionais.vidrosFarois + custosAdicionais.danosMorais,
+        features: [...planoCompleto.features, 'Vidros e Faróis', 'Danos Morais'],
+        isRecommended: false,
+    };
+
+    const plans = [planoEssencial, planoCompleto, planoPremium];
+
+    return { plans };
 }
 
 // Calcular valor do seguro residencial
-function calculateResidentialInsurance(form) {
-    const formData = new FormData(form);
-    
-    // Obter dados do imóvel
-    const valorImovel = parseFloat(document.getElementById('valor-imovel').value);
-    const areaConstructa = parseFloat(document.getElementById('area-construida').value);
-    const anoConstructo = parseInt(document.getElementById('ano-construcao').value);
-    const tipoImovel = document.getElementById('tipo-imovel').value;
-    const finalidadeImovel = document.getElementById('finalidade-imovel').value;
-    const possuiPortaria = document.getElementById('portaria').value;
-    
-    // Cálculo base: 0.3% a 0.8% do valor do imóvel
-    let basePercentage = 0.005; // 0.5% base
-    
-    // Ajuste por tipo de imóvel
-    let propertyMultiplier = 1;
-    let propertyType = '';
+function calculateResidentialInsurance(data) {
+    // --- Fatores de Cálculo ---
+    // A lógica abaixo é uma SIMULAÇÃO. Em um cenário real, os cálculos seriam feitos por um sistema de backend seguro.
+
+    // Coleta e conversão dos dados do formulário
+    const valorImovel = parseFloat(data.valorImovel) || 0;
+    const valorConteudo = parseFloat(data.valorConteudo) || 0;
+    const anoConstrucao = parseInt(data.anoConstrucao) || new Date().getFullYear();
+    const tipoImovel = data.tipoImovel;
+    const usoImovel = data.finalidadeImovel;
+    const tipoConstrucao = data.tipoConstrucao;
+    const sistemasSeguranca = data.seguranca || [];
+    const coberturasAdicionais = data.coberturas || [];
+
+    // --- Cálculo do Prêmio Base ---
+    // O prêmio inicial é calculado separadamente para a estrutura do imóvel e para o conteúdo.
+    const basePercentageStructure = 0.002; // 0.2% do valor de reconstrução do imóvel.
+    const basePercentageContent = 0.007;   // 0.7% do valor dos bens/conteúdo.
+
+    // Soma dos valores base para obter o prêmio inicial.
+    let premioBase = (valorImovel * basePercentageStructure) + (valorConteudo * basePercentageContent);
+
+    // --- Fatores de Ajuste (Multiplicadores) ---
+    // Cada característica do imóvel aplica um multiplicador que aumenta ou diminui o prêmio base.
+    let propertyMultiplier = 1, usageMultiplier = 1, constructionMultiplier = 1, ageMultiplier = 1, securityMultiplier = 1;
+    let fatoresResumo = []; // Array para armazenar o resumo que será exibido ao usuário.
+
+    // 1. Ajuste por tipo de imóvel (Apartamentos são geralmente mais seguros que casas).
     switch (tipoImovel) {
-        case 'casa':
-            propertyMultiplier = 1.1;
-            propertyType = 'Casa (risco médio-alto)';
-            break;
-        case 'apartamento':
-            propertyMultiplier = 0.9;
-            propertyType = 'Apartamento (menor risco)';
-            break;
-        case 'sobrado':
-            propertyMultiplier = 1.2;
-            propertyType = 'Sobrado (maior risco)';
-            break;
-        case 'kitnet':
-            propertyMultiplier = 0.8;
-            propertyType = 'Kitnet (baixo risco)';
-            break;
-        case 'cobertura':
-            propertyMultiplier = 1.3;
-            propertyType = 'Cobertura (alto risco)';
-            break;
+        case 'casa': propertyMultiplier = 1.2; fatoresResumo.push('Tipo: Casa'); break;
+        case 'apartamento': propertyMultiplier = 0.8; fatoresResumo.push('Tipo: Apartamento'); break;
+        case 'sobrado': propertyMultiplier = 1.25; fatoresResumo.push('Tipo: Sobrado'); break;
+        case 'casa_condominio': propertyMultiplier = 0.9; fatoresResumo.push('Tipo: Casa em Condomínio'); break;
     }
-    
-    // Ajuste por finalidade
-    let purposeMultiplier = 1;
-    let purposeType = '';
-    switch (finalidadeImovel) {
-        case 'residencial':
-            purposeMultiplier = 1;
-            purposeType = 'Residencial';
-            break;
-        case 'aluguel':
-            purposeMultiplier = 1.2;
-            purposeType = 'Aluguel (maior risco)';
-            break;
-        case 'temporada':
-            purposeMultiplier = 1.4;
-            purposeType = 'Temporada (alto risco)';
-            break;
-        case 'comercial':
-            purposeMultiplier = 1.5;
-            purposeType = 'Comercial (alto risco)';
-            break;
+
+    // 2. Ajuste por uso do imóvel (Imóveis de veraneio ficam vazios por mais tempo, aumentando o risco).
+    switch (usoImovel) {
+        case 'moradia': usageMultiplier = 1.0; fatoresResumo.push('Uso: Moradia Habitual'); break;
+        case 'veraneio': usageMultiplier = 1.5; fatoresResumo.push('Uso: Veraneio (risco maior)'); break;
     }
-    
-    // Ajuste por idade da construção
-    const currentYear = new Date().getFullYear();
-    const buildingAge = currentYear - anoConstructo;
-    let ageMultiplier = 1;
-    let ageGroup = '';
-    
-    if (buildingAge <= 5) {
-        ageMultiplier = 0.9;
-        ageGroup = 'Construção nova (0-5 anos)';
-    } else if (buildingAge <= 15) {
-        ageMultiplier = 1;
-        ageGroup = 'Construção recente (6-15 anos)';
-    } else if (buildingAge <= 30) {
-        ageMultiplier = 1.1;
-        ageGroup = 'Construção antiga (16-30 anos)';
+
+    // 3. Ajuste por tipo de construção (Madeira tem maior risco de incêndio que alvenaria).
+    switch (tipoConstrucao) {
+        case 'alvenaria': constructionMultiplier = 1.0; fatoresResumo.push('Construção: Alvenaria'); break;
+        case 'madeira': constructionMultiplier = 1.8; fatoresResumo.push('Construção: Madeira (risco de incêndio)'); break;
+        case 'mista': constructionMultiplier = 1.4; fatoresResumo.push('Construção: Mista'); break;
+    }
+
+    // 4. Ajuste por idade da construção (Imóveis mais antigos podem ter mais problemas estruturais/elétricos).
+    const buildingAge = new Date().getFullYear() - anoConstrucao;
+    if (buildingAge <= 5) { ageMultiplier = 0.95; fatoresResumo.push('Idade do Imóvel: Novo (0-5 anos)'); }
+    else if (buildingAge <= 20) { ageMultiplier = 1.0; fatoresResumo.push('Idade do Imóvel: Recente (6-20 anos)'); }
+    else if (buildingAge <= 40) { ageMultiplier = 1.15; fatoresResumo.push('Idade do Imóvel: Antigo (21-40 anos)'); }
+    else { ageMultiplier = 1.3; fatoresResumo.push('Idade do Imóvel: Muito Antigo (40+ anos)'); }
+
+    // 5. Ajuste por sistemas de segurança (Aplicam descontos, reduzindo o prêmio).
+    let securityFactors = [];
+    if (sistemasSeguranca.includes('alarme')) { securityMultiplier *= 0.95; securityFactors.push('Alarme'); } // 5% de desconto
+    if (sistemasSeguranca.includes('camera')) { securityMultiplier *= 0.97; securityFactors.push('Câmeras'); } // 3% de desconto
+    if (sistemasSeguranca.includes('portaria')) { securityMultiplier *= 0.90; securityFactors.push('Portaria 24h'); } // 10% de desconto
+    if (securityFactors.length > 0) {
+        fatoresResumo.push(`Segurança: ${securityFactors.join(', ')} (desconto)`);
     } else {
-        ageMultiplier = 1.3;
-        ageGroup = 'Construção muito antiga (30+ anos)';
+        fatoresResumo.push('Segurança: Nenhum sistema informado');
     }
+
+    // Aplica todos os multiplicadores de risco ao prêmio base.
+    let premioAjustado = premioBase * propertyMultiplier * usageMultiplier * constructionMultiplier * ageMultiplier * securityMultiplier;
+
+    // 6. Adicionar custo das coberturas adicionais
+    // Cada cobertura opcional tem um custo fixo ou percentual que é somado ao final.
+    let custoCoberturasAdicionais = 0;
+    let coberturasContratadas = [];
+    if (coberturasAdicionais.includes('danos_eletricos')) { custoCoberturasAdicionais += (valorConteudo * 0.0015); coberturasContratadas.push('Danos Elétricos'); }
+    if (coberturasAdicionais.includes('vendaval')) { custoCoberturasAdicionais += (valorImovel * 0.0005); coberturasContratadas.push('Vendaval/Granizo'); }
+    if (coberturasAdicionais.includes('roubo_furto')) { custoCoberturasAdicionais += (valorConteudo * 0.005); coberturasContratadas.push('Roubo/Furto de Bens'); }
+    if (coberturasAdicionais.includes('resp_civil')) { custoCoberturasAdicionais += 50; coberturasContratadas.push('Responsabilidade Civil'); } // Valor fixo
     
-    // Ajuste por segurança
-    let securityMultiplier = 1;
-    let securityType = '';
-    if (possuiPortaria === 'sim') {
-        securityMultiplier = 0.85;
-        securityType = 'Com portaria 24h (desconto)';
-    } else {
-        securityMultiplier = 1;
-        securityType = 'Sem portaria 24h';
+    if (coberturasContratadas.length === 0) {
+        coberturasContratadas.push('Apenas cobertura básica contra incêndio');
     }
-    
-    // Cálculo final
-    const finalPercentage = basePercentage * propertyMultiplier * purposeMultiplier * ageMultiplier * securityMultiplier;
-    const annualValue = valorImovel * finalPercentage;
+
+    // --- Cálculo Final ---
+    // O valor final é o prêmio ajustado pelos riscos mais o custo das coberturas extras.
+    const annualValue = premioAjustado + custoCoberturasAdicionais;
     const monthlyValue = annualValue / 12;
     
+    // Montagem do HTML de resultado
     const resultHTML = `
         <div class="grid md:grid-cols-2 gap-6">
             <div class="bg-blue-50 p-4 rounded-lg">
-                <h4 class="font-bold text-blue-800 mb-2">Valor do Imóvel</h4>
-                <p class="text-2xl font-bold text-blue-600">R$ ${valorImovel.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>
+                <h4 class="font-bold text-blue-800 mb-2">Cobertura Total</h4>
+                <p class="text-lg font-semibold text-blue-700">Imóvel: ${formatCurrency(valorImovel)}</p>
+                <p class="text-lg font-semibold text-blue-700">Conteúdo: ${formatCurrency(valorConteudo)}</p>
             </div>
             <div class="bg-green-50 p-4 rounded-lg">
                 <h4 class="font-bold text-green-800 mb-2">Estimativa do Seguro Anual</h4>
-                <p class="text-2xl font-bold text-green-600">R$ ${annualValue.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>
-                <p class="text-sm text-green-700 mt-1">Aproximadamente R$ ${monthlyValue.toLocaleString('pt-BR', {minimumFractionDigits: 2})}/mês</p>
+                <p class="text-2xl font-bold text-green-600">${formatCurrency(annualValue)}</p>
+                <p class="text-sm text-green-700 mt-1">Aproximadamente ${formatCurrency(monthlyValue)}/mês</p>
+            </div>
+        </div>
+        <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+            <h4 class="font-bold text-gray-800 mb-3">Resumo da Cotação:</h4>
+            <div class="grid md:grid-cols-2 gap-x-6 gap-y-2 text-sm text-gray-600">
+                ${fatoresResumo.map(fator => `<div>• ${fator}</div>`).join('')}
             </div>
         </div>
         <div class="mt-4 p-4 bg-gray-50 rounded-lg">
-            <h4 class="font-bold text-gray-800 mb-2">Fatores Considerados no Cálculo:</h4>
+            <h4 class="font-bold text-gray-800 mb-3">Coberturas Incluídas:</h4>
             <ul class="text-sm text-gray-600 space-y-1">
-                <li>• Valor do imóvel: R$ ${valorImovel.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</li>
-                <li>• Área construída: ${areaConstructa}m²</li>
-                <li>• Tipo: ${propertyType}</li>
-                <li>• Finalidade: ${purposeType}</li>
-                <li>• Idade da construção: ${ageGroup}</li>
-                <li>• Segurança: ${securityType}</li>
+                ${coberturasContratadas.map(cobertura => `<li><i class="fas fa-check-circle text-green-500 mr-2"></i>${cobertura}</li>`).join('')}
             </ul>
         </div>
     `;
@@ -959,66 +1052,71 @@ function calculateResidentialInsurance(form) {
 }
 
 // Calcular valor do seguro de vida
-function calculateLifeInsurance(form) {
-    const formData = new FormData(form);
+function calculateLifeInsurance(data) {
+    // --- Fatores de Cálculo ---
+    // A lógica abaixo é uma SIMULAÇÃO. Em um cenário real, os cálculos seriam feitos por um sistema de backend seguro.
+
+    // Coleta e conversão dos dados do formulário
+    const capitalSegurado = parseFloat(data.capitalSegurado) || 0;
+    const profissao = data.profissao;
+    const rendaMensal = parseFloat(data.rendaMensal) || 0;
+    const esportesRadicais = data.esportesRadicais;
+    const fumante = data.fumante;    
+    const doencasGraves = data.doencasGraves;
     
-    // Obter dados do segurado
-    const capitalSegurado = parseFloat(document.getElementById('capital-segurado').value);
-    const profissao = document.getElementById('profissao').value;
-    const rendaMensal = parseFloat(document.getElementById('renda-mensal').value);
-    const esportesRadicais = document.getElementById('esportes-radicais').value;
-    const fumante = document.getElementById('fumante').value;
-    const doencasGraves = document.getElementById('doencas-graves').value;
-    
-    // Calcular idade
-    const birthDate = new Date(document.getElementById('nascimento').value);
+    // Calcular idade do segurado
+    const birthDate = new Date(data.nascimento);
     const age = new Date().getFullYear() - birthDate.getFullYear();
     
-    // Cálculo base: 0.5% a 2% do capital segurado por ano
-    let basePercentage = 0.008; // 0.8% base
+    // Fator base: Define o ponto de partida do prêmio do seguro.
+    let basePercentage = 0.008; // 0.8% do capital segurado como base.
     
-    // Ajuste por idade
+    // --- Fatores de Ajuste (Multiplicadores) ---
+    // Cada característica do segurado aplica um multiplicador que aumenta ou diminui o prêmio base.
+
+    // 1. Ajuste por idade (O risco aumenta significativamente com a idade).
     let ageMultiplier = 1;
     let ageGroup = '';
     if (age < 30) {
-        ageMultiplier = 0.7;
+        ageMultiplier = 0.7; // -30%
         ageGroup = 'Jovem (18-29 anos) - baixo risco';
     } else if (age >= 30 && age <= 45) {
-        ageMultiplier = 1;
+        ageMultiplier = 1; // Fator neutro
         ageGroup = 'Adulto (30-45 anos) - risco normal';
     } else if (age >= 46 && age <= 60) {
-        ageMultiplier = 1.5;
+        ageMultiplier = 1.5; // +50%
         ageGroup = 'Meia idade (46-60 anos) - risco elevado';
     } else {
-        ageMultiplier = 2.5;
+        ageMultiplier = 2.5; // +150%
         ageGroup = 'Senior (60+ anos) - alto risco';
     }
     
-    // Ajuste por profissão (simplificado)
+    // 2. Ajuste por profissão (Algumas profissões têm maior risco de acidentes).
     let professionMultiplier = 1;
     let professionRisk = '';
-    const riskProfessions = ['policial', 'bombeiro', 'piloto', 'minerador', 'soldador'];
-    const lowRiskProfessions = ['professor', 'contador', 'advogado', 'médico', 'engenheiro'];
+    // Listas simplificadas para simulação
+    const riskProfessions = ['policial', 'bombeiro', 'piloto', 'minerador', 'soldador', 'segurança'];
+    const lowRiskProfessions = ['professor', 'contador', 'advogado', 'médico', 'engenheiro', 'escritório'];
     
     const profissaoLower = profissao.toLowerCase();
     if (riskProfessions.some(prof => profissaoLower.includes(prof))) {
-        professionMultiplier = 1.8;
+        professionMultiplier = 1.8; // +80%
         professionRisk = 'Profissão de alto risco';
     } else if (lowRiskProfessions.some(prof => profissaoLower.includes(prof))) {
-        professionMultiplier = 0.9;
+        professionMultiplier = 0.9; // -10%
         professionRisk = 'Profissão de baixo risco';
     } else {
-        professionMultiplier = 1;
+        professionMultiplier = 1; // Fator neutro
         professionRisk = 'Profissão de risco médio';
     }
     
-    // Ajuste por hábitos
+    // 3. Ajuste por hábitos e saúde (Fatores que impactam diretamente a expectativa de vida).
     let habitsMultiplier = 1;
-    let habitsInfo = [];
+    let habitsInfo = []; // Array para armazenar o resumo que será exibido ao usuário.
     
     if (fumante === 'sim') {
-        habitsMultiplier *= 1.5;
-        habitsInfo.push('Fumante (50% aumento)');
+        habitsMultiplier *= 1.5; // +50%
+        habitsInfo.push('Fumante (risco aumentado)');
     }
     
     if (esportesRadicais === 'sim') {
@@ -1027,19 +1125,22 @@ function calculateLifeInsurance(form) {
     }
     
     if (doencasGraves === 'sim') {
-        habitsMultiplier *= 1.4;
-        habitsInfo.push('Histórico de doenças (40% aumento)');
+        habitsMultiplier *= 1.4; // +40%
+        habitsInfo.push('Histórico de doenças graves');
     }
     
     if (habitsInfo.length === 0) {
         habitsInfo.push('Sem fatores de risco adicionais');
     }
     
-    // Cálculo final
+    // --- Cálculo Final ---
+    // Multiplica o percentual base por todos os fatores de ajuste.
     const finalPercentage = basePercentage * ageMultiplier * professionMultiplier * habitsMultiplier;
+    // Aplica o percentual final sobre o capital segurado.
     const annualValue = capitalSegurado * finalPercentage;
     const monthlyValue = annualValue / 12;
     
+    // Montagem do HTML de resultado
     const resultHTML = `
         <div class="grid md:grid-cols-2 gap-6">
             <div class="bg-blue-50 p-4 rounded-lg">
@@ -1057,7 +1158,7 @@ function calculateLifeInsurance(form) {
             <ul class="text-sm text-gray-600 space-y-1">
                 <li>• Capital segurado: R$ ${capitalSegurado.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</li>
                 <li>• Idade: ${ageGroup}</li>
-                <li>• Profissão: ${profissionRisk}</li>
+                <li>• Profissão: ${professionRisk}</li>
                 <li>• Hábitos e saúde: ${habitsInfo.join(', ')}</li>
                 <li>• Renda mensal: R$ ${rendaMensal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</li>
             </ul>
@@ -1145,28 +1246,241 @@ function setupFAQ() {
             const answer = document.getElementById(targetId);
             const icon = this.querySelector('i');
             
+            const isOpening = answer.classList.contains('hidden');
+
             // Fechar outras perguntas abertas
             faqQuestions.forEach(otherQuestion => {
                 if (otherQuestion !== this) {
                     const otherTargetId = otherQuestion.getAttribute('data-target');
                     const otherAnswer = document.getElementById(otherTargetId);
                     const otherIcon = otherQuestion.querySelector('i');
-                    
+
                     otherAnswer.classList.add('hidden');
-                    otherIcon.style.transform = 'rotate(0deg)';
+                    otherIcon.classList.remove('rotate-180');
                 }
             });
-            
-            // Toggle da pergunta atual
-            if (answer.classList.contains('hidden')) {
-                answer.classList.remove('hidden');
-                icon.style.transform = 'rotate(180deg)';
-            } else {
-                answer.classList.add('hidden');
-                icon.style.transform = 'rotate(0deg)';
-            }
+
+            // Alterna a visibilidade da resposta e a rotação do ícone
+            answer.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180', isOpening);
         });
     });
+}
+
+// Configuração da seleção de plano
+function setupPlanSelection() {
+    const resultContent = document.getElementById('quote-result-content');
+    if (!resultContent) return;
+
+    resultContent.addEventListener('click', function(e) {
+        const button = e.target.closest('.plan-selection-btn');
+        const resultDiv = document.getElementById('quote-result');
+        if (!button) return;
+
+        const planName = button.dataset.planName;
+        const planPrice = parseFloat(button.dataset.planPrice);
+
+        const confirmationHTML = `
+            <div class="text-center p-6 bg-white rounded-lg shadow-lg animate-fadeInUp">
+                <i class="fas fa-check-circle text-green-500 text-5xl mb-4"></i>
+                <h3 class="text-2xl font-bold text-gray-800">Ótima escolha!</h3>
+                <p class="text-gray-600 mt-2 mb-4">
+                    Você selecionou o <strong>Plano ${planName}</strong>. Um de nossos corretores especializados entrará em contato em breve para finalizar os detalhes da sua cotação.
+                </p>
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <p class="text-lg text-blue-800">Valor aproximado:</p>
+                    <p class="text-3xl font-bold text-blue-600">${formatCurrency(planPrice)}<span class="text-base font-normal text-gray-500">/mês</span></p>
+                </div>
+            </div>
+        `;
+
+        // Substitui todo o conteúdo da área de resultado pela mensagem de confirmação
+        if (resultDiv) {
+            resultDiv.innerHTML = confirmationHTML;
+        }
+    });
+}
+
+// Configuração do consentimento de privacidade
+function setupPrivacyConsent() {
+    const consentCheckbox = document.getElementById('privacy-consent');
+    const quoteFieldset = document.getElementById('quote-fieldset');
+
+    if (!consentCheckbox || !quoteFieldset) return;
+
+    // A fieldset começa desabilitada no HTML.
+    // Apenas precisamos lidar com o evento de mudança.
+    consentCheckbox.addEventListener('change', function() {
+        // Habilita ou desabilita o fieldset baseado no estado do checkbox
+        quoteFieldset.disabled = !this.checked;
+    });
+}
+
+// Gerenciador do estado e lógica do formulário em passos (Quiz)
+const quizManager = {
+    currentStepIndex: 0,
+    form: null,
+    nextBtn: null,
+    prevBtn: null,
+    submitBtn: null,
+    progressBar: null,
+    allSteps: [],
+    
+    init() {
+        this.form = document.getElementById('quote-form');
+        if (!this.form || this.form.dataset.quizInitialized) return;
+
+        this.nextBtn = document.getElementById('next-btn');
+        this.prevBtn = document.getElementById('prev-btn');
+        this.submitBtn = document.getElementById('submit-quote');
+        this.progressBar = document.getElementById('progress-bar');
+        this.allSteps = Array.from(this.form.querySelectorAll('.form-step'));
+
+        // Adiciona os listeners apenas uma vez
+        this.nextBtn.addEventListener('click', () => this.nextStep());
+        this.prevBtn.addEventListener('click', () => this.prevStep());
+
+        this.form.dataset.quizInitialized = 'true';
+        this.updateView();
+    },
+
+    reset() {
+        this.currentStepIndex = 0;
+        this.updateView();
+    },
+
+    getVisibleSteps() {
+        const checkedRadio = document.querySelector('input[name="insurance-type"]:checked');
+        const insuranceType = checkedRadio ? checkedRadio.value : null;
+
+        return this.allSteps.filter(step => {
+            const stepType = step.getAttribute('data-insurance-type');
+            // Passo sem tipo específico é sempre considerado na contagem de passos.
+            if (!stepType) {
+                return true;
+            }
+            // Passo com tipo específico só é considerado se o tipo correspondente estiver selecionado.
+            return stepType === insuranceType;
+        });
+    },
+
+    updateView() {
+        const visibleSteps = this.getVisibleSteps();
+        
+        // Garante que o índice não seja maior que o número de passos visíveis
+        if (this.currentStepIndex >= visibleSteps.length) {
+            this.currentStepIndex = visibleSteps.length - 1;
+        }
+        
+        visibleSteps.forEach((step, index) => {
+            step.classList.toggle('hidden', index !== this.currentStepIndex);
+        });
+
+        const isFirstStep = this.currentStepIndex === 0;
+        const isLastStep = this.currentStepIndex === visibleSteps.length - 1;
+
+        this.prevBtn.classList.toggle('hidden', isFirstStep);
+        this.nextBtn.classList.toggle('hidden', isLastStep);
+        this.submitBtn.classList.toggle('hidden', !isLastStep);
+
+        const progress = ((this.currentStepIndex + 1) / visibleSteps.length) * 100;
+        this.progressBar.style.width = `${progress}%`;
+    },
+
+    validateCurrentStep() {
+        const currentStepDiv = this.getVisibleSteps()[this.currentStepIndex];
+        if (!currentStepDiv) return false;
+
+        // Validação especial para o primeiro passo (seleção do tipo de seguro)
+        if (this.currentStepIndex === 0) {
+            const checkedRadio = this.form.querySelector('input[name="insurance-type"]:checked');
+            if (!checkedRadio) {
+                // Pode-se usar um toast ou um feedback visual melhor no futuro.
+                alert('Por favor, selecione um tipo de seguro para continuar.');
+                return false;
+            }
+        }
+
+        const inputs = currentStepDiv.querySelectorAll('input[required], select[required]');
+        let isStepValid = true;
+        inputs.forEach(input => {
+            if (!validateField(input)) {
+                isStepValid = false;
+            }
+        });
+        return isStepValid;
+    },
+
+    validateAllVisibleSteps() {
+        const visibleSteps = this.getVisibleSteps();
+        let isFormValid = true;
+        visibleSteps.forEach(step => {
+            const inputs = step.querySelectorAll('input[required], select[required]');
+            inputs.forEach(input => {
+                // Verificamos isFormValid aqui para evitar que um campo válido
+                // sobrescreva um erro anterior.
+                if (!validateField(input)) {
+                    isFormValid = false;
+                }
+            });
+        });
+        return isFormValid;
+    },
+
+    nextStep() {
+        if (this.validateCurrentStep()) {
+            const visibleSteps = this.getVisibleSteps();
+            if (this.currentStepIndex < visibleSteps.length - 1) {
+                this.currentStepIndex++;
+                this.updateView();
+            }
+        }
+    },
+
+    prevStep() {
+        if (this.currentStepIndex > 0) {
+            this.currentStepIndex--;
+            this.updateView();
+        }
+    }
+};
+
+// Gerar HTML para os planos de comparação
+function generatePlansHtml(plans) {
+    const allFeatures = [...new Set(plans.flatMap(p => p.features))];
+
+    const plansHtml = plans.map(plan => {
+        const isRecommended = plan.isRecommended;
+        const monthlyPrice = plan.price / 12;
+
+        return `
+            <div class="bg-white p-6 rounded-lg shadow-md border-2 ${isRecommended ? 'border-blue-600' : 'border-transparent'} relative">
+                ${isRecommended ? '<span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">RECOMENDADO</span>' : ''}
+                <h4 class="text-xl font-bold ${isRecommended ? 'text-blue-800' : 'text-gray-800'}">${plan.name}</h4>
+                <p class="text-3xl font-bold text-gray-900 my-4">${formatCurrency(monthlyPrice)}<span class="text-base font-normal text-gray-500">/mês</span></p>
+                <p class="text-xs text-gray-500 mb-4">Valor anual: ${formatCurrency(plan.price)}</p>
+                <ul class="space-y-2 text-gray-600 mb-6">
+                    ${allFeatures.map(feature => {
+                        const hasFeature = plan.features.includes(feature);
+                        return `
+                            <li class="flex items-center ${hasFeature ? '' : 'text-gray-400 line-through'}">
+                                <i class="fas ${hasFeature ? 'fa-check-circle text-green-500' : 'fa-times-circle text-red-400'} mr-2"></i>
+                                ${feature}
+                            </li>
+                        `;
+                    }).join('')}
+                </ul>
+                <button class="w-full ${isRecommended ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800'} py-2 rounded-lg font-semibold plan-selection-btn" data-plan-name="${plan.name}" data-plan-price="${monthlyPrice}">Selecionar Plano</button>
+            </div>
+        `;
+    }).join('');
+
+    return `<div class="grid md:grid-cols-3 gap-6 text-left">${plansHtml}</div>`;
+}
+
+// Configuração do formulário em passos (Quiz)
+function setupQuizForm() {
+    quizManager.init();
 }
 
 // Configuração da seleção do tipo de seguro
@@ -1174,8 +1488,8 @@ function setupInsuranceTypeSelection() {
     const insuranceTypeRadios = document.querySelectorAll('.insurance-type-radio');
     const insuranceSections = document.querySelectorAll('.insurance-section');
     
-    // Configurar campos obrigatórios iniciais (seguro auto é padrão)
-    updateRequiredFields('auto');
+    // Ao carregar, nenhum tipo está selecionado, então nenhum campo específico é obrigatório.
+    updateRequiredFields(null);
     
     insuranceTypeRadios.forEach(radio => {
         radio.addEventListener('change', function() {
@@ -1194,6 +1508,11 @@ function setupInsuranceTypeSelection() {
             
             // Atualizar campos obrigatórios
             updateRequiredFields(selectedType);
+
+            // Avisa o quiz manager para recalcular os passos visíveis e atualizar a UI
+            if (quizManager) {
+                quizManager.updateView();
+            }
         });
     });
 }
@@ -1205,6 +1524,11 @@ function updateRequiredFields(insuranceType) {
     allSpecificFields.forEach(field => {
         field.removeAttribute('required');
     });
+
+    // Se nenhum tipo de seguro for selecionado, não há nada a fazer.
+    if (!insuranceType) {
+        return;
+    }
     
     // Adicionar required apenas aos campos da seção ativa
     let activeSection = null;
@@ -1220,7 +1544,7 @@ function updateRequiredFields(insuranceType) {
         // Campos que sempre são obrigatórios para cada tipo (baseado nos asteriscos)
         const requiredFieldIds = {
             'auto': ['marca', 'modelo', 'ano', 'chassi', 'cep-pernoite', 'tipo-uso'],
-            'residencial': ['tipo-imovel', 'area-construida', 'valor-imovel', 'ano-construcao', 'finalidade-imovel'],
+            'residencial': ['tipo-imovel', 'finalidade-imovel', 'tipo-construcao', 'ano-construcao', 'area-construida', 'valor-imovel', 'valor-conteudo'],
             'vida': ['capital-segurado', 'profissao', 'renda-mensal']
         };
         

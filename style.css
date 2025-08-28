@@ -170,9 +170,10 @@ button:hover {
     background-color: #fef2f2 !important;
 }
 
-/* Navbar shadow on scroll */
-.navbar-scrolled {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+/* Active navigation link style */
+.nav-link.active {
+    color: #2563eb !important; /* text-blue-600 */
+    font-weight: 600; /* semibold */
 }
 
 /* Responsive text sizes */
@@ -335,4 +336,27 @@ button:hover {
 
 .insurance-section.hidden {
     display: none;
+}
+
+/* Skeleton Loading */
+.skeleton {
+    background-color: #e5e7eb; /* gray-200 */
+    border-radius: 0.5rem; /* rounded-lg */
+    position: relative;
+    overflow: hidden;
+}
+.skeleton::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    height: 100%;
+    width: 150%;
+    background: linear-gradient(to right, transparent 0%, #f3f4f6 50%, transparent 100%); /* gray-100 */
+    animation: skeleton-shine 1.5s infinite;
+}
+@keyframes skeleton-shine {
+    100% {
+        left: 150%;
+    }
 }
