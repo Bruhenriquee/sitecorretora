@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeguroMax - Corretora de Seguros | Cotação Online</title>
+    <meta name="description" content="SeguroMax - Corretora de seguros com as melhores cotações do mercado. Seguro auto, residencial, vida e empresarial. Solicite sua cotação online agora.">
+    <meta name="keywords" content="seguro auto, seguro residencial, seguro vida, corretora seguros, cotação online, FIPE">
+    <meta name="author" content="SeguroMax Corretora">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE2IDJMMjYgOFYyMkMyNiAyNC4yMDkxIDI0LjIwOTEgMjYgMjIgMjZIMTBDNy43OTA4NiAyNiA2IDI0LjIwOTEgNiAyMlY4TDE2IDJaIiBmaWxsPSIjMjU2M0VCIi8+CjxwYXRoIGQ9Ik0xNiA2TDIyIDEwVjIwQzIyIDIxLjEwNDYgMjEuMTA0NiAyMiAyMCAyMkgxMkMxMC44OTU0IDIyIDEwIDIxLjEwNDYgMTAgMjBWMTBMMTYgNloiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPg==">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center">
+                            <i class="fas fa-shield-alt text-blue-600 text-2xl mr-3"></i>
+                            <span class="text-xl font-bold text-gray-800">SeguroMax</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-blue-600 transition duration-300">Home</a>
+                    <a href="#quem-somos" class="text-gray-700 hover:text-blue-600 transition duration-300">Quem Somos</a>
+                    <a href="#beneficios" class="text-gray-700 hover:text-blue-600 transition duration-300">Benefícios</a>
+                    <a href="#cotacao" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">Solicitar Cotação</a>
+                    <a href="#contato" class="text-gray-700 hover:text-blue-600 transition duration-300">Contato</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-blue-600">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="block px-3 py-2 text-gray-700 hover:text-blue-600">Home</a>
+                <a href="#quem-somos" class="block px-3 py-2 text-gray-700 hover:text-blue-600">Quem Somos</a>
+                <a href="#beneficios" class="block px-3 py-2 text-gray-700 hover:text-blue-600">Benefícios</a>
+                <a href="#cotacao" class="block px-3 py-2 text-gray-700 hover:text-blue-600">Solicitar Cotação</a>
+                <a href="#contato" class="block px-3 py-2 text-gray-700 hover:text-blue-600">Contato</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-16 bg-gradient-to-br from-blue-600 to-blue-800 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="hero-content">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                        Proteja o que mais <span class="text-yellow-300">importa</span> para você
+                    </h1>
+                    <p class="text-xl mb-8 text-blue-100">
+                        Somos especialistas em seguros com mais de 15 anos de experiência. 
+                        Oferecemos as melhores coberturas do mercado com atendimento personalizado.
+                    </p>
+                    <a href="#cotacao" class="bg-yellow-400 text-blue-900 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-yellow-300 transition duration-300 inline-block">
+                        Solicitar Cotação Agora
+                    </a>
+                </div>
+                <div class="hero-image">
+                    <div class="bg-white/10 rounded-2xl p-8 backdrop-blur-sm">
+                        <i class="fas fa-car text-8xl text-yellow-300 mb-4 block text-center"></i>
+                        <div class="text-center">
+                            <h3 class="text-2xl font-bold mb-2">Seguro Auto</h3>
+                            <p class="text-blue-100">Proteção completa para seu veículo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quem Somos -->
+    <section id="quem-somos" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Quem Somos</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Uma corretora de seguros comprometida com a proteção e tranquilidade dos nossos clientes
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Nossa Missão</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Há mais de 15 anos no mercado, a SeguroMax é uma corretora de seguros que tem como missão 
+                        oferecer proteção completa e tranquilidade para nossos clientes. Nossa equipe especializada 
+                        trabalha com as principais seguradoras do país para garantir as melhores condições e coberturas.
+                    </p>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        Nossos valores são baseados na confiança, transparência e excelência no atendimento. 
+                        Acreditamos que cada cliente é único e merece um seguro personalizado para suas necessidades específicas.
+                    </p>
+
+                    <h4 class="text-lg font-semibold text-gray-800 mb-4">Nossos Parceiros</h4>
+                    <div class="flex flex-wrap gap-4">
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Porto Seguro</span>
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Bradesco Seguros</span>
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">SulAmérica</span>
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Allianz</span>
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Mapfre</span>
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">HDI Seguros</span>
+                    </div>
+                </div>
+                <div class="bg-gray-50 rounded-2xl p-8">
+                    <div class="grid grid-cols-2 gap-6 text-center">
+                        <div>
+                            <div class="text-3xl font-bold text-blue-600 mb-2">15+</div>
+                            <div class="text-gray-600">Anos de Experiência</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-blue-600 mb-2">50k+</div>
+                            <div class="text-gray-600">Clientes Atendidos</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-blue-600 mb-2">24h</div>
+                            <div class="text-gray-600">Suporte Disponível</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-blue-600 mb-2">98%</div>
+                            <div class="text-gray-600">Satisfação dos Clientes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefícios -->
+    <section id="beneficios" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Benefícios Exclusivos</h2>
+                <p class="text-xl text-gray-600">
+                    Vantagens únicas que só a SeguroMax oferece
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition duration-300">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Atendimento Personalizado</h3>
+                    <p class="text-gray-600">
+                        Cada cliente recebe atenção individual com consultores especializados dedicados ao seu caso.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition duration-300">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Suporte Rápido</h3>
+                    <p class="text-gray-600">
+                        Atendimento 24/7 com tempo de resposta médio de 15 minutos para emergências.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition duration-300">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Múltiplas Seguradoras</h3>
+                    <p class="text-gray-600">
+                        Trabalhamos com mais de 15 seguradoras para oferecer as melhores opções do mercado.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition duration-300">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Pagamento Facilitado</h3>
+                    <p class="text-gray-600">
+                        Parcelamento em até 12x no cartão ou débito automático com desconto especial.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition duration-300">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">App Exclusivo</h3>
+                    <p class="text-gray-600">
+                        Gerencie suas apólices, solicite serviços e acompanhe sinistros pelo nosso app.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition duration-300">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Assistência 24h</h3>
+                    <p class="text-gray-600">
+                        Guincho, chaveiro, eletricista e outros serviços disponíveis a qualquer hora.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition duration-300">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Descontos Especiais</h3>
+                    <p class="text-gray-600">
+                        Até 25% de desconto para clientes fiéis e pacotes com múltiplos seguros.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition duration-300">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Consultoria Especializada</h3>
+                    <p class="text-gray-600">
+                        Nossa equipe possui certificações e anos de experiência no mercado de seguros.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seguradoras Parceiras -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Nossas Seguradoras Parceiras</h2>
+                <p class="text-xl text-gray-600">Trabalhamos com as principais seguradoras do mercado brasileiro</p>
+            </div>
+            
+            <div class="overflow-hidden">
+                <div id="insurance-carousel" class="flex items-center animate-scroll">
+                    <!-- Porto Seguro -->
+                    <div class="flex-shrink-0 mx-8">
+                        <div class="bg-gray-50 rounded-lg p-6 h-24 w-32 flex items-center justify-center hover:shadow-lg transition duration-300">
+                            <span class="text-blue-700 font-bold text-lg">Porto Seguro</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Bradesco Seguros -->
+                    <div class="flex-shrink-0 mx-8">
+                        <div class="bg-gray-50 rounded-lg p-6 h-24 w-32 flex items-center justify-center hover:shadow-lg transition duration-300">
+                            <span class="text-red-600 font-bold text-lg">Bradesco</span>
+                        </div>
+                    </div>
+                    
+                    <!-- SulAmérica -->
+                    <div class="flex-shrink-0 mx-8">
+                        <div class="bg-gray-50 rounded-lg p-6 h-24 w-32 flex items-center justify-center hover:shadow-lg transition duration-300">
+                            <span class="text-blue-600 font-bold text-lg">SulAmérica</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Allianz -->
+                    <div class="flex-shrink-0 mx-8">
+                        <div class="bg-gray-50 rounded-lg p-6 h-24 w-32 flex items-center justify-center hover:shadow-lg transition duration-300">
+                            <span class="text-blue-800 font-bold text-lg">Allianz</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Mapfre -->
+                    <div class="flex-shrink-0 mx-8">
+                        <div class="bg-gray-50 rounded-lg p-6 h-24 w-32 flex items-center justify-center hover:shadow-lg transition duration-300">
+                            <span class="text-red-700 font-bold text-lg">Mapfre</span>
+                        </div>
+                    </div>
+                    
+                    <!-- HDI Seguros -->
+                    <div class="flex-shrink-0 mx-8">
+                        <div class="bg-gray-50 rounded-lg p-6 h-24 w-32 flex items-center justify-center hover:shadow-lg transition duration-300">
+                            <span class="text-orange-600 font-bold text-lg">HDI</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Zurich -->
+                    <div class="flex-shrink-0 mx-8">
+                        <div class="bg-gray-50 rounded-lg p-6 h-24 w-32 flex items-center justify-center hover:shadow-lg transition duration-300">
+                            <span class="text-blue-900 font-bold text-lg">Zurich</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Liberty Seguros -->
+                    <div class="flex-shrink-0 mx-8">
+                        <div class="bg-gray-50 rounded-lg p-6 h-24 w-32 flex items-center justify-center hover:shadow-lg transition duration-300">
+                            <span class="text-green-700 font-bold text-lg">Liberty</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cotação Completa -->
+    <section id="cotacao" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Solicitar Cotação de Seguros</h2>
+                <p class="text-xl text-gray-600">
+                    Preencha os dados abaixo para receber uma cotação personalizada
+                </p>
+            </div>
+
+            <form id="quote-form" class="bg-gray-50 rounded-xl p-8 shadow-lg">
+                <!-- Tipo de Seguro -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6">Tipo de Seguro</h3>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <label class="insurance-type-option cursor-pointer">
+                            <input type="radio" name="insurance-type" value="auto" class="hidden insurance-type-radio" checked>
+                            <div class="insurance-type-card p-6 border-2 border-gray-300 rounded-lg text-center transition duration-300 hover:border-blue-500">
+                                <i class="fas fa-car text-4xl text-blue-600 mb-3"></i>
+                                <h4 class="text-lg font-bold text-gray-800 mb-2">Seguro Auto</h4>
+                                <p class="text-gray-600 text-sm">Proteção completa para seu veículo</p>
+                            </div>
+                        </label>
+                        
+                        <label class="insurance-type-option cursor-pointer">
+                            <input type="radio" name="insurance-type" value="residencial" class="hidden insurance-type-radio">
+                            <div class="insurance-type-card p-6 border-2 border-gray-300 rounded-lg text-center transition duration-300 hover:border-blue-500">
+                                <i class="fas fa-home text-4xl text-green-600 mb-3"></i>
+                                <h4 class="text-lg font-bold text-gray-800 mb-2">Seguro Residencial</h4>
+                                <p class="text-gray-600 text-sm">Proteja seu lar e patrimônio</p>
+                            </div>
+                        </label>
+                        
+                        <label class="insurance-type-option cursor-pointer">
+                            <input type="radio" name="insurance-type" value="vida" class="hidden insurance-type-radio">
+                            <div class="insurance-type-card p-6 border-2 border-gray-300 rounded-lg text-center transition duration-300 hover:border-blue-500">
+                                <i class="fas fa-heart text-4xl text-red-600 mb-3"></i>
+                                <h4 class="text-lg font-bold text-gray-800 mb-2">Seguro de Vida</h4>
+                                <p class="text-gray-600 text-sm">Segurança para sua família</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Dados Pessoais -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6">Dados Pessoais</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Nome Completo *</label>
+                            <input type="text" id="nome" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">CPF *</label>
+                            <input type="text" id="cpf" placeholder="000.000.000-00" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Data de Nascimento *</label>
+                            <input type="date" id="nascimento" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Telefone (11 dígitos) *</label>
+                            <input type="tel" id="telefone" placeholder="(11) 99999-9999" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-gray-700 font-semibold mb-2">E-mail *</label>
+                            <input type="email" id="email" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Endereço -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6">Endereço</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">CEP *</label>
+                            <input type="text" id="cep" placeholder="00000-000" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-gray-700 font-semibold mb-2">Rua *</label>
+                            <input type="text" id="rua" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Número *</label>
+                            <input type="text" id="numero" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Bairro *</label>
+                            <input type="text" id="bairro" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Cidade *</label>
+                            <input type="text" id="cidade" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Estado *</label>
+                            <select id="estado" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                                <option value="">Selecione</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dados do Veículo (Seguro Auto) -->
+                <div id="auto-section" class="mb-8 insurance-section">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6">Dados do Veículo</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Marca *</label>
+                            <select id="marca" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="">Carregando marcas...</option>
+                            </select>
+                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Modelo *</label>
+                            <select id="modelo" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" disabled>
+                                <option value="">Selecione a marca primeiro</option>
+                            </select>
+                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Ano *</label>
+                            <select id="ano" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" disabled>
+                                <option value="">Selecione o modelo primeiro</option>
+                            </select>
+                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Chassi (17 caracteres) *</label>
+                            <input type="text" id="chassi" placeholder="17 dígitos do chassi" maxlength="17" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Placa (opcional)</label>
+                            <input type="text" id="placa" placeholder="ABC-1234" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Tipo de Uso *</label>
+                            <select id="tipo-uso" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="">Selecione</option>
+                                <option value="particular">Particular</option>
+                                <option value="aplicativo">Aplicativo (Uber/99)</option>
+                                <option value="empresarial">Empresarial</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2 lg:col-span-3">
+                            <label class="block text-gray-700 font-semibold mb-2">CEP de Pernoite *</label>
+                            <input type="text" id="cep-pernoite" placeholder="Onde o carro fica estacionado à noite" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dados do Imóvel (Seguro Residencial) -->
+                <div id="residencial-section" class="mb-8 insurance-section hidden">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6">Dados do Imóvel</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Tipo de Imóvel *</label>
+                            <select id="tipo-imovel" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="">Selecione</option>
+                                <option value="casa">Casa</option>
+                                <option value="apartamento">Apartamento</option>
+                                <option value="sobrado">Sobrado</option>
+                                <option value="kitnet">Kitnet</option>
+                                <option value="cobertura">Cobertura</option>
+                            </select>
+                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Área Construída (m²) *</label>
+                            <input type="number" id="area-construida" placeholder="Ex: 120" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Valor do Imóvel (R$) *</label>
+                            <input type="number" id="valor-imovel" placeholder="Ex: 500000" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Ano de Construção *</label>
+                            <input type="number" id="ano-construcao" placeholder="Ex: 2020" min="1900" max="2024" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Finalidade *</label>
+                            <select id="finalidade-imovel" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="">Selecione</option>
+                                <option value="residencial">Residencial</option>
+                                <option value="aluguel">Aluguel</option>
+                                <option value="temporada">Temporada</option>
+                                <option value="comercial">Comercial</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Possui Portaria 24h?</label>
+                            <select id="portaria" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="nao">Não</option>
+                                <option value="sim">Sim</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dados do Segurado (Seguro de Vida) -->
+                <div id="vida-section" class="mb-8 insurance-section hidden">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6">Dados do Seguro</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Capital Segurado Desejado (R$) *</label>
+                            <select id="capital-segurado" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="">Selecione</option>
+                                <option value="50000">R$ 50.000</option>
+                                <option value="100000">R$ 100.000</option>
+                                <option value="200000">R$ 200.000</option>
+                                <option value="300000">R$ 300.000</option>
+                                <option value="500000">R$ 500.000</option>
+                                <option value="1000000">R$ 1.000.000</option>
+                            </select>
+                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Profissão *</label>
+                            <input type="text" id="profissao" placeholder="Ex: Engenheiro" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Renda Mensal (R$) *</label>
+                            <select id="renda-mensal" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="">Selecione</option>
+                                <option value="2000">Até R$ 2.000</option>
+                                <option value="5000">R$ 2.001 - R$ 5.000</option>
+                                <option value="10000">R$ 5.001 - R$ 10.000</option>
+                                <option value="20000">R$ 10.001 - R$ 20.000</option>
+                                <option value="50000">Acima de R$ 20.000</option>
+                            </select>
+                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Pratica Esportes Radicais?</label>
+                            <select id="esportes-radicais" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="nao">Não</option>
+                                <option value="sim">Sim</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Fumante?</label>
+                            <select id="fumante" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="nao">Não</option>
+                                <option value="sim">Sim</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Histórico de Doenças Graves?</label>
+                            <select id="doencas-graves" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="nao">Não</option>
+                                <option value="sim">Sim</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" id="submit-quote" class="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition duration-300">
+                        Calcular Cotação
+                    </button>
+                </div>
+
+                <!-- Resultado da Cotação -->
+                <div id="quote-result" class="mt-8 p-6 bg-green-50 border border-green-200 rounded-lg hidden">
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold text-green-800 mb-4">Cotação Calculada</h3>
+                        <div id="quote-result-content"></div>
+                        <p class="text-sm text-green-600 mt-4">
+                            Esta é uma estimativa baseada nos dados fornecidos. Nossa equipe entrará em contato para finalizar sua cotação oficial.
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+
+    <!-- Serviços -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Nossos Serviços</h2>
+                <p class="text-xl text-gray-600">
+                    Proteção completa para todas as áreas da sua vida
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="service-card bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-8 text-center hover:shadow-xl transition duration-300">
+                    <div class="text-blue-600 text-6xl mb-6">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Seguro Auto</h3>
+                    <p class="text-gray-600 mb-6">
+                        Proteção completa para seu veículo com cobertura contra furto, roubo, acidentes e assistência 24h.
+                    </p>
+                    <ul class="text-sm text-gray-600 text-left space-y-2">
+                        <li><i class="fas fa-check text-blue-600 mr-2"></i> Cobertura para terceiros</li>
+                        <li><i class="fas fa-check text-blue-600 mr-2"></i> Assistência 24h</li>
+                        <li><i class="fas fa-check text-blue-600 mr-2"></i> Carro reserva</li>
+                        <li><i class="fas fa-check text-blue-600 mr-2"></i> Proteção contra furto/roubo</li>
+                    </ul>
+                </div>
+
+                <div class="service-card bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-8 text-center hover:shadow-xl transition duration-300">
+                    <div class="text-green-600 text-6xl mb-6">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Seguro Saúde</h3>
+                    <p class="text-gray-600 mb-6">
+                        Planos de saúde com cobertura nacional e atendimento em hospitais de referência.
+                    </p>
+                    <ul class="text-sm text-gray-600 text-left space-y-2">
+                        <li><i class="fas fa-check text-green-600 mr-2"></i> Rede credenciada ampla</li>
+                        <li><i class="fas fa-check text-green-600 mr-2"></i> Cobertura nacional</li>
+                        <li><i class="fas fa-check text-green-600 mr-2"></i> Atendimento emergencial</li>
+                        <li><i class="fas fa-check text-green-600 mr-2"></i> Exames e consultas</li>
+                    </ul>
+                </div>
+
+                <div class="service-card bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-8 text-center hover:shadow-xl transition duration-300">
+                    <div class="text-purple-600 text-6xl mb-6">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Seguro de Vida</h3>
+                    <p class="text-gray-600 mb-6">
+                        Tranquilidade para você e sua família com cobertura por morte, invalidez e doenças graves.
+                    </p>
+                    <ul class="text-sm text-gray-600 text-left space-y-2">
+                        <li><i class="fas fa-check text-purple-600 mr-2"></i> Cobertura por morte</li>
+                        <li><i class="fas fa-check text-purple-600 mr-2"></i> Invalidez permanente</li>
+                        <li><i class="fas fa-check text-purple-600 mr-2"></i> Doenças graves</li>
+                        <li><i class="fas fa-check text-purple-600 mr-2"></i> Assistência funeral</li>
+                    </ul>
+                </div>
+
+                <div class="service-card bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-8 text-center hover:shadow-xl transition duration-300">
+                    <div class="text-orange-600 text-6xl mb-6">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Seguro Residencial</h3>
+                    <p class="text-gray-600 mb-6">
+                        Proteja seu lar contra incêndio, roubo, danos elétricos e desastres naturais.
+                    </p>
+                    <ul class="text-sm text-gray-600 text-left space-y-2">
+                        <li><i class="fas fa-check text-orange-600 mr-2"></i> Cobertura contra incêndio</li>
+                        <li><i class="fas fa-check text-orange-600 mr-2"></i> Proteção contra roubo</li>
+                        <li><i class="fas fa-check text-orange-600 mr-2"></i> Danos elétricos</li>
+                        <li><i class="fas fa-check text-orange-600 mr-2"></i> Responsabilidade civil</li>
+                    </ul>
+                </div>
+
+                <div class="service-card bg-gradient-to-br from-teal-50 to-teal-100 rounded-xl p-8 text-center hover:shadow-xl transition duration-300">
+                    <div class="text-teal-600 text-6xl mb-6">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Seguro Empresarial</h3>
+                    <p class="text-gray-600 mb-6">
+                        Soluções completas para proteger seu negócio, funcionários e patrimônio empresarial.
+                    </p>
+                    <ul class="text-sm text-gray-600 text-left space-y-2">
+                        <li><i class="fas fa-check text-teal-600 mr-2"></i> Responsabilidade civil</li>
+                        <li><i class="fas fa-check text-teal-600 mr-2"></i> Equipamentos</li>
+                        <li><i class="fas fa-check text-teal-600 mr-2"></i> Lucros cessantes</li>
+                        <li><i class="fas fa-check text-teal-600 mr-2"></i> Acidentes de trabalho</li>
+                    </ul>
+                </div>
+
+                <div class="service-card bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-8 text-center hover:shadow-xl transition duration-300">
+                    <div class="text-red-600 text-6xl mb-6">
+                        <i class="fas fa-motorcycle"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Seguro Moto</h3>
+                    <p class="text-gray-600 mb-6">
+                        Proteção específica para motocicletas com cobertura contra acidentes e assistência especializada.
+                    </p>
+                    <ul class="text-sm text-gray-600 text-left space-y-2">
+                        <li><i class="fas fa-check text-red-600 mr-2"></i> Cobertura total</li>
+                        <li><i class="fas fa-check text-red-600 mr-2"></i> Assistência 24h</li>
+                        <li><i class="fas fa-check text-red-600 mr-2"></i> Equipamentos</li>
+                        <li><i class="fas fa-check text-red-600 mr-2"></i> Acidentes pessoais</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">O que nossos clientes dizem</h2>
+                <p class="text-xl text-gray-600">
+                    Depoimentos reais de quem confia na SeguroMax
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl p-6 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-blue-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Maria Silva</h4>
+                            <p class="text-gray-600 text-sm">Cliente há 3 anos</p>
+                        </div>
+                    </div>
+                    <div class="text-yellow-400 mb-3">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600">
+                        "Excelente atendimento! Quando precisei usar o seguro do meu carro, foram super ágeis e resolveram tudo sem burocracia. Recomendo!"
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-green-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">João Santos</h4>
+                            <p class="text-gray-600 text-sm">Cliente há 5 anos</p>
+                        </div>
+                    </div>
+                    <div class="text-yellow-400 mb-3">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600">
+                        "A SeguroMax conseguiu um preço muito melhor que outras corretoras. O atendimento é personalizado e sempre que preciso, eles estão disponíveis."
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-purple-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Ana Costa</h4>
+                            <p class="text-gray-600 text-sm">Cliente há 2 anos</p>
+                        </div>
+                    </div>
+                    <div class="text-yellow-400 mb-3">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600">
+                        "Profissionais competentes e confiáveis. Fizeram uma análise completa das minhas necessidades e encontraram o seguro perfeito para minha família."
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-orange-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Carlos Oliveira</h4>
+                            <p class="text-gray-600 text-sm">Cliente há 4 anos</p>
+                        </div>
+                    </div>
+                    <div class="text-yellow-400 mb-3">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600">
+                        "O suporte 24h realmente funciona! Tive um problema no final de semana e fui atendido imediatamente. Empresa séria e comprometida."
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-teal-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Fernanda Lima</h4>
+                            <p class="text-gray-600 text-sm">Cliente há 1 ano</p>
+                        </div>
+                    </div>
+                    <div class="text-yellow-400 mb-3">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600">
+                        "Migrei de outra corretora e não me arrependo. Aqui o atendimento é mais humano e os preços são justos. Muito satisfeita!"
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-red-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Roberto Mendes</h4>
+                            <p class="text-gray-600 text-sm">Cliente há 6 anos</p>
+                        </div>
+                    </div>
+                    <div class="text-yellow-400 mb-3">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600">
+                        "Empresa de confiança! Já passei por algumas situações difíceis e sempre foram muito eficientes na resolução. Parceiros de verdade."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mapa -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Nossa Localização</h2>
+                <p class="text-xl text-gray-600">
+                    Visite nosso escritório para um atendimento presencial
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Endereço do Escritório</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-blue-600 text-xl mr-4"></i>
+                            <div>
+                                <p class="font-semibold text-gray-800">Endereço</p>
+                                <p class="text-gray-600">Rua das Seguradoras, 123 - Centro<br>São Paulo, SP - CEP: 01310-100</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-phone text-blue-600 text-xl mr-4"></i>
+                            <div>
+                                <p class="font-semibold text-gray-800">Telefone</p>
+                                <p class="text-gray-600">(11) 3333-4444</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-clock text-blue-600 text-xl mr-4"></i>
+                            <div>
+                                <p class="font-semibold text-gray-800">Horário de Atendimento</p>
+                                <p class="text-gray-600">Segunda a Sexta: 8h às 18h<br>Sábado: 8h às 12h</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope text-blue-600 text-xl mr-4"></i>
+                            <div>
+                                <p class="font-semibold text-gray-800">E-mail</p>
+                                <p class="text-gray-600">contato@seguromax.com.br</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-100 rounded-xl overflow-hidden">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.4484525604835!2d-46.65472052463773!3d-23.576092162698567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8da0aa315%3A0xd59f9431f2c9776a!2sAv.%20Paulista%2C%20S%C3%A3o%20Paulo%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1699456789123!5m2!1spt-BR!2sbr" 
+                        width="100%" 
+                        height="400" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Perguntas Frequentes</h2>
+                <p class="text-xl text-gray-600">
+                    Esclarecemos as principais dúvidas sobre seguros
+                </p>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="bg-gray-50 rounded-lg">
+                    <button class="faq-question w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg" data-target="faq-1">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg font-semibold text-gray-800">O que é franquia no seguro auto?</h3>
+                            <i class="fas fa-chevron-down text-gray-500 transform transition-transform duration-200"></i>
+                        </div>
+                    </button>
+                    <div id="faq-1" class="faq-answer hidden px-6 pb-6">
+                        <p class="text-gray-600">
+                            A franquia é o valor que você paga em caso de sinistro. É uma participação obrigatória do segurado nos custos do reparo. 
+                            Quanto maior a franquia, menor o valor do seguro, e vice-versa.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="bg-gray-50 rounded-lg">
+                    <button class="faq-question w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg" data-target="faq-2">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg font-semibold text-gray-800">Como funciona a cobertura para terceiros?</h3>
+                            <i class="fas fa-chevron-down text-gray-500 transform transition-transform duration-200"></i>
+                        </div>
+                    </button>
+                    <div id="faq-2" class="faq-answer hidden px-6 pb-6">
+                        <p class="text-gray-600">
+                            A cobertura para terceiros protege você de danos materiais e corporais que você possa causar a outras pessoas. 
+                            É obrigatória e cobre despesas médicas, reparos em outros veículos e danos morais.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="bg-gray-50 rounded-lg">
+                    <button class="faq-question w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg" data-target="faq-3">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg font-semibold text-gray-800">Posso usar qualquer oficina para o reparo?</h3>
+                            <i class="fas fa-chevron-down text-gray-500 transform transition-transform duration-200"></i>
+                        </div>
+                    </button>
+                    <div id="faq-3" class="faq-answer hidden px-6 pb-6">
+                        <p class="text-gray-600">
+                            Depende do tipo de cobertura. Na rede referenciada, você não paga a franquia antecipadamente. 
+                            Na livre escolha, você pode usar qualquer oficina, mas precisa pagar a franquia diretamente.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="bg-gray-50 rounded-lg">
+                    <button class="faq-question w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg" data-target="faq-4">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg font-semibold text-gray-800">O que fazer em caso de acidente?</h3>
+                            <i class="fas fa-chevron-down text-gray-500 transform transition-transform duration-200"></i>
+                        </div>
+                    </button>
+                    <div id="faq-4" class="faq-answer hidden px-6 pb-6">
+                        <p class="text-gray-600">
+                            1) Preserve o local do acidente, 2) Chame a polícia se houver vítimas, 3) Faça fotos do acidente, 
+                            4) Anote dados dos envolvidos, 5) Entre em contato com a seguradora imediatamente, 6) Não assine documentos que admitam culpa.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="bg-gray-50 rounded-lg">
+                    <button class="faq-question w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg" data-target="faq-5">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg font-semibold text-gray-800">Quanto tempo demora para sair uma cotação?</h3>
+                            <i class="fas fa-chevron-down text-gray-500 transform transition-transform duration-200"></i>
+                        </div>
+                    </button>
+                    <div id="faq-5" class="faq-answer hidden px-6 pb-6">
+                        <p class="text-gray-600">
+                            Nossa equipe responde cotações em até 2 horas úteis. Para casos urgentes, 
+                            entre em contato diretamente pelo WhatsApp para atendimento imediato.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 6 -->
+                <div class="bg-gray-50 rounded-lg">
+                    <button class="faq-question w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg" data-target="faq-6">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg font-semibold text-gray-800">Posso cancelar meu seguro a qualquer momento?</h3>
+                            <i class="fas fa-chevron-down text-gray-500 transform transition-transform duration-200"></i>
+                        </div>
+                    </button>
+                    <div id="faq-6" class="faq-answer hidden px-6 pb-6">
+                        <p class="text-gray-600">
+                            Sim, você pode cancelar seu seguro a qualquer momento. Você tem direito ao reembolso proporcional 
+                            do período não utilizado, descontadas as taxas administrativas conforme contrato.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato" class="py-20 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Entre em Contato</h2>
+                <p class="text-xl text-gray-600">
+                    Estamos prontos para atender você e esclarecer todas suas dúvidas
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Fale Conosco</h3>
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Nome Completo *</label>
+                            <input type="text" id="contact-name" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">E-mail *</label>
+                            <input type="email" id="contact-email" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Telefone *</label>
+                            <input type="tel" id="contact-phone" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Assunto *</label>
+                            <select id="contact-subject" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                                <option value="">Selecione o assunto</option>
+                                <option value="cotacao">Solicitar Cotação</option>
+                                <option value="duvida">Dúvida sobre Seguros</option>
+                                <option value="sinistro">Informar Sinistro</option>
+                                <option value="suporte">Suporte Técnico</option>
+                                <option value="outros">Outros</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Mensagem *</label>
+                            <textarea id="contact-message" rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition duration-300">
+                            Enviar Mensagem
+                        </button>
+                    </form>
+
+                    <div id="contact-success" class="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg hidden">
+                        <div class="text-green-800">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            Mensagem enviada com sucesso! Entraremos em contato em breve.
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Informações de Contato</h3>
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-lg p-6 shadow-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-phone text-blue-600 text-2xl mr-4"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Telefone</h4>
+                                    <p class="text-gray-600">(11) 3333-4444</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-6 shadow-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-whatsapp text-green-600 text-2xl mr-4"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">WhatsApp</h4>
+                                    <p class="text-gray-600">(11) 99999-8888</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-6 shadow-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-envelope text-blue-600 text-2xl mr-4"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">E-mail</h4>
+                                    <p class="text-gray-600">contato@seguromax.com.br</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-6 shadow-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-clock text-blue-600 text-2xl mr-4"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Atendimento</h4>
+                                    <p class="text-gray-600">Segunda a Sexta: 8h às 18h<br>Sábado: 8h às 12h</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-6 shadow-lg">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-map-marker-alt text-blue-600 text-2xl mr-4"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Endereço</h4>
+                                    <p class="text-gray-600">Av. Paulista, 1000 - Bela Vista<br>São Paulo - SP, 01310-100</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mapa -->
+            <div class="mt-12">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Nossa Localização</h3>
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.196256860749!2d-46.655652!3d-23.561684!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8da0aa315%3A0xd59f9431f2c9776a!2sAv.%20Paulista%2C%201000%20-%20Bela%20Vista%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2001310-100!5e0!3m2!1spt!2sbr!4v1640995200000!5m2!1spt!2sbr" 
+                        width="100%" 
+                        height="400" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        class="w-full">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-shield-alt text-blue-400 text-2xl mr-3"></i>
+                        <span class="text-xl font-bold">SeguroMax</span>
+                    </div>
+                    <p class="text-gray-300 mb-6">
+                        Protegendo o que mais importa para você há mais de 15 anos. 
+                        Confiança, qualidade e excelência no atendimento.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-blue-400 transition duration-300">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-blue-400 transition duration-300">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-blue-400 transition duration-300">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-blue-400 transition duration-300">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Links Rápidos</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-300 hover:text-blue-400 transition duration-300">Home</a></li>
+                        <li><a href="#quem-somos" class="text-gray-300 hover:text-blue-400 transition duration-300">Quem Somos</a></li>
+                        <li><a href="#beneficios" class="text-gray-300 hover:text-blue-400 transition duration-300">Benefícios</a></li>
+                        <li><a href="#cotacao" class="text-gray-300 hover:text-blue-400 transition duration-300">Solicitar Cotação</a></li>
+                        <li><a href="#contato" class="text-gray-300 hover:text-blue-400 transition duration-300">Contato</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Nossos Seguros</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-300 hover:text-blue-400 transition duration-300">Seguro Auto</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-blue-400 transition duration-300">Seguro Residencial</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-blue-400 transition duration-300">Seguro de Vida</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-blue-400 transition duration-300">Seguro Empresarial</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-blue-400 transition duration-300">Seguro Saúde</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Contato</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-blue-400 mr-3"></i>
+                            <span class="text-gray-300">Rua das Seguradoras, 123<br>São Paulo, SP</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-phone text-blue-400 mr-3"></i>
+                            <span class="text-gray-300">(11) 3333-4444</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope text-blue-400 mr-3"></i>
+                            <span class="text-gray-300">contato@seguromax.com.br</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-300">
+                    © 2024 SeguroMax Corretora de Seguros. Todos os direitos reservados.
+                </p>
+                <p class="text-gray-400 text-sm mt-2">
+                    CNPJ: 12.345.678/0001-90 | SUSEP: 12345.678901/2024-56
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/5511999998888?text=Olá! Gostaria de solicitar uma cotação de seguro." 
+       target="_blank" 
+       class="whatsapp-float fixed bottom-6 right-6 bg-green-500 text-white rounded-full p-4 shadow-lg hover:bg-green-600 transition duration-300 z-50"
+       aria-label="Falar no WhatsApp">
+        <i class="fab fa-whatsapp text-2xl"></i>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+</html>

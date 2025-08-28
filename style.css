@@ -1,0 +1,338 @@
+/* Custom CSS adicional para complementar o Tailwind */
+
+/* Scroll suave */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Animações personalizadas */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Classes de animação */
+.animate-fadeInUp {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.animate-fadeInLeft {
+    animation: fadeInLeft 0.8s ease-out;
+}
+
+.animate-fadeInRight {
+    animation: fadeInRight 0.8s ease-out;
+}
+
+.animate-scroll {
+    animation: scroll 20s linear infinite;
+}
+
+/* Pausar animação no hover do carrossel */
+#insurance-carousel:hover {
+    animation-play-state: paused;
+}
+
+/* Efeitos hover personalizados */
+.service-card {
+    transition: all 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Hero content animation */
+.hero-content {
+    animation: fadeInLeft 1s ease-out;
+}
+
+.hero-image {
+    animation: fadeInRight 1s ease-out;
+}
+
+/* Loading spinner */
+.loading-spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #2563eb;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Form focus states */
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #2563eb;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #1d4ed8;
+}
+
+/* Mobile menu animation */
+#mobile-menu {
+    transition: all 0.3s ease;
+}
+
+/* Button hover effects */
+button {
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-1px);
+}
+
+/* Card hover effects */
+.shadow-lg {
+    transition: all 0.3s ease;
+}
+
+.shadow-lg:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Gradient text */
+.gradient-text {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Success and error states */
+.success {
+    border-color: #10b981 !important;
+    background-color: #ecfdf5 !important;
+}
+
+.error {
+    border-color: #ef4444 !important;
+    background-color: #fef2f2 !important;
+}
+
+/* Navbar shadow on scroll */
+.navbar-scrolled {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive text sizes */
+@media (max-width: 640px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+        line-height: 1.2;
+    }
+}
+
+/* Form validation styles */
+.field-valid {
+    border-color: #10b981;
+    background-color: #f0fdf4;
+}
+
+.field-invalid {
+    border-color: #ef4444;
+    background-color: #fef2f2;
+}
+
+/* Loading overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* Tooltip styles */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #374151;
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 12px;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Print styles */
+@media print {
+    .no-print {
+        display: none;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .bg-gray-50 {
+        background-color: white;
+    }
+    
+    .text-gray-600 {
+        color: #000;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus visible for accessibility */
+*:focus-visible {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+}
+
+/* Skip link for accessibility */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: #2563eb;
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 10000;
+}
+
+.skip-link:focus {
+    top: 6px;
+}
+
+/* WhatsApp floating button */
+.whatsapp-float {
+    animation: whatsapp-pulse 2s infinite;
+    box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(34, 197, 94, 0.6);
+}
+
+@keyframes whatsapp-pulse {
+    0% {
+        box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
+    }
+    50% {
+        box-shadow: 0 4px 30px rgba(34, 197, 94, 0.7);
+    }
+    100% {
+        box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
+    }
+}
+
+/* Insurance type selection */
+.insurance-type-card {
+    border: 2px solid #d1d5db;
+    transition: all 0.3s ease;
+}
+
+.insurance-type-card:hover {
+    border-color: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+}
+
+.insurance-type-radio:checked + .insurance-type-card {
+    border-color: #2563eb;
+    background-color: #eff6ff;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+/* Insurance sections */
+.insurance-section {
+    transition: all 0.3s ease;
+}
+
+.insurance-section.hidden {
+    display: none;
+}
