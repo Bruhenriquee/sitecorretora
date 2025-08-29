@@ -1,4 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Cookie Consent Banner ---
+    const cookieBanner = document.getElementById('cookie-consent-banner');
+    const acceptCookiesBtn = document.getElementById('accept-cookies-btn');
+    const cookiePolicyBannerLink = document.getElementById('cookie-policy-banner-link');
+
+    if (cookieBanner && acceptCookiesBtn) {
+        // Check if user has already accepted cookies
+        if (!localStorage.getItem('cookies_accepted')) {
+            cookieBanner.classList.remove('hidden');
+        }
+
+        // Event listener for the accept button
+        acceptCookiesBtn.addEventListener('click', () => {
+            localStorage.setItem('cookies_accepted', 'true');
+            cookieBanner.classList.add('hidden');
+        });
+
+        // Event listener for the policy link inside the banner
+        cookiePolicyBannerLink?.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal('cookie'); // Re-uses the existing modal logic
+        });
+    }
+
     // --- Navbar Mobile Menu ---
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -61,6 +85,33 @@ document.addEventListener('DOMContentLoaded', () => {
         el.style.opacity = '1';
         el.style.transform = 'none';
         el.style.visibility = 'visible';
+    });
+
+    // --- Count-Up Animation ---
+    const countUpObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                const target = +el.getAttribute('data-count-up');
+                let count = 0;
+                const duration = 2000;
+                const stepTime = Math.max(1, Math.floor(duration / target));
+
+                const timer = setInterval(() => {
+                    count++;
+                    el.textContent = count;
+                    if (count >= target) {
+                        el.textContent = target;
+                        clearInterval(timer);
+                    }
+                }, stepTime);
+                observer.unobserve(el);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('[data-count-up]').forEach(el => {
+        countUpObserver.observe(el);
     });
 
     // --- Insurance Carousel (Infinite Scroll) ---
@@ -145,6 +196,47 @@ document.addEventListener('DOMContentLoaded', () => {
         const recalculateBtn = document.getElementById('recalculate-btn');
         const whatsappRedirectBtn = document.getElementById('whatsapp-redirect-btn');
 
+        // --- Input Masking ---
+        const applyMask = (event, maskFunction) => {
+            // Using setTimeout to ensure the input value is updated before masking
+            setTimeout(() => {
+                const input = event.target;
+                const originalValue = input.value;
+                const maskedValue = maskFunction(originalValue);
+                if (originalValue !== maskedValue) {
+                    input.value = maskedValue;
+                }
+            }, 1);
+        };
+
+        const formatCPF = (value) => {
+            return value
+                .replace(/\D/g, '')
+                .slice(0, 11)
+                .replace(/(\d{3})(\d)/, '$1.$2')
+                .replace(/(\d{3})(\d)/, '$1.$2')
+                .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+        };
+
+        const formatPhone = (value) => {
+            return value
+                .replace(/\D/g, '')
+                .slice(0, 11)
+                .replace(/(\d{2})(\d)/, '($1) $2')
+                .replace(/(\d{5})(\d)/, '$1-$2');
+        };
+
+        const formatCEP = (value) => {
+            return value.replace(/\D/g, '').slice(0, 8).replace(/(\d{5})(\d)/, '$1-$2');
+        };
+
+        // Attach masks to inputs
+        document.getElementById('cpf')?.addEventListener('input', (e) => applyMask(e, formatCPF));
+        document.getElementById('condutor-cpf')?.addEventListener('input', (e) => applyMask(e, formatCPF));
+        document.getElementById('telefone')?.addEventListener('input', (e) => applyMask(e, formatPhone));
+        document.getElementById('cep')?.addEventListener('input', (e) => applyMask(e, formatCEP));
+        document.getElementById('cep-pernoite')?.addEventListener('input', (e) => applyMask(e, formatCEP));
+
         let currentStep = 1;
         let totalSteps = 3;
         let selectedInsuranceType = '';
@@ -153,6 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const FIPE_MARCAS_URL = 'https://parallelum.com.br/fipe/api/v1/carros/marcas';
         const FIPE_MODELOS_URL = (marcaId) => `https://parallelum.com.br/fipe/api/v1/carros/marcas/${marcaId}/modelos`;
         const FIPE_ANOS_URL = (marcaId, modeloId) => `https://parallelum.com.br/fipe/api/v1/carros/marcas/${marcaId}/modelos/${modeloId}/anos`;
+
 
         const updateProgressBar = () => {
             const progress = (currentStep / totalSteps) * 100;
@@ -180,6 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateProgressBar();
         };
 
+
         // Configuração centralizada dos campos obrigatórios por etapa.
         const requiredFieldsConfig = {
             2: ['nome', 'email', 'telefone', 'cpf', 'nascimento', 'genero', 'estado-civil'],
@@ -190,6 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             4: ['cep', 'rua', 'numero', 'bairro', 'cidade', 'estado']
         };
+
 
         const validateStep = (stepNumber) => {
             let requiredIds = [];
@@ -239,6 +334,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return allFieldsValid;
         };
 
+
         // --- Real-time visual feedback on input ---
         const provideInputFeedback = (event) => {
             const input = event.target;
@@ -267,9 +363,11 @@ document.addEventListener('DOMContentLoaded', () => {
         quoteForm.addEventListener('input', provideInputFeedback);
         quoteForm.addEventListener('change', provideInputFeedback);
 
+
         // --- FORM INITIALIZATION ---
         fieldset.disabled = !privacyConsent.checked;
         showStep(currentStep); // Show the first step on page load. It will be disabled if consent is not given.
+
 
         privacyConsent.addEventListener('change', () => {
             fieldset.disabled = !privacyConsent.checked;
@@ -285,6 +383,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
+
         // --- Logic for conditional driver fields ---
         const condutorFields = document.getElementById('principal-condutor-fields');
         if (condutorFields) {
@@ -298,6 +397,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
         }
+
 
         nextBtn.addEventListener('click', () => {
             if (currentStep === 1 && !selectedInsuranceType) {
@@ -315,12 +415,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+
         prevBtn.addEventListener('click', () => {
             if (currentStep > 1) {
                 currentStep--;
                 showStep(currentStep);
             }
         });
+
 
         recalculateBtn.addEventListener('click', () => {
             quoteResultDiv.classList.add('hidden');
@@ -351,6 +453,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // até que o usuário aceite a política de privacidade novamente.
             showStep(1);
         });
+
 
         quoteForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -525,6 +628,7 @@ Este e-mail foi enviado automaticamente pelo formulário de cotação do site.
             });
         }
 
+
         // --- API Fetching Helper ---
         async function fetchAPIData(url, errorMessage) {
             try {
@@ -536,6 +640,7 @@ Este e-mail foi enviado automaticamente pelo formulário de cotação do site.
                 return null; // Retorna nulo para que a função que chamou possa lidar com o erro.
             }
         }
+
 
         const cepInput = document.getElementById('cep');
         cepInput?.addEventListener('blur', async () => {
@@ -551,6 +656,7 @@ Este e-mail foi enviado automaticamente pelo formulário de cotação do site.
             }
         });
 
+
         const marcaSelect = document.getElementById('marca');
         const modeloSelect = document.getElementById('modelo');
         const anoSelect = document.getElementById('ano');
@@ -565,6 +671,7 @@ Este e-mail foi enviado automaticamente pelo formulário de cotação do site.
             marcaSelect.innerHTML = '<option value="">Selecione a Marca</option>';
             marcas.forEach(marca => marcaSelect.add(new Option(marca.nome, marca.codigo)));
         }
+
 
         marcaSelect?.addEventListener('change', async () => {
             const marcaId = marcaSelect.value;
@@ -582,6 +689,7 @@ Este e-mail foi enviado automaticamente pelo formulário de cotação do site.
             data.modelos.forEach(modelo => modeloSelect.add(new Option(modelo.nome, modelo.codigo)));
             modeloSelect.disabled = false;
         });
+
 
         modeloSelect?.addEventListener('change', async () => {
             const marcaId = marcaSelect.value;
