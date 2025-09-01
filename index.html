@@ -56,6 +56,26 @@
       ]
     }
     </script>
+    <style>
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(15px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeOut {
+          from { opacity: 1; transform: translateY(0); }
+          to { opacity: 0; transform: translateY(-15px); }
+        }
+        
+        .form-step-fade-in {
+          animation: fadeIn 0.4s ease-out forwards;
+        }
+        
+        .form-step-fade-out {
+          animation: fadeOut 0.3s ease-in forwards;
+        }
+        </style>
+        
 </head>
 <body class="bg-gray-50">
     <!-- Navbar -->
@@ -390,6 +410,9 @@
                 </div>
             </div>
             <form id="quote-form" class="bg-gray-50 rounded-xl p-8 shadow-lg relative">
+                <div id="form-notification" class="hidden p-4 mb-4 text-sm text-white rounded-lg transition-opacity duration-300" role="alert">
+                    <span id="notification-message"></span>
+                </div>
                 <fieldset id="quote-fieldset" disabled>
                     <!-- Barra de Progresso -->
                     <div class="w-full bg-gray-200 rounded-full h-2.5 mb-8">
@@ -400,34 +423,41 @@
                     <div class="form-step" data-step="1">
                         <div class="mb-8">
                             <h3 class="text-xl font-bold text-gray-800 mb-6">Tipo de Seguro</h3>
-                            <div class="grid md:grid-cols-3 gap-4">
-                                <label class="insurance-type-option cursor-pointer">
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="insurance-types-container">
+                                <label class="insurance-type-option cursor-pointer flex">
                                     <input type="radio" name="insurance-type" value="auto" class="hidden insurance-type-radio">
-                                    <div class="insurance-type-card p-6 border-2 border-gray-300 rounded-lg text-center transition duration-300 hover:border-blue-500">
+                                    <div class="insurance-type-card w-full flex flex-col justify-center p-6 border-2 border-gray-300 rounded-lg text-center transition duration-300 hover:border-blue-500">
                                         <i class="fas fa-car text-4xl text-blue-600 mb-3"></i>
-                                        <h4 class="text-lg font-bold text-gray-800 mb-2">Seguro Auto</h4>
-                                        <p class="text-gray-600 text-sm">Proteção completa para seu veículo</p>
+                                        <h4 class="text-lg font-bold text-gray-800 mb-2">Seguro Automóvel</h4>
+                                        <p class="text-gray-600 text-sm">Proteção para seu veículo</p>
                                     </div>
                                 </label>
-                                
-                                <label class="insurance-type-option cursor-pointer">
+                                <label class="insurance-type-option cursor-pointer flex">
                                     <input type="radio" name="insurance-type" value="residencial" class="hidden insurance-type-radio">
-                                    <div class="insurance-type-card p-6 border-2 border-gray-300 rounded-lg text-center transition duration-300 hover:border-blue-500">
+                                    <div class="insurance-type-card w-full flex flex-col justify-center p-6 border-2 border-gray-300 rounded-lg text-center transition duration-300 hover:border-blue-500">
                                         <i class="fas fa-home text-4xl text-green-600 mb-3"></i>
                                         <h4 class="text-lg font-bold text-gray-800 mb-2">Seguro Residencial</h4>
-                                        <p class="text-gray-600 text-sm">Proteja seu lar e patrimônio</p>
+                                        <p class="text-gray-600 text-sm">Sua casa sempre segura</p>
                                     </div>
                                 </label>
-                                
-                                <label class="insurance-type-option cursor-pointer">
+                                <label class="insurance-type-option cursor-pointer flex">
                                     <input type="radio" name="insurance-type" value="vida" class="hidden insurance-type-radio">
-                                    <div class="insurance-type-card p-6 border-2 border-gray-300 rounded-lg text-center transition duration-300 hover:border-blue-500">
-                                        <i class="fas fa-heart text-4xl text-red-600 mb-3"></i>
+                                    <div class="insurance-type-card w-full flex flex-col justify-center p-6 border-2 border-gray-300 rounded-lg text-center transition duration-300 hover:border-blue-500">
+                                        <i class="fas fa-heartbeat text-4xl text-red-600 mb-3"></i>
                                         <h4 class="text-lg font-bold text-gray-800 mb-2">Seguro de Vida</h4>
                                         <p class="text-gray-600 text-sm">Segurança para sua família</p>
                                     </div>
                                 </label>
+                                <label class="insurance-type-option cursor-pointer flex">
+                                    <input type="radio" name="insurance-type" value="consorcio" class="hidden insurance-type-radio">
+                                    <div class="insurance-type-card w-full flex flex-col justify-center p-6 border-2 border-gray-300 rounded-lg text-center transition duration-300 hover:border-blue-500">
+                                        <i class="fas fa-users text-4xl text-purple-600 mb-3"></i>
+                                        <h4 class="text-lg font-bold text-gray-800 mb-2">Consórcio</h4>
+                                        <p class="text-gray-600 text-sm">Realize seus sonhos</p>
+                                    </div>
+                                </label>
                             </div>
+                            
                         </div>
                     </div>
                     
@@ -488,8 +518,11 @@
                             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                                 <div>
                                     <label class="block text-gray-700 font-semibold mb-2">CEP *</label>
-                                    <input type="text" id="cep" placeholder="00000-000" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
-                                    <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                                    <div class="relative">
+                                        <input type="text" id="cep" placeholder="00000-000" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                                        <i id="cep-spinner" class="fas fa-spinner fa-spin text-gray-500 absolute right-3 top-1/2 -translate-y-1/2 hidden"></i>
+                                    </div>
+                                    <div id="cep-error" class="error-message text-red-500 text-sm mt-1 hidden"></div>
                                 </div>
                                 <div class="md:col-span-2">
                                     <label class="block text-gray-700 font-semibold mb-2">Rua *</label>
@@ -550,24 +583,33 @@
                             <h3 class="text-xl font-bold text-gray-800 mb-6">Dados do Veículo</h3>
                             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 <div>
-                                    <label class="block text-gray-700 font-semibold mb-2">Marca *</label>
-                                    <select id="marca" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                        <option value="">Carregando marcas...</option>
-                                    </select>
-                                    <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                                    <label for="marca" class="block text-gray-700 font-semibold mb-2">Marca *</label>
+                                    <div class="relative">
+                                        <select id="marca" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-10">
+                                            <option value="">Selecione a marca</option>
+                                        </select>
+                                        <i id="marca-spinner" class="fas fa-spinner fa-spin text-gray-500 absolute right-8 top-1/2 -translate-y-1/2 hidden"></i>
+                                    </div>
+                                    <div id="marca-error" class="error-message text-red-500 text-sm mt-1 hidden"></div>
                                 </div>
                                 <div>
-                                    <label class="block text-gray-700 font-semibold mb-2">Modelo *</label>
-                                    <select id="modelo" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" disabled>
-                                        <option value="">Selecione a marca primeiro</option>
-                                    </select>
-                                    <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                                    <label for="modelo" class="block text-gray-700 font-semibold mb-2">Modelo *</label>
+                                    <div class="relative">
+                                        <select id="modelo" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-10" disabled>
+                                            <option value="">Selecione a marca primeiro</option>
+                                        </select>
+                                        <i id="modelo-spinner" class="fas fa-spinner fa-spin text-gray-500 absolute right-8 top-1/2 -translate-y-1/2 hidden"></i>
+                                    </div>
+                                    <div id="modelo-error" class="error-message text-red-500 text-sm mt-1 hidden"></div>
                                 </div>
                                 <div>
                                     <label class="block text-gray-700 font-semibold mb-2">Ano *</label>
-                                    <select id="ano" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" disabled>
-                                        <option value="">Selecione o modelo primeiro</option>
-                                    </select>
+                                    <div class="relative">
+                                        <select id="ano" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-10" disabled>
+                                            <option value="">Selecione o modelo primeiro</option>
+                                        </select>
+                                        <i id="ano-spinner" class="fas fa-spinner fa-spin text-gray-500 absolute right-8 top-1/2 -translate-y-1/2 hidden"></i>
+                                    </div>
                                     <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
                                 </div>
                                 <div>
@@ -590,8 +632,11 @@
                                 </div>
                                 <div class="md:col-span-2 lg:col-span-3">
                                     <label class="block text-gray-700 font-semibold mb-2">CEP de Pernoite *</label>
-                                    <input type="text" id="cep-pernoite" placeholder="Onde o carro fica estacionado à noite" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                    <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                                    <div class="relative">
+                                        <input type="text" id="cep-pernoite" placeholder="Onde o carro fica estacionado à noite" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                        <i id="cep-pernoite-spinner" class="fas fa-spinner fa-spin text-gray-500 absolute right-3 top-1/2 -translate-y-1/2 hidden"></i>
+                                    </div>
+                                    <div id="cep-pernoite-error" class="error-message text-red-500 text-sm mt-1 hidden"></div>
                                 </div>
                                 <div>
                                     <label class="block text-gray-700 font-semibold mb-2">Classe de Bônus *</label>
@@ -776,6 +821,29 @@
                         </div>
                     </div>
 
+                    <!-- Seção para Consórcio (Etapa 4) -->
+                    <div class="form-step hidden" data-step="4" data-insurance-type="consorcio">
+                        <h3 class="text-xl font-semibold mb-4">Detalhes do Consórcio</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- Tipo de Consórcio -->
+                            <div>
+                                <label for="tipo-consorcio" class="block text-gray-700 font-semibold mb-2">Tipo de Consórcio *</label>
+                                <select id="tipo-consorcio" name="tipo-consorcio" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                    <option value="">Selecione o tipo</option>
+                                    <option value="Imóvel">Imóvel</option>
+                                    <option value="Veículo">Veículo</option>
+                                    <option value="Serviços">Serviços</option>
+                                </select>
+                                <div id="tipo-consorcio-error" class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                            </div>
+                            <!-- Valor da Carta de Crédito -->
+                            <div>
+                                <label for="valor-carta-credito" class="block text-gray-700 font-semibold mb-2">Valor da Carta de Crédito (R$) *</label>
+                                <input type="number" id="valor-carta-credito" name="valor-carta-credito" placeholder="Ex: 50000" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <div id="valor-carta-credito-error" class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                            </div>
+                        </div>
+                    </div>
                     <!-- Botões de Navegação -->
                     <div class="flex justify-between mt-8">
                         <button type="button" id="prev-btn" class="bg-gray-300 text-gray-800 px-6 py-2 rounded-lg font-semibold hover:bg-gray-400 hidden">Anterior</button>
@@ -916,6 +984,7 @@
                 </div>
             </div>
         </div>
+
     </section>
 
     <!-- Depoimentos -->
@@ -1398,6 +1467,13 @@
        aria-label="Falar no WhatsApp">
         <i class="fab fa-whatsapp text-3xl"></i>
     </a>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" 
+            class="hidden fixed bottom-24 right-6 bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:bg-blue-700 transition-opacity duration-300 z-50"
+            aria-label="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <!-- Modal de Políticas -->
     <div id="legal-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-[100] flex items-center justify-center p-4">

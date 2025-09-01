@@ -1,4 +1,30 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Inject Animation Styles ---
+    const injectAnimationStyles = () => {
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+              from { opacity: 0; transform: translateY(15px); }
+              to { opacity: 1; transform: translateY(0); }
+            }
+    
+            @keyframes fadeOut {
+              from { opacity: 1; transform: translateY(0); }
+              to { opacity: 0; transform: translateY(-15px); }
+            }
+    
+            .form-step-fade-in {
+              animation: fadeIn 0.4s ease-out forwards;
+            }
+    
+            .form-step-fade-out {
+              animation: fadeOut 0.3s ease-in forwards;
+            }
+        `;
+        document.head.appendChild(style);
+    };
+    injectAnimationStyles();
+
     // --- Cookie Consent Banner ---
     const cookieBanner = document.getElementById('cookie-consent-banner');
     const acceptCookiesBtn = document.getElementById('accept-cookies-btn');
@@ -33,54 +59,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Smooth Scrolling for anchor links ---
-    // This is a robust implementation that avoids conflicts with other scripts.
-    // By scoping to 'nav', we ensure this only applies to the main navigation links.
     document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const targetId = this.getAttribute('href');
-
-            // 1. Ignore links that are just "#". These are almost always for JS triggers.
-            if (targetId === '#') {
-                return;
-            }
-
-            // 2. Try to find the element this link points to.
+            if (targetId === '#') return;
             try {
                 const targetElement = document.querySelector(targetId);
-
-                // 3. Only act if the element actually exists on the page.
                 if (targetElement) {
-                    // 4. This is a valid internal link, so we handle the scroll.
                     e.preventDefault();
-
                     const navbar = document.querySelector('nav');
                     const navbarHeight = navbar ? navbar.offsetHeight : 0;
                     const elementPosition = targetElement.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
-
                     window.scrollTo({
                         top: offsetPosition,
                         behavior: 'smooth'
                     });
-
-                    // Close mobile menu if open
                     if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
                         mobileMenu.classList.add('hidden');
                     }
                 }
-                // 5. If targetElement is null, we do nothing and let the browser/other scripts proceed.
             } catch (error) {
-                // Catch potential errors from an invalid selector in targetId.
                 console.warn('Could not query selector for smooth scroll:', targetId, error);
             }
         });
     });
 
     // --- Animate on Scroll ---
-    // The original animation logic was causing some content sections to remain hidden.
-    // To guarantee that all content is always visible, we will now directly
-    // set the styles to make the elements appear. This is the most reliable method
-    // and bypasses any potential issues with CSS classes.
     document.querySelectorAll('.animate-on-scroll').forEach(el => {
         el.style.opacity = '1';
         el.style.transform = 'none';
@@ -96,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 let count = 0;
                 const duration = 2000;
                 const stepTime = Math.max(1, Math.floor(duration / target));
-
                 const timer = setInterval(() => {
                     count++;
                     el.textContent = count;
@@ -114,23 +118,12 @@ document.addEventListener('DOMContentLoaded', () => {
         countUpObserver.observe(el);
     });
 
-    // --- Insurance Carousel (Infinite Scroll) ---
-    // O código abaixo duplica os itens do carrossel para criar um efeito de rolagem infinita.
-    // Se a animação CSS correspondente não estiver presente, ele parecerá apenas duplicado.
-    // Foi comentado para remover a duplicação. Se desejar o efeito, reative e ajuste seu CSS.
-    // const carousel = document.getElementById('insurance-carousel');
-    // if (carousel) {
-    //     const clone = carousel.cloneNode(true);
-    //     carousel.parentElement.appendChild(clone);
-    // }
-
     // --- FAQ Accordion ---
     document.querySelectorAll('.faq-question').forEach(button => {
         button.addEventListener('click', () => {
             const targetId = button.getAttribute('data-target');
             const answer = document.getElementById(targetId);
             const icon = button.querySelector('i');
-
             const isOpen = !answer.classList.contains('hidden');
             answer.classList.toggle('hidden');
             icon.classList.toggle('rotate-180', !isOpen);
@@ -174,7 +167,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            // Here you would typically send the form data to a backend
             console.log('Contact form submitted');
             contactForm.reset();
             contactSuccess.classList.remove('hidden');
@@ -196,9 +188,27 @@ document.addEventListener('DOMContentLoaded', () => {
         const recalculateBtn = document.getElementById('recalculate-btn');
         const whatsappRedirectBtn = document.getElementById('whatsapp-redirect-btn');
 
+        // --- Notification System ---
+        const notificationDiv = document.getElementById('form-notification');
+        const notificationMessage = document.getElementById('notification-message');
+        let notificationTimeout;
+
+        const showNotification = (message, type = 'error') => {
+            if (!notificationDiv || !notificationMessage) return;
+
+            clearTimeout(notificationTimeout);
+            notificationMessage.textContent = message;
+            notificationDiv.classList.remove('bg-red-600', 'bg-green-600', 'hidden');
+            
+            notificationDiv.classList.add(type === 'error' ? 'bg-red-600' : 'bg-green-600');
+
+            notificationTimeout = setTimeout(() => {
+                notificationDiv.classList.add('hidden');
+            }, 5000);
+        };
+
         // --- Input Masking ---
         const applyMask = (event, maskFunction) => {
-            // Using setTimeout to ensure the input value is updated before masking
             setTimeout(() => {
                 const input = event.target;
                 const originalValue = input.value;
@@ -209,119 +219,122 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 1);
         };
 
-        const formatCPF = (value) => {
-            return value
-                .replace(/\D/g, '')
-                .slice(0, 11)
-                .replace(/(\d{3})(\d)/, '$1.$2')
-                .replace(/(\d{3})(\d)/, '$1.$2')
-                .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+        const formatCPF = (value) => value.replace(/\D/g, '').slice(0, 11).replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+        const formatPhone = (value) => value.replace(/\D/g, '').slice(0, 11).replace(/(\d{2})(\d)/, '($1) $2').replace(/(\d{5})(\d)/, '$1-$2');
+        const formatCEP = (value) => value.replace(/\D/g, '').slice(0, 8).replace(/(\d{5})(\d)/, '$1-$2');
+        const formatCurrency = (value) => {
+            if (!value) return '';
+            let numStr = value.replace(/\D/g, '');
+            if (numStr === '') return '';
+            const num = parseFloat(numStr) / 100;
+            return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(num);
         };
 
-        const formatPhone = (value) => {
-            return value
-                .replace(/\D/g, '')
-                .slice(0, 11)
-                .replace(/(\d{2})(\d)/, '($1) $2')
-                .replace(/(\d{5})(\d)/, '$1-$2');
-        };
-
-        const formatCEP = (value) => {
-            return value.replace(/\D/g, '').slice(0, 8).replace(/(\d{5})(\d)/, '$1-$2');
-        };
-
-        // Attach masks to inputs
         document.getElementById('cpf')?.addEventListener('input', (e) => applyMask(e, formatCPF));
         document.getElementById('condutor-cpf')?.addEventListener('input', (e) => applyMask(e, formatCPF));
         document.getElementById('telefone')?.addEventListener('input', (e) => applyMask(e, formatPhone));
         document.getElementById('cep')?.addEventListener('input', (e) => applyMask(e, formatCEP));
         document.getElementById('cep-pernoite')?.addEventListener('input', (e) => applyMask(e, formatCEP));
 
+        const currencyFieldIds = ['valor-imovel', 'valor-conteudo', 'capital-segurado', 'renda-mensal', 'valor-carta-credito'];
+        currencyFieldIds.forEach(id => {
+            const field = document.getElementById(id);
+            if (field) {
+                field.type = 'text';
+                field.setAttribute('inputmode', 'numeric');
+                field.addEventListener('input', (e) => applyMask(e, formatCurrency));
+            }
+        });
+
         let currentStep = 1;
         let totalSteps = 3;
         let selectedInsuranceType = '';
 
-        const VIA_CEP_URL = (cep) => `https://viacep.com.br/ws/${cep}/json/`;
-        const FIPE_MARCAS_URL = 'https://parallelum.com.br/fipe/api/v1/carros/marcas';
-        const FIPE_MODELOS_URL = (marcaId) => `https://parallelum.com.br/fipe/api/v1/carros/marcas/${marcaId}/modelos`;
-        const FIPE_ANOS_URL = (marcaId, modeloId) => `https://parallelum.com.br/fipe/api/v1/carros/marcas/${marcaId}/modelos/${modeloId}/anos`;
-
-
+        // --- API Endpoints ---
+        const API_ENDPOINTS = {
+            VIA_CEP: (cep) => `https://viacep.com.br/ws/${cep}/json/`,
+            FIPE_MARCAS: 'https://parallelum.com.br/fipe/api/v1/carros/marcas',
+            FIPE_MODELOS: (marcaId) => `https://parallelum.com.br/fipe/api/v1/carros/marcas/${marcaId}/modelos`,
+            FIPE_ANOS: (marcaId, modeloId) => `https://parallelum.com.br/fipe/api/v1/carros/marcas/${marcaId}/modelos/${modeloId}/anos`,
+            FORM_SUBMIT: 'https://formspree.io/f/myzdyybp'
+        };
         const updateProgressBar = () => {
             const progress = (currentStep / totalSteps) * 100;
             progressBar.style.width = `${progress}%`;
         };
 
         const showStep = (stepNumber) => {
-            steps.forEach(step => {
-                const stepData = parseInt(step.dataset.step);
-                const isTypeSpecificStep = step.dataset.insuranceType;
-                let isVisible = stepData === stepNumber;
-
-                if (isVisible && isTypeSpecificStep && isTypeSpecificStep !== selectedInsuranceType) {
-                    isVisible = false;
-                }
-                step.classList.toggle('hidden', !isVisible);
-                if(isVisible && isTypeSpecificStep) {
-                    document.getElementById(`${selectedInsuranceType}-section`).classList.remove('hidden');
-                }
-            });
-
+             const currentVisibleStep = steps.find(s => !s.classList.contains('hidden'));
+             const nextStep = steps.find(s => {
+                 const stepData = parseInt(s.dataset.step);
+                 const isTypeSpecificStep = s.dataset.insuranceType;
+                 if (stepData !== stepNumber) return false;
+                 if (isTypeSpecificStep && isTypeSpecificStep !== selectedInsuranceType) return false;
+                 return true;
+             });
+ 
+             const transitionDuration = 300; // Must match the fadeOut animation duration
+ 
+             if (!nextStep || (currentVisibleStep && currentVisibleStep === nextStep)) {
+                 return; // Do nothing if no next step or it's the same step
+             }
+ 
+             if (currentVisibleStep) {
+                 currentVisibleStep.classList.add('form-step-fade-out');
+                 setTimeout(() => {
+                     currentVisibleStep.classList.add('hidden');
+                     currentVisibleStep.classList.remove('form-step-fade-out');
+                     nextStep.classList.remove('hidden');
+                     nextStep.classList.add('form-step-fade-in');
+                 }, transitionDuration);
+             } else {
+                 // Initial load
+                 nextStep.classList.remove('hidden');
+                 nextStep.classList.add('form-step-fade-in');
+             }
+ 
             prevBtn.classList.toggle('hidden', currentStep === 1);
             nextBtn.classList.toggle('hidden', currentStep === totalSteps);
             submitBtn.classList.toggle('hidden', currentStep !== totalSteps);
             updateProgressBar();
         };
 
-
-        // Configuração centralizada dos campos obrigatórios por etapa.
-        const requiredFieldsConfig = {
-            2: ['nome', 'email', 'telefone', 'cpf', 'nascimento', 'genero', 'estado-civil'],
-            3: {
-                auto: ['marca', 'modelo', 'ano', 'chassi', 'placa', 'tipo-uso', 'cep-pernoite'],
-                residencial: ['tipo-imovel', 'finalidade-imovel', 'tipo-construcao', 'valor-imovel', 'valor-conteudo'],
-                vida: ['capital-segurado', 'profissao', 'renda-mensal']
-            },
-            4: ['cep', 'rua', 'numero', 'bairro', 'cidade', 'estado']
+        const requiredFields = {
+            1: ['insurance-type'],
+            2: ['nome', 'cpf', 'nascimento', 'telefone', 'email', 'genero', 'estado-civil'],
+            3: ['cep', 'rua', 'numero', 'bairro', 'cidade', 'estado'],
+            4: {
+                auto: ['marca', 'modelo', 'ano', 'chassi', 'tipo-uso', 'cep-pernoite', 'classe-bonus', 'garagem-casa', 'garagem-trabalho'],
+                residencial: ['tipo-imovel', 'finalidade-imovel', 'tipo-construcao', 'area-construida', 'valor-imovel', 'valor-conteudo'],
+                vida: ['capital-segurado', 'profissao', 'renda-mensal'],
+                consorcio: ['tipo-consorcio', 'valor-carta-credito']
+            }
         };
 
-
         const validateStep = (stepNumber) => {
+            const stepRules = requiredFields[stepNumber];
+            if (!stepRules) return true;
             let requiredIds = [];
-            // Define a lista de IDs obrigatórios com base na etapa e tipo de seguro
-            if (stepNumber === 2 || stepNumber === 4) {
-                requiredIds = requiredFieldsConfig[stepNumber];
-            } else if (stepNumber === 3 && selectedInsuranceType && requiredFieldsConfig[3][selectedInsuranceType]) {
-                requiredIds = requiredFieldsConfig[3][selectedInsuranceType];
+            if (Array.isArray(stepRules)) {
+                requiredIds = stepRules;
+            } else if (typeof stepRules === 'object' && selectedInsuranceType && stepRules[selectedInsuranceType]) {
+                requiredIds = stepRules[selectedInsuranceType];
             }
-
-            // Adiciona os campos condicionais do condutor, se necessário
-            if (stepNumber === 3 && selectedInsuranceType === 'auto') {
+            if (stepNumber === 4 && selectedInsuranceType === 'auto') {
                 const ownerIsNotDriver = document.querySelector('input[name="proprietario-condutor"][value="nao"]:checked');
                 if (ownerIsNotDriver) {
                     requiredIds.push('condutor-nome', 'condutor-cpf');
                 }
             }
-
-            if (requiredIds.length === 0) return true; // Nenhuma validação necessária
-
+            if (requiredIds.length === 0) return true;
             let allFieldsValid = true;
             requiredIds.forEach(id => {
                 const input = document.getElementById(id);
-                // A verificação de visibilidade é crucial.
-                // Ignora campos que não existem ou não estão visíveis na tela.
-                if (!input || input.offsetParent === null) {
-                    return;
-                }
-
-                // Limpa erros anteriores
+                if (!input || input.offsetParent === null) return;
                 const errorDiv = input.closest('div').querySelector('.error-message');
-                if (errorDiv) {
-                    errorDiv.classList.add('hidden');
-                }
-                input.classList.remove('border-red-500', 'border-green-500');
-
-                if (!input.value.trim()) { // Se o campo obrigatório estiver vazio
+                if (errorDiv) errorDiv.classList.add('hidden');
+                input.classList.remove('border-red-500');
+                if (!input.value.trim()) {
                     allFieldsValid = false;
                     input.classList.add('border-red-500');
                     if (errorDiv) {
@@ -330,28 +343,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             });
-
             return allFieldsValid;
         };
 
-
-        // --- Real-time visual feedback on input ---
         const provideInputFeedback = (event) => {
             const input = event.target;
-
-            // Aplica feedback apenas em campos de texto, seleção e área de texto
             if (!input.matches('input[type="text"], input[type="email"], input[type="tel"], input[type="date"], input[type="number"], select, textarea')) {
                 return;
             }
-
-            // Limpa o erro se o usuário começar a corrigir um campo inválido
             const errorDiv = input.closest('div').querySelector('.error-message');
             if (errorDiv && !errorDiv.classList.contains('hidden')) {
                 errorDiv.classList.add('hidden');
                 input.classList.remove('border-red-500');
             }
-
-            // Adiciona ou remove a borda verde com base no preenchimento
             if (input.value.trim() !== '') {
                 input.classList.add('border-green-500');
             } else {
@@ -359,15 +363,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        // Usa delegação de eventos para eficiência. 'input' cobre digitação, 'change' cobre seleções.
         quoteForm.addEventListener('input', provideInputFeedback);
         quoteForm.addEventListener('change', provideInputFeedback);
 
-
-        // --- FORM INITIALIZATION ---
         fieldset.disabled = !privacyConsent.checked;
-        showStep(currentStep); // Show the first step on page load. It will be disabled if consent is not given.
-
+        showStep(currentStep);
 
         privacyConsent.addEventListener('change', () => {
             fieldset.disabled = !privacyConsent.checked;
@@ -383,8 +383,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-
-        // --- Logic for conditional driver fields ---
         const condutorFields = document.getElementById('principal-condutor-fields');
         if (condutorFields) {
             document.querySelectorAll('input[name="proprietario-condutor"]').forEach(radio => {
@@ -398,23 +396,20 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-
         nextBtn.addEventListener('click', () => {
             if (currentStep === 1 && !selectedInsuranceType) {
-                alert('Por favor, selecione um tipo de seguro.');
+                showNotification('Por favor, selecione um tipo de seguro.');
                 return;
             }
             if (!validateStep(currentStep)) {
-                alert('Por favor, preencha todos os campos obrigatórios destacados.');
+                showNotification('Por favor, preencha todos os campos obrigatórios destacados.');
                 return;
             }
-
             if (currentStep < totalSteps) {
                 currentStep++;
                 showStep(currentStep);
             }
         });
-
 
         prevBtn.addEventListener('click', () => {
             if (currentStep > 1) {
@@ -423,186 +418,85 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-
         recalculateBtn.addEventListener('click', () => {
             quoteResultDiv.classList.add('hidden');
             fieldset.classList.remove('hidden');
             quoteForm.reset();
-
-            // Limpa todos os feedbacks visuais de validação (bordas vermelhas/verdes)
             quoteForm.querySelectorAll('input, select, textarea').forEach(input => {
                 input.classList.remove('border-red-500', 'border-green-500');
                 const errorDiv = input.closest('div').querySelector('.error-message');
                 if (errorDiv) errorDiv.classList.add('hidden');
             });
-
-            // Reseta o estado do formulário para o início
             fieldset.disabled = true;
             privacyConsent.checked = false;
-
-            // Esconde campos condicionais no reset
             if (condutorFields) {
                 condutorFields.classList.add('hidden');
             }
-
             currentStep = 1;
             totalSteps = 3;
             selectedInsuranceType = '';
             document.querySelectorAll('.insurance-type-card').forEach(card => card.classList.remove('border-blue-500', 'bg-blue-50'));
-            // Reseta o formulário para a primeira etapa, que ficará visível mas desabilitada
-            // até que o usuário aceite a política de privacidade novamente.
             showStep(1);
         });
 
-
         quoteForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-
-            // Valida a última etapa antes de enviar
             if (!validateStep(currentStep)) {
-                alert('Por favor, preencha todos os campos obrigatórios destacados antes de enviar.');
+                showNotification('Por favor, preencha todos os campos obrigatórios destacados antes de enviar.');
                 return;
             }
-
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Enviando...';
 
-            // --- Robust Data Collection ---
-            // Manually collect data to ensure all fields are captured, even if 'name' attributes are missing in the HTML.
             const data = { insuranceType: selectedInsuranceType };
             const formElements = quoteForm.querySelectorAll('input, select, textarea');
-
             formElements.forEach(el => {
-                // Use the element's name or fallback to its ID as the key.
                 const key = el.name || el.id;
-                if (!key) return; // Skip elements without a name or id.
-
+                if (!key) return;
                 if (el.type === 'radio') {
-                    if (el.checked) {
-                        data[key] = el.value;
-                    }
+                    if (el.checked) data[key] = el.value;
                 } else {
-                    // For all other types (text, select, etc.), assign the value.
-                    // Checkboxes are handled separately in the email formatting section.
                     data[key] = el.value;
                 }
             });
-            
-            // --- Formatação do E-mail ---
-            // Para um e-mail mais organizado, criamos um corpo de texto formatado
-            // e usamos os campos especiais do Formspree (_subject, _replyto).
 
-            const insuranceTypeName = {
-                auto: 'Automóvel',
-                vida: 'de Vida',
-                residencial: 'Residencial'
-            }[selectedInsuranceType] || selectedInsuranceType;
-
-            const personalDataSection = `
-**DADOS DO CLIENTE**
-- **Nome:** ${data.nome || 'Não informado'}
-- **Email:** ${data.email || 'Não informado'}
-- **Telefone:** ${data.telefone || 'Não informado'}
-- **CPF:** ${data.cpf || 'Não informado'}
-- **Data de Nascimento:** ${data.nascimento ? new Date(data.nascimento + 'T00:00:00').toLocaleDateString('pt-BR') : 'Não informado'}
-- **Gênero:** ${data.genero || 'Não informado'}
-- **Estado Civil:** ${data['estado-civil'] || 'Não informado'}
-`;
-
-            const addressSection = `
-**ENDEREÇO**
-- **CEP:** ${data.cep || 'Não informado'}
-- **Logradouro:** ${data.rua || 'Não informado'}, Nº ${data.numero || 'S/N'}
-- **Bairro:** ${data.bairro || 'Não informado'}
-- **Cidade/UF:** ${data.cidade || 'Não informado'}/${data.estado || 'Não informado'}
-`;
-
+            const insuranceTypeName = { auto: 'Automóvel', vida: 'de Vida', residencial: 'Residencial', consorcio: 'Consórcio' }[selectedInsuranceType] || selectedInsuranceType;
+            const personalDataSection = `\n**DADOS DO CLIENTE**\n- **Nome:** ${data.nome || 'Não informado'}\n- **Email:** ${data.email || 'Não informado'}\n- **Telefone:** ${data.telefone || 'Não informado'}\n- **CPF:** ${data.cpf || 'Não informado'}\n- **Data de Nascimento:** ${data.nascimento ? new Date(data.nascimento + 'T00:00:00').toLocaleDateString('pt-BR') : 'Não informado'}\n- **Gênero:** ${data.genero || 'Não informado'}\n- **Estado Civil:** ${data['estado-civil'] || 'Não informado'}`;
+            const addressSection = `\n**ENDEREÇO**\n- **CEP:** ${data.cep || 'Não informado'}\n- **Logradouro:** ${data.rua || 'Não informado'}, Nº ${data.numero || 'S/N'}\n- **Bairro:** ${data.bairro || 'Não informado'}\n- **Cidade/UF:** ${data.cidade || 'Não informado'}/${data.estado || 'Não informado'}`;
             let detailsSection = '';
             if (selectedInsuranceType === 'auto') {
                 const marcaText = data.marca ? marcaSelect.options[marcaSelect.selectedIndex].text : 'Não informado';
                 const modeloText = data.modelo ? modeloSelect.options[modeloSelect.selectedIndex].text : 'Não informado';
                 const anoText = data.ano ? anoSelect.options[anoSelect.selectedIndex].text : 'Não informado';
-
-                let condutorSection = `
-- **Proprietário é o Principal Condutor?** ${data['proprietario-condutor'] === 'sim' ? 'Sim' : 'Não'}`;
-
+                let condutorSection = `\n- **Proprietário é o Principal Condutor?** ${data['proprietario-condutor'] === 'sim' ? 'Sim' : 'Não'}`;
                 if (data['proprietario-condutor'] === 'nao') {
-                    condutorSection += `
-- **Nome do Principal Condutor:** ${data['condutor-nome'] || 'Não informado'}
-- **CPF do Principal Condutor:** ${data['condutor-cpf'] || 'Não informado'}`;
+                    condutorSection += `\n- **Nome do Principal Condutor:** ${data['condutor-nome'] || 'Não informado'}\n- **CPF do Principal Condutor:** ${data['condutor-cpf'] || 'Não informado'}`;
                 }
-
-                detailsSection = `
-**DADOS DO VEÍCULO**
-- **Marca:** ${marcaText}
-- **Modelo:** ${modeloText}
-- **Ano/Modelo:** ${anoText}
-- **Chassi:** ${data.chassi || 'Não informado'}
-- **Placa:** ${data.placa || 'Não informado'}
-- **Tipo de Uso:** ${data['tipo-uso'] || 'Não informado'}
-- **CEP de Pernoite:** ${data['cep-pernoite'] || 'Não informado'}
-- **Classe de Bônus:** ${data['classe-bonus'] || 'Não informado'}
-- **Garagem em Casa?** ${data['garagem-casa'] || 'Não informado'}
-- **Garagem no Trabalho/Estudo?** ${data['garagem-trabalho'] || 'Não informado'}
-${condutorSection}
-`;
+                detailsSection = `\n**DADOS DO VEÍCULO**\n- **Marca:** ${marcaText}\n- **Modelo:** ${modeloText}\n- **Ano/Modelo:** ${anoText}\n- **Chassi:** ${data.chassi || 'Não informado'}\n- **Placa:** ${data.placa || 'Não informado'}\n- **Tipo de Uso:** ${data['tipo-uso'] || 'Não informado'}\n- **CEP de Pernoite:** ${data['cep-pernoite'] || 'Não informado'}\n- **Classe de Bônus:** ${data['classe-bonus'] || 'Não informado'}\n- **Garagem em Casa?** ${data['garagem-casa'] || 'Não informado'}\n- **Garagem no Trabalho/Estudo?** ${data['garagem-trabalho'] || 'Não informado'}${condutorSection}`;
             } else if (selectedInsuranceType === 'residencial') {
                 const coberturas = Array.from(document.querySelectorAll('input[name="coberturas"]:checked')).map(cb => cb.nextElementSibling.textContent.trim()).join(', ') || 'Nenhuma';
                 const seguranca = Array.from(document.querySelectorAll('input[name="seguranca"]:checked')).map(cb => cb.nextElementSibling.textContent.trim()).join(', ') || 'Nenhuma';
-                detailsSection = `
-**DADOS DO IMÓVEL**
-- **Tipo de Imóvel:** ${data['tipo-imovel'] || 'Não informado'}
-- **Uso do Imóvel:** ${data['finalidade-imovel'] || 'Não informado'}
-- **Tipo de Construção:** ${data['tipo-construcao'] || 'Não informado'}
-- **Área Construída (m²):** ${data['area-construida'] || 'Não informado'}
-- **Valor de Reconstrução (R$):** ${data['valor-imovel'] || 'Não informado'}
-- **Valor dos Bens/Conteúdo (R$):** ${data['valor-conteudo'] || 'Não informado'}
-- **Coberturas Adicionais:** ${coberturas}
-- **Sistemas de Segurança:** ${seguranca}
-`;
+                detailsSection = `\n**DADOS DO IMÓVEL**\n- **Tipo de Imóvel:** ${data['tipo-imovel'] || 'Não informado'}\n- **Uso do Imóvel:** ${data['finalidade-imovel'] || 'Não informado'}\n- **Tipo de Construção:** ${data['tipo-construcao'] || 'Não informado'}\n- **Área Construída (m²):** ${data['area-construida'] || 'Não informado'}\n- **Valor de Reconstrução (R$):** ${data['valor-imovel'] || 'Não informado'}\n- **Valor dos Bens/Conteúdo (R$):** ${data['valor-conteudo'] || 'Não informado'}\n- **Coberturas Adicionais:** ${coberturas}\n- **Sistemas de Segurança:** ${seguranca}`;
             } else if (selectedInsuranceType === 'vida') {
-                detailsSection = `
-**DADOS DO SEGURO DE VIDA**
-- **Capital Segurado Desejado (R$):** ${data['capital-segurado'] || 'Não informado'}
-- **Profissão:** ${data.profissao || 'Não informado'}
-- **Renda Mensal (R$):** ${data['renda-mensal'] || 'Não informado'}
-- **Pratica Esportes Radicais?** ${data['esportes-radicais'] || 'Não informado'}
-- **Fumante?** ${data.fumante || 'Não informado'}
-- **Histórico de Doenças Graves?** ${data['doencas-graves'] || 'Não informado'}
-`;
+                detailsSection = `\n**DADOS DO SEGURO DE VIDA**\n- **Capital Segurado Desejado (R$):** ${data['capital-segurado'] || 'Não informado'}\n- **Profissão:** ${data.profissao || 'Não informado'}\n- **Renda Mensal (R$):** ${data['renda-mensal'] || 'Não informado'}\n- **Pratica Esportes Radicais?** ${data['esportes-radicais'] || 'Não informado'}\n- **Fumante?** ${data.fumante || 'Não informado'}\n- **Histórico de Doenças Graves?** ${data['doencas-graves'] || 'Não informado'}`;
+            } else if (selectedInsuranceType === 'consorcio') {
+                detailsSection = `\n**DADOS DO CONSÓRCIO**\n- **Tipo de Consórcio:** ${data['tipo-consorcio'] || 'Não informado'}\n- **Valor da Carta de Crédito (R$):** ${data['valor-carta-credito'] || 'Não informado'}\n- **Prazo Desejado (meses):** ${data['prazo-desejado'] || 'Não informado'}`;
             }
-
-            const emailBody = `
-Nova Solicitação de Cotação de Seguro ${insuranceTypeName}
-----------------------------------------------------
-${personalDataSection}
-${addressSection}
-${detailsSection}
-----------------------------------------------------
-Este e-mail foi enviado automaticamente pelo formulário de cotação do site.
-`;
-
-            const payload = {
-                _subject: `Cotação de Seguro ${insuranceTypeName} - ${data.nome}`,
-                _replyto: data.email,
-                "Solicitação de Cotação": emailBody,
-            };
+            const emailBody = `\nNova Solicitação de Cotação de Seguro ${insuranceTypeName}\n----------------------------------------------------\n${personalDataSection}\n${addressSection}\n${detailsSection}\n----------------------------------------------------\nEste e-mail foi enviado automaticamente pelo formulário de cotação do site.\n`;
+            const payload = { _subject: `Cotação de Seguro ${insuranceTypeName} - ${data.nome}`, _replyto: data.email, "Solicitação de Cotação": emailBody };
 
             try {
                 const response = await sendDataToBroker(payload);
                 if (!response.ok) throw new Error('Falha ao enviar a solicitação.');
-
                 fieldset.classList.add('hidden');
                 quoteResultDiv.classList.remove('hidden');
-
-                const phone = '5518981558125'; // <-- COLOQUE SEU NÚMERO AQUI
+                const phone = '5518981558125';
                 const clientName = document.getElementById('nome').value.split(' ')[0] || 'Cliente';
                 const message = `Olá! Acabei de fazer uma cotação pelo site em nome de ${clientName} e gostaria de saber o preço.`;
                 whatsappRedirectBtn.href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-
             } catch (error) {
                 console.error('Submission Error:', error);
-                alert('Ocorreu um erro ao enviar sua solicitação. Por favor, tente novamente.');
+                showNotification('Ocorreu um erro ao enviar sua solicitação. Por favor, tente novamente.');
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = 'Enviar Solicitação';
@@ -610,26 +504,15 @@ Este e-mail foi enviado automaticamente pelo formulário de cotação do site.
         });
 
         async function sendDataToBroker(data) {
-            // IMPORTANTE: Substitua pela URL do seu endpoint de backend.
-            // Serviços como Formspree, Netlify Forms ou um endpoint próprio são ideais.
-            // Certifique-se de que o ID do seu formulário Formspree esteja correto aqui.
-            const endpoint = 'https://formspree.io/f/myzdyybp';
-            
+            const endpoint = API_ENDPOINTS.FORM_SUBMIT;
             console.log('Enviando dados para a corretora:', data);
-
-            // Este é o código que envia os dados para o seu e-mail via Formspree.
             return fetch(endpoint, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json' // Adicionado para melhor compatibilidade com Formspree
-                },
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                 body: JSON.stringify(data),
             });
         }
 
-
-        // --- API Fetching Helper ---
         async function fetchAPIData(url, errorMessage) {
             try {
                 const response = await fetch(url);
@@ -637,25 +520,43 @@ Este e-mail foi enviado automaticamente pelo formulário de cotação do site.
                 return await response.json();
             } catch (error) {
                 console.error(errorMessage, error);
-                return null; // Retorna nulo para que a função que chamou possa lidar com o erro.
+                return null;
             }
         }
-
 
         const cepInput = document.getElementById('cep');
         cepInput?.addEventListener('blur', async () => {
             const cep = cepInput.value.replace(/\D/g, '');
             if (cep.length === 8) {
-                const data = await fetchAPIData(VIA_CEP_URL(cep), 'Erro ao buscar CEP:');
-                if (data && !data.erro) {
-                    document.getElementById('rua').value = data.logradouro;
-                    document.getElementById('bairro').value = data.bairro;
-                    document.getElementById('cidade').value = data.localidade;
-                    document.getElementById('estado').value = data.uf;
+                const spinner = document.getElementById('cep-spinner');
+                if (spinner) spinner.classList.remove('hidden');
+                try {
+                    const data = await fetchAPIData(API_ENDPOINTS.VIA_CEP(cep), 'Erro ao buscar CEP:');
+                    if (data && !data.erro) {
+                        document.getElementById('rua').value = data.logradouro;
+                        document.getElementById('bairro').value = data.bairro;
+                        document.getElementById('cidade').value = data.localidade;
+                        document.getElementById('estado').value = data.uf;
+                    }
+                } finally {
+                    if (spinner) spinner.classList.add('hidden');
                 }
             }
         });
-
+        
+        const cepPernoiteInput = document.getElementById('cep-pernoite');
+        cepPernoiteInput?.addEventListener('blur', async () => {
+            const cep = cepPernoiteInput.value.replace(/\D/g, '');
+            if (cep.length === 8) {
+                const spinner = document.getElementById('cep-pernoite-spinner');
+                if (spinner) spinner.classList.remove('hidden');
+                try {
+                    await fetchAPIData(API_ENDPOINTS.VIA_CEP(cep), 'Erro ao buscar CEP de pernoite:');
+                } finally {
+                    if (spinner) spinner.classList.add('hidden');
+                }
+            }
+        });
 
         const marcaSelect = document.getElementById('marca');
         const modeloSelect = document.getElementById('modelo');
@@ -663,49 +564,84 @@ Este e-mail foi enviado automaticamente pelo formulário de cotação do site.
 
         async function loadMarcas() {
             if (!marcaSelect || marcaSelect.options.length > 1) return;
-            const marcas = await fetchAPIData(FIPE_MARCAS_URL, 'Erro ao carregar marcas:');
-            if (!marcas) {
-                marcaSelect.innerHTML = '<option value="">Erro ao carregar</option>';
-                return;
+            const spinner = document.getElementById('marca-spinner');
+            if (spinner) spinner.classList.remove('hidden');
+            marcaSelect.innerHTML = '<option value="">Carregando...</option>';
+            try {
+                const marcas = await fetchAPIData(API_ENDPOINTS.FIPE_MARCAS, 'Erro ao carregar marcas:');
+                if (!marcas) {
+                    marcaSelect.innerHTML = '<option value="">Erro ao carregar</option>';
+                    return;
+                }
+                marcaSelect.innerHTML = '<option value="">Selecione a Marca</option>';
+                marcas.forEach(marca => marcaSelect.add(new Option(marca.nome, marca.codigo)));
+            } finally {
+                if (spinner) spinner.classList.add('hidden');
             }
-            marcaSelect.innerHTML = '<option value="">Selecione a Marca</option>';
-            marcas.forEach(marca => marcaSelect.add(new Option(marca.nome, marca.codigo)));
         }
-
 
         marcaSelect?.addEventListener('change', async () => {
             const marcaId = marcaSelect.value;
-            modeloSelect.disabled = true; anoSelect.disabled = true;
-            modeloSelect.innerHTML = '<option value="">Selecione a marca</option>'; anoSelect.innerHTML = '<option value="">Selecione o modelo</option>';
+            modeloSelect.disabled = true;
+            anoSelect.disabled = true;
+            modeloSelect.innerHTML = '<option value="">Selecione a marca</option>';
+            anoSelect.innerHTML = '<option value="">Selecione o modelo</option>';
             if (!marcaId) return;
-            
+            const spinner = document.getElementById('modelo-spinner');
+            if (spinner) spinner.classList.remove('hidden');
             modeloSelect.innerHTML = '<option value="">Carregando...</option>';
-            const data = await fetchAPIData(FIPE_MODELOS_URL(marcaId), 'Erro ao carregar modelos:');
-            if (!data || !data.modelos) {
-                modeloSelect.innerHTML = '<option value="">Erro ao carregar</option>';
-                return;
+            try {
+                const data = await fetchAPIData(API_ENDPOINTS.FIPE_MODELOS(marcaId), 'Erro ao carregar modelos:');
+                if (!data || !data.modelos) {
+                    modeloSelect.innerHTML = '<option value="">Erro ao carregar</option>';
+                    return;
+                }
+                modeloSelect.innerHTML = '<option value="">Selecione o Modelo</option>';
+                data.modelos.forEach(modelo => modeloSelect.add(new Option(modelo.nome, modelo.codigo)));
+                modeloSelect.disabled = false;
+            } finally {
+                if (spinner) spinner.classList.add('hidden');
             }
-            modeloSelect.innerHTML = '<option value="">Selecione o Modelo</option>';
-            data.modelos.forEach(modelo => modeloSelect.add(new Option(modelo.nome, modelo.codigo)));
-            modeloSelect.disabled = false;
         });
-
 
         modeloSelect?.addEventListener('change', async () => {
             const marcaId = marcaSelect.value;
             const modeloId = modeloSelect.value;
-            anoSelect.disabled = true; anoSelect.innerHTML = '<option value="">Selecione o modelo</option>';
+            anoSelect.disabled = true;
+            anoSelect.innerHTML = '<option value="">Selecione o modelo</option>';
             if (!marcaId || !modeloId) return;
-
+            const spinner = document.getElementById('ano-spinner');
+            if (spinner) spinner.classList.remove('hidden');
             anoSelect.innerHTML = '<option value="">Carregando...</option>';
-            const anos = await fetchAPIData(FIPE_ANOS_URL(marcaId, modeloId), 'Erro ao carregar anos:');
-            if (!anos) {
-                anoSelect.innerHTML = '<option value="">Erro ao carregar</option>';
-                return;
+            try {
+                const anos = await fetchAPIData(API_ENDPOINTS.FIPE_ANOS(marcaId, modeloId), 'Erro ao carregar anos:');
+                if (!anos) {
+                    anoSelect.innerHTML = '<option value="">Erro ao carregar</option>';
+                    return;
+                }
+                anoSelect.innerHTML = '<option value="">Selecione o Ano</option>';
+                anos.forEach(ano => anoSelect.add(new Option(ano.nome, ano.codigo)));
+                anoSelect.disabled = false;
+            } finally {
+                if (spinner) spinner.classList.add('hidden');
             }
-            anoSelect.innerHTML = '<option value="">Selecione o Ano</option>';
-            anos.forEach(ano => anoSelect.add(new Option(ano.nome, ano.codigo)));
-            anoSelect.disabled = false;
         });
     }
+
+    // --- Back to Top Button ---
+    const backToTopBtn = document.getElementById('back-to-top');
+    if (backToTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('hidden');
+            } else {
+                backToTopBtn.classList.add('hidden');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
 });
