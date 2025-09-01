@@ -19,20 +19,20 @@
       "@type": "InsuranceAgency",
       "name": "SeguroMax Corretora de Seguros",
       "description": "Corretora de seguros com as melhores cotações do mercado. Seguro auto, residencial, vida e empresarial. Solicite sua cotação online agora.",
-      "url": "https://www.sua-url-final.com.br",
-      "logo": "https://www.sua-url-final.com.br/assets/logo.png",
-      "telephone": "+55-11-3333-4444",
+      "url": "https://www.sua-url-final.com.br", // <-- ATUALIZE COM SUA URL FINAL
+      "logo": "https://www.sua-url-final.com.br/assets/logo.png", // <-- ATUALIZE COM A URL DO SEU LOGO
+      "telephone": "+551133334444", // Formato internacional E.164
       "email": "contato@seguromax.com.br",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Av. Paulista, 1000 - Bela Vista",
+        "streetAddress": "Av. Paulista, 1000",
         "addressLocality": "São Paulo",
         "addressRegion": "SP",
         "postalCode": "01310-100",
         "addressCountry": "BR"
       },
       "openingHoursSpecification": [
-        {
+        { 
           "@type": "OpeningHoursSpecification",
           "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
           "opens": "08:00",
@@ -50,32 +50,12 @@
         "ratingValue": "5",
         "reviewCount": "6"
       },
-      "sameAs": [
-        "https://www.facebook.com/sua-pagina",
-        "https://www.instagram.com/seu-perfil"
+      "sameAs": [ // <-- ATUALIZE COM SUAS REDES SOCIAIS
+        "https://www.facebook.com/suapagina",
+        "https://www.instagram.com/seuperfil"
       ]
     }
     </script>
-    <style>
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(15px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes fadeOut {
-          from { opacity: 1; transform: translateY(0); }
-          to { opacity: 0; transform: translateY(-15px); }
-        }
-        
-        .form-step-fade-in {
-          animation: fadeIn 0.4s ease-out forwards;
-        }
-        
-        .form-step-fade-out {
-          animation: fadeOut 0.3s ease-in forwards;
-        }
-        </style>
-        
 </head>
 <body class="bg-gray-50">
     <!-- Navbar -->
@@ -656,15 +636,49 @@
                                 </div>
                                 <div>
                                     <label class="block text-gray-700 font-semibold mb-2">Garagem em Casa? *</label>
-                                    <select id="garagem-casa" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"><option value="sim">Sim</option><option value="nao">Não</option></select>
+                                    <select id="garagem-casa" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                        <option value="sim">Sim</option>
+                                        <option value="nao">Não</option>
+                                    </select>
+                                    <div id="garagem-casa-error" class="error-message text-red-500 text-sm mt-1 hidden"></div>
                                 </div>
                                 <div>
                                     <label class="block text-gray-700 font-semibold mb-2">Garagem no Trabalho/Estudo? *</label>
-                                    <select id="garagem-trabalho" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"><option value="sim">Sim</option><option value="nao">Não</option></select>
+                                    <select id="garagem-trabalho" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                        <option value="sim">Sim</option>
+                                        <option value="nao">Não</option>
+                                        <option value="nao_aplica">Não se aplica</option>
+                                    </select>
+                                    <div id="garagem-trabalho-error" class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                                </div>
+
+                                <!-- Container para a pergunta e os campos condicionais -->
+                                <div class="md:col-span-2 lg:col-span-3">
+                                    <div>
+                                        <label class="block text-gray-700 font-semibold mb-2">O proprietário é o principal condutor? *</label>
+                                        <div class="flex items-center space-x-4">
+                                            <label class="flex items-center"><input type="radio" name="proprietario-condutor" value="sim" class="form-radio h-4 w-4 text-blue-600" checked><span class="ml-2 text-gray-700">Sim</span></label>
+                                            <label class="flex items-center"><input type="radio" name="proprietario-condutor" value="nao" class="form-radio h-4 w-4 text-blue-600"><span class="ml-2 text-gray-700">Não</span></label>
+                                        </div>
+                                    </div>
+                                    <!-- Campos do Principal Condutor (se não for o proprietário) -->
+                                    <div id="principal-condutor-fields" class="hidden mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div>
+                                            <label for="condutor-nome" class="block text-gray-700 font-semibold mb-2">Nome do Principal Condutor *</label>
+                                            <input type="text" id="condutor-nome" name="condutor-nome" class="w-full p-3 border border-gray-300 rounded-lg">
+                                            <div id="condutor-nome-error" class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                                        </div>
+                                        <div>
+                                            <label for="condutor-cpf" class="block text-gray-700 font-semibold mb-2">CPF do Principal Condutor *</label>
+                                            <input type="text" id="condutor-cpf" name="condutor-cpf" class="w-full p-3 border border-gray-300 rounded-lg">
+                                            <div id="condutor-cpf-error" class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
     
                     <!-- Dados do Imóvel (Seguro Residencial) -->
                     <div class="form-step hidden" data-step="4" data-insurance-type="residencial">
@@ -988,7 +1002,7 @@
     </section>
 
     <!-- Depoimentos -->
-    <section class="py-20 bg-gray-50">
+    <section id="depoimentos" class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold text-gray-800 mb-4">O que nossos clientes dizem</h2>
@@ -997,138 +1011,85 @@
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white rounded-xl p-6 shadow-lg animate-on-scroll">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
-                            <i class="fas fa-user text-blue-600"></i>
+            <div class="relative">
+                <div id="testimonial-container" class="overflow-hidden">
+                    <div id="testimonial-track" class="flex transition-transform duration-500 ease-in-out">
+                        <!-- Card 1 -->
+                        <div class="testimonial-card w-full md:w-1/2 lg:w-1/3 flex-shrink-0 p-4">
+                            <div class="bg-white rounded-xl p-6 shadow-lg h-full flex flex-col">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4"><i class="fas fa-user text-blue-600"></i></div>
+                                    <div><h4 class="font-bold text-gray-800">Maria Silva</h4><p class="text-gray-600 text-sm">Cliente há 3 anos</p></div>
+                                </div>
+                                <div class="text-yellow-400 mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                <p class="text-gray-600 flex-grow">"Excelente atendimento! Quando precisei usar o seguro do meu carro, foram super ágeis e resolveram tudo sem burocracia. Recomendo!"</p>
+                            </div>
                         </div>
-                        <div>
-                            <h4 class="font-bold text-gray-800">Maria Silva</h4>
-                            <p class="text-gray-600 text-sm">Cliente há 3 anos</p>
+                        <!-- Card 2 -->
+                        <div class="testimonial-card w-full md:w-1/2 lg:w-1/3 flex-shrink-0 p-4">
+                            <div class="bg-white rounded-xl p-6 shadow-lg h-full flex flex-col">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mr-4"><i class="fas fa-user text-orange-500"></i></div>
+                                    <div><h4 class="font-bold text-gray-800">João Santos</h4><p class="text-gray-600 text-sm">Cliente há 5 anos</p></div>
+                                </div>
+                                <div class="text-yellow-400 mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                <p class="text-gray-600 flex-grow">"A SeguroMax conseguiu um preço muito melhor que outras corretoras. O atendimento é personalizado e sempre que preciso, eles estão disponíveis."</p>
+                            </div>
+                        </div>
+                        <!-- Card 3 -->
+                        <div class="testimonial-card w-full md:w-1/2 lg:w-1/3 flex-shrink-0 p-4">
+                            <div class="bg-white rounded-xl p-6 shadow-lg h-full flex flex-col">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4"><i class="fas fa-user text-blue-600"></i></div>
+                                    <div><h4 class="font-bold text-gray-800">Ana Costa</h4><p class="text-gray-600 text-sm">Cliente há 2 anos</p></div>
+                                </div>
+                                <div class="text-yellow-400 mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                <p class="text-gray-600 flex-grow">"Profissionais competentes e confiáveis. Fizeram uma análise completa das minhas necessidades e encontraram o seguro perfeito para minha família."</p>
+                            </div>
+                        </div>
+                        <!-- Card 4 -->
+                        <div class="testimonial-card w-full md:w-1/2 lg:w-1/3 flex-shrink-0 p-4">
+                            <div class="bg-white rounded-xl p-6 shadow-lg h-full flex flex-col">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mr-4"><i class="fas fa-user text-orange-500"></i></div>
+                                    <div><h4 class="font-bold text-gray-800">Carlos Oliveira</h4><p class="text-gray-600 text-sm">Cliente há 4 anos</p></div>
+                                </div>
+                                <div class="text-yellow-400 mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                <p class="text-gray-600 flex-grow">"O suporte 24h realmente funciona! Tive um problema no final de semana e fui atendido imediatamente. Empresa séria e comprometida."</p>
+                            </div>
+                        </div>
+                        <!-- Card 5 -->
+                        <div class="testimonial-card w-full md:w-1/2 lg:w-1/3 flex-shrink-0 p-4">
+                            <div class="bg-white rounded-xl p-6 shadow-lg h-full flex flex-col">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4"><i class="fas fa-user text-blue-600"></i></div>
+                                    <div><h4 class="font-bold text-gray-800">Fernanda Lima</h4><p class="text-gray-600 text-sm">Cliente há 1 ano</p></div>
+                                </div>
+                                <div class="text-yellow-400 mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                <p class="text-gray-600 flex-grow">"Migrei de outra corretora e não me arrependo. Aqui o atendimento é mais humano e os preços são justos. Muito satisfeita!"</p>
+                            </div>
+                        </div>
+                        <!-- Card 6 -->
+                        <div class="testimonial-card w-full md:w-1/2 lg:w-1/3 flex-shrink-0 p-4">
+                            <div class="bg-white rounded-xl p-6 shadow-lg h-full flex flex-col">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mr-4"><i class="fas fa-user text-orange-500"></i></div>
+                                    <div><h4 class="font-bold text-gray-800">Roberto Mendes</h4><p class="text-gray-600 text-sm">Cliente há 6 anos</p></div>
+                                </div>
+                                <div class="text-yellow-400 mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                <p class="text-gray-600 flex-grow">"Empresa de confiança! Já passei por algumas situações difíceis e sempre foram muito eficientes na resolução. Parceiros de verdade."</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="text-yellow-400 mb-3">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="text-gray-600">
-                        "Excelente atendimento! Quando precisei usar o seguro do meu carro, foram super ágeis e resolveram tudo sem burocracia. Recomendo!"
-                    </p>
                 </div>
 
-                <div class="bg-white rounded-xl p-6 shadow-lg animate-on-scroll">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mr-4">
-                            <i class="fas fa-user text-orange-500"></i>
-                        </div>
-                        <div> 
-                            <h4 class="font-bold text-gray-800">João Santos</h4>
-                            <p class="text-gray-600 text-sm">Cliente há 5 anos</p>
-                        </div>
-                    </div>
-                    <div class="text-yellow-400 mb-3">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="text-gray-600">
-                        "A SeguroMax conseguiu um preço muito melhor que outras corretoras. O atendimento é personalizado e sempre que preciso, eles estão disponíveis."
-                    </p>
-                </div>
-
-                <div class="bg-white rounded-xl p-6 shadow-lg animate-on-scroll">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
-                            <i class="fas fa-user text-blue-600"></i>
-                        </div>
-                        <div> 
-                            <h4 class="font-bold text-gray-800">Ana Costa</h4>
-                            <p class="text-gray-600 text-sm">Cliente há 2 anos</p>
-                        </div>
-                    </div>
-                    <div class="text-yellow-400 mb-3">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="text-gray-600">
-                        "Profissionais competentes e confiáveis. Fizeram uma análise completa das minhas necessidades e encontraram o seguro perfeito para minha família."
-                    </p>
-                </div>
-
-                <div class="bg-white rounded-xl p-6 shadow-lg animate-on-scroll">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mr-4">
-                            <i class="fas fa-user text-orange-500"></i>
-                        </div>
-                        <div> 
-                            <h4 class="font-bold text-gray-800">Carlos Oliveira</h4>
-                            <p class="text-gray-600 text-sm">Cliente há 4 anos</p>
-                        </div>
-                    </div>
-                    <div class="text-yellow-400 mb-3">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="text-gray-600">
-                        "O suporte 24h realmente funciona! Tive um problema no final de semana e fui atendido imediatamente. Empresa séria e comprometida."
-                    </p>
-                </div>
-
-                <div class="bg-white rounded-xl p-6 shadow-lg animate-on-scroll">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
-                            <i class="fas fa-user text-blue-600"></i>
-                        </div>
-                        <div> 
-                            <h4 class="font-bold text-gray-800">Fernanda Lima</h4>
-                            <p class="text-gray-600 text-sm">Cliente há 1 ano</p>
-                        </div>
-                    </div>
-                    <div class="text-yellow-400 mb-3">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="text-gray-600">
-                        "Migrei de outra corretora e não me arrependo. Aqui o atendimento é mais humano e os preços são justos. Muito satisfeita!"
-                    </p>
-                </div>
-
-                <div class="bg-white rounded-xl p-6 shadow-lg animate-on-scroll">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mr-4">
-                            <i class="fas fa-user text-orange-500"></i>
-                        </div>
-                        <div> 
-                            <h4 class="font-bold text-gray-800">Roberto Mendes</h4>
-                            <p class="text-gray-600 text-sm">Cliente há 6 anos</p>
-                        </div>
-                    </div>
-                    <div class="text-yellow-400 mb-3">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="text-gray-600">
-                        "Empresa de confiança! Já passei por algumas situações difíceis e sempre foram muito eficientes na resolução. Parceiros de verdade."
-                    </p>
-                </div>
+                <!-- Navigation Buttons -->
+                <button id="testimonial-prev" class="absolute top-1/2 -translate-y-1/2 hover:-translate-y-1/2 -left-4 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:bg-gray-100 transition-all z-10">
+                    <i class="fas fa-chevron-left text-gray-600"></i>
+                </button>
+                <button id="testimonial-next" class="absolute top-1/2 -translate-y-1/2 hover:-translate-y-1/2 -right-4 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:bg-gray-100 transition-all z-10">
+                    <i class="fas fa-chevron-right text-gray-600"></i>
+                </button>
             </div>
         </div>
     </section>
@@ -1364,6 +1325,7 @@
                         style="border:0;" 
                         allowfullscreen="" 
                         loading="lazy" 
+                        title="Mapa da localização da SeguroMax"
                         referrerpolicy="no-referrer-when-downgrade"
                         class="w-full">
                     </iframe>

@@ -1,30 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Inject Animation Styles ---
-    const injectAnimationStyles = () => {
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes fadeIn {
-              from { opacity: 0; transform: translateY(15px); }
-              to { opacity: 1; transform: translateY(0); }
-            }
-    
-            @keyframes fadeOut {
-              from { opacity: 1; transform: translateY(0); }
-              to { opacity: 0; transform: translateY(-15px); }
-            }
-    
-            .form-step-fade-in {
-              animation: fadeIn 0.4s ease-out forwards;
-            }
-    
-            .form-step-fade-out {
-              animation: fadeOut 0.3s ease-in forwards;
-            }
-        `;
-        document.head.appendChild(style);
-    };
-    injectAnimationStyles();
-
     // --- Cookie Consent Banner ---
     const cookieBanner = document.getElementById('cookie-consent-banner');
     const acceptCookiesBtn = document.getElementById('accept-cookies-btn');
@@ -187,6 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const quoteResultDiv = document.getElementById('quote-result');
         const recalculateBtn = document.getElementById('recalculate-btn');
         const whatsappRedirectBtn = document.getElementById('whatsapp-redirect-btn');
+        const condutorFields = document.getElementById('principal-condutor-fields');
 
         // --- Notification System ---
         const notificationDiv = document.getElementById('form-notification');
@@ -383,18 +358,23 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        const condutorFields = document.getElementById('principal-condutor-fields');
-        if (condutorFields) {
-            document.querySelectorAll('input[name="proprietario-condutor"]').forEach(radio => {
-                radio.addEventListener('change', (e) => {
-                    if (e.target.value === 'nao') {
-                        condutorFields.classList.remove('hidden');
-                    } else {
-                        condutorFields.classList.add('hidden');
-                    }
-                });
+        const initializeConditionalFields = () => {
+            const condutorRadios = document.querySelectorAll('input[name="proprietario-condutor"]');
+
+            if (!condutorFields || condutorRadios.length === 0) {
+                return;
+            }
+
+            const toggleCondutorFields = (event) => {
+                const shouldShow = event.target.value === 'nao';
+                condutorFields.classList.toggle('hidden', !shouldShow);
+            };
+
+            condutorRadios.forEach(radio => {
+                radio.addEventListener('change', toggleCondutorFields);
             });
-        }
+        };
+        initializeConditionalFields();
 
         nextBtn.addEventListener('click', () => {
             if (currentStep === 1 && !selectedInsuranceType) {
@@ -418,26 +398,48 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        recalculateBtn.addEventListener('click', () => {
+        const resetForm = () => {
             quoteResultDiv.classList.add('hidden');
             fieldset.classList.remove('hidden');
             quoteForm.reset();
+
+            // Clear all visual feedback and error messages
             quoteForm.querySelectorAll('input, select, textarea').forEach(input => {
                 input.classList.remove('border-red-500', 'border-green-500');
-                const errorDiv = input.closest('div').querySelector('.error-message');
+                const errorDiv = input.closest('div')?.querySelector('.error-message');
                 if (errorDiv) errorDiv.classList.add('hidden');
             });
+
+            // Reset specific elements and state
             fieldset.disabled = true;
             privacyConsent.checked = false;
-            if (condutorFields) {
-                condutorFields.classList.add('hidden');
+            condutorFields?.classList.add('hidden');
+            document.querySelectorAll('.insurance-type-card').forEach(card => {
+                card.classList.remove('border-blue-500', 'bg-blue-50');
+            });
+
+            // Manually reset FIPE fields to their initial state, as form.reset() doesn't handle this.
+            const modeloSelect = document.getElementById('modelo');
+            const anoSelect = document.getElementById('ano');
+            if (modeloSelect) {
+                modeloSelect.innerHTML = '<option value="">Selecione a marca primeiro</option>';
+                modeloSelect.disabled = true;
             }
+            if (anoSelect) {
+                anoSelect.innerHTML = '<option value="">Selecione o modelo primeiro</option>';
+                anoSelect.disabled = true;
+            }
+
+            // Reset form state variables
             currentStep = 1;
             totalSteps = 3;
             selectedInsuranceType = '';
-            document.querySelectorAll('.insurance-type-card').forEach(card => card.classList.remove('border-blue-500', 'bg-blue-50'));
+
+            // Show the first step
             showStep(1);
-        });
+        };
+
+        recalculateBtn.addEventListener('click', resetForm);
 
         quoteForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -644,4 +646,59 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- Testimonial Carousel ---
+    const testimonialTrack = document.getElementById('testimonial-track');
+    if (testimonialTrack) {
+        const prevBtn = document.getElementById('testimonial-prev');
+        const nextBtn = document.getElementById('testimonial-next');
+        const cards = testimonialTrack.querySelectorAll('.testimonial-card');
+        let currentIndex = 0;
+        let resizeTimeout;
+
+        if (cards.length === 0) {
+            // If there are no testimonials, hide the controls.
+            if (prevBtn) prevBtn.style.display = 'none';
+            if (nextBtn) nextBtn.style.display = 'none';
+        } else {
+            const getItemsPerPage = () => {
+                if (window.innerWidth < 768) return 1;
+                if (window.innerWidth < 1024) return 2;
+                return 3;
+            };
+
+            const updateCarousel = () => {
+                const itemsPerPage = getItemsPerPage();
+                const maxIndex = Math.max(0, cards.length - itemsPerPage);
+
+                // Clamp currentIndex to be within valid bounds
+                if (currentIndex > maxIndex) currentIndex = maxIndex;
+                if (currentIndex < 0) currentIndex = 0;
+
+                // Use offsetWidth for a more reliable integer-based width
+                const cardWidth = cards[0].offsetWidth;
+                const offset = -currentIndex * cardWidth;
+                testimonialTrack.style.transform = `translateX(${offset}px)`;
+
+                // Update button states
+                prevBtn.disabled = currentIndex === 0;
+                nextBtn.disabled = currentIndex >= maxIndex;
+
+                prevBtn.classList.toggle('cursor-not-allowed', prevBtn.disabled);
+                prevBtn.classList.toggle('opacity-50', prevBtn.disabled);
+                nextBtn.classList.toggle('cursor-not-allowed', nextBtn.disabled);
+                nextBtn.classList.toggle('opacity-50', nextBtn.disabled);
+            };
+
+            nextBtn.addEventListener('click', () => { currentIndex++; updateCarousel(); });
+            prevBtn.addEventListener('click', () => { currentIndex--; updateCarousel(); });
+
+            // Debounce resize event for better performance
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(updateCarousel, 150);
+            });
+
+            updateCarousel(); // Initial call
+        }
+    }
 });
