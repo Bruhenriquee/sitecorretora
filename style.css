@@ -143,8 +143,10 @@ html {
 
 /* Form focus states */
 input:focus, select:focus, textarea:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    outline: none !important;
+    border-color: #3b82f6 !important; /* Cor da borda azul no foco */
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2) !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 /* Custom scrollbar */
@@ -222,13 +224,42 @@ button:hover {
 
 /* Form validation styles */
 .field-valid {
-    border-color: #10b981;
-    background-color: #f0fdf4;
+    border-color: #10b981 !important;
+    background-color: #f0fdf4 !important;
 }
 
 .field-invalid {
-    border-color: #ef4444;
-    background-color: #fef2f2;
+    border-color: #ef4444 !important;
+    background-color: #fef2f2 !important;
+}
+
+.validation-icon-container {
+    position: absolute;
+    right: 0.75rem; /* 12px */
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.field-valid + .validation-icon-container,
+.field-invalid + .validation-icon-container {
+    opacity: 1;
+}
+
+.field-valid + .validation-icon-container::after {
+    content: '\f00c'; /* Font Awesome check icon */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    color: #10b981; /* green-500 */
+}
+
+.field-invalid + .validation-icon-container::after {
+    content: '\f00d'; /* Font Awesome times icon */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    color: #ef4444; /* red-500 */
 }
 
 .field-wrapper {
@@ -337,20 +368,46 @@ button:hover {
 
 /* Insurance type selection */
 .insurance-type-card {
-    border: 2px solid #d1d5db;
-    transition: all 0.3s ease;
+    border: 1px solid #e5e7eb; /* Borda mais sutil */
+    background-image: linear-gradient(to top, #f9fafb, white); /* Gradiente suave */
+    transition: all 0.4s ease; /* Transição mais suave */
 }
 
 .insurance-type-card:hover {
-    border-color: #2563eb;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+    border-color: #d1d5db;
+    transform: translateY(-4px); /* Efeito de elevação maior */
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.07);
+}
+
+.insurance-type-card:hover .icon-background {
+    transform: scale(1.05); /* Animação de zoom no ícone */
+}
+
+.insurance-type-card .icon-background {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background-color: #f3f4f6; /* Fundo do ícone mais neutro */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.8rem; /* Aumentado de 40px para ~45px */
+    transition: all 0.4s ease;
+}
+
+.insurance-type-card p {
+    color: #4b5563; /* Deixa o texto da descrição um pouco mais escuro */
 }
 
 .insurance-type-radio:checked + .insurance-type-card {
-    border-color: #2563eb;
-    background-color: #eff6ff;
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    border-color: #2563eb !important; /* Borda azul mais forte */
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.15);
+    background-image: linear-gradient(to top, #eff6ff, white); /* Gradiente azulado */
+}
+
+.insurance-type-radio:checked + .insurance-type-card .icon-background {
+    background-color: #bfdbfe; /* blue-200 */
 }
 
 /* Insurance sections */
@@ -403,6 +460,11 @@ button:hover {
     animation: fadeOut 0.3s ease-in forwards;
   }
 
+/* Ajuste no espaçamento dos títulos das etapas */
+.form-step h3 {
+    margin-bottom: 2.5rem; /* Aumenta o espaço abaixo do título */
+}
+
 /* Toast Notification Styles */
 @keyframes toast-in {
     from {
@@ -426,6 +488,34 @@ button:hover {
     }
 }
 
+/* Classe para o painel de resumo flutuante (sticky) */
+.simulation-panel-sticky {
+    position: fixed;
+    top: 6rem; /* Equivalente a top-24 do Tailwind */
+    width: inherit; /* Herda a largura do seu contêiner pai */
+    z-index: 40;
+}
+
+/* Classe para travar o painel no final do container */
+.simulation-panel-absolute {
+    position: absolute;
+    bottom: 0;
+    width: 100%; /* Garante que ele ocupe a largura da coluna */
+}
+
+/* Animação de flutuação para o painel de resumo */
+@keyframes float {
+	0% {
+		transform: translateY(0px);
+	}
+	50% {
+		transform: translateY(-8px);
+	}
+	100% {
+		transform: translateY(0px);
+	}
+}
+
 /* Estilos para o painel de simulação */
 .summary-item {
     animation: summary-item-in 0.5s ease-out forwards;
@@ -447,4 +537,37 @@ button:hover {
 
 .summary-item strong {
     color: #1f2937; /* text-gray-800 */
+}
+
+/* Estilos para Seções com Imagem de Fundo */
+.section-bg-image {
+    position: relative;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed; /* Efeito Parallax */
+}
+.section-bg-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.9), rgba(249, 250, 251, 0.85)); /* Gradiente de branco para cinza claro - Padrão */
+    z-index: 0;
+}
+
+.section-bg-image > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Ajuste específico para a seção de depoimentos com fundo escuro */
+#depoimentos.section-bg-image::before {
+    background: linear-gradient(to right, rgba(17, 24, 39, 0.9), rgba(55, 65, 81, 0.85)); /* Gradiente de cinza escuro */
+}
+
+/* Ajuste para o formulário de cotação não ter o overlay padrão */
+#cotacao .section-bg-image::before {
+    /* background: none; */ /* Re-enabled for better text contrast if needed */
 }

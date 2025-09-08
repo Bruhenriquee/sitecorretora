@@ -48,7 +48,7 @@
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "5",
-        "reviewCount": "6"
+        "reviewCount": "12"
       },
       "sameAs": [
         "https://www.facebook.com/seguromax",
@@ -147,7 +147,7 @@
     </section>
 
     <!-- Quem Somos -->
-    <section id="quem-somos" class="py-20 bg-white">
+    <section id="quem-somos" class="py-20 bg-white relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold text-gray-800 mb-4">Sua Tranquilidade, Nossa Prioridade</h2>
@@ -157,7 +157,7 @@
             </div>
 
             <!-- Missão, Visão, Valores -->
-            <div class="grid md:grid-cols-3 gap-8 mb-16 text-center">
+            <div class="grid md:grid-cols-3 gap-8 mb-16 text-center relative z-10">
                 <!-- Missão -->
                 <div class="p-6">
                     <div class="text-blue-600 text-5xl mb-4"><i class="fas fa-bullseye"></i></div>
@@ -188,7 +188,7 @@
             </div>
 
             <!-- Números que Falam por Nós -->
-            <div class="bg-gray-50 rounded-2xl p-8">
+            <div class="bg-gray-50 rounded-2xl p-8 relative z-10">
                 <h3 class="text-2xl font-bold text-gray-800 mb-8 text-center">Nossos Números</h3>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
                     <div class="animate-on-scroll">
@@ -371,442 +371,568 @@
                             <span class="text-green-700 font-bold text-xl">Liberty</span>
                         </div>
                     </div>
+                    <!-- Clones para o loop infinito -->
+                    <div class="flex-shrink-0 mx-4">
+                        <div class="bg-gray-50 rounded-lg p-8 h-32 w-48 flex items-center justify-center hover:shadow-lg transition duration-300">
+                            <span class="text-blue-700 font-bold text-xl">Porto Seguro</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-shrink-0 mx-4">
+                        <div class="bg-gray-50 rounded-lg p-8 h-32 w-48 flex items-center justify-center hover:shadow-lg transition duration-300">
+                            <span class="text-red-600 font-bold text-xl">Bradesco</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-shrink-0 mx-4">
+                        <div class="bg-gray-50 rounded-lg p-8 h-32 w-48 flex items-center justify-center hover:shadow-lg transition duration-300">
+                            <span class="text-blue-600 font-bold text-xl">SulAmérica</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-shrink-0 mx-4">
+                        <div class="bg-gray-50 rounded-lg p-8 h-32 w-48 flex items-center justify-center hover:shadow-lg transition duration-300">
+                            <span class="text-blue-800 font-bold text-xl">Allianz</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-shrink-0 mx-4">
+                        <div class="bg-gray-50 rounded-lg p-8 h-32 w-48 flex items-center justify-center hover:shadow-lg transition duration-300">
+                            <span class="text-red-700 font-bold text-xl">Mapfre</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-shrink-0 mx-4">
+                        <div class="bg-gray-50 rounded-lg p-8 h-32 w-48 flex items-center justify-center hover:shadow-lg transition duration-300">
+                            <span class="text-orange-600 font-bold text-xl">HDI</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-shrink-0 mx-4">
+                        <div class="bg-gray-50 rounded-lg p-8 h-32 w-48 flex items-center justify-center hover:shadow-lg transition duration-300">
+                            <span class="text-blue-900 font-bold text-xl">Zurich</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-shrink-0 mx-4">
+                        <div class="bg-gray-50 rounded-lg p-8 h-32 w-48 flex items-center justify-center hover:shadow-lg transition duration-300">
+                            <span class="text-green-700 font-bold text-xl">Liberty</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Cotação Completa -->
-    <section id="cotacao" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-3 gap-12">
-                <!-- Coluna do Formulário -->
-                <div class="lg:col-span-2">
-                    <div class="text-center lg:text-left mb-12">
-                        <h2 class="text-4xl font-bold text-gray-800 mb-4">Simulador de Cotação de Seguros</h2>
-                        <p class="text-xl text-gray-600">
-                            Preencha os dados para simular e solicitar sua cotação personalizada.
-                        </p>
-                    </div>
-
-                    <!-- Aviso de Simulação e Consentimento -->
-                    <div class="bg-yellow-50 border-l-4 border-yellow-500 text-yellow-800 p-6 rounded-lg mb-8 shadow-md" role="alert">
-                        <div class="flex items-center">
-                            <div class="py-1"><i class="fas fa-exclamation-triangle text-2xl mr-4"></i></div>
-                            <div>
-                                <p class="font-bold text-lg">Próximo Passo: Sua Cotação Personalizada</p>
-                                <p class="text-sm">Ao preencher o formulário, você nos enviará os dados necessários para que um de nossos especialistas prepare sua cotação. Não se preocupe, não há contratação automática. Ao prosseguir, você concorda com nossa <a href="/politica-de-privacidade.html" target="_blank" class="font-bold underline hover:text-yellow-900">Política de Privacidade</a>.</p>
+    <section id="cotacao" class="bg-white pt-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative pb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Simulador de Cotação de Seguros</h2>
+                <p class="text-xl text-gray-600">Preencha os dados para simular e solicitar sua cotação personalizada.</p>
+            </div>
+            <div id="quote-card" class="bg-white rounded-xl shadow-2xl relative overflow-hidden border-t-8 border-transparent transition-all duration-500">
+                <div class="p-8">
+                    <div id="quote-form-container">
+                        <!-- Aviso de Simulação e Consentimento -->
+                        <div class="bg-yellow-50 border-l-4 border-yellow-500 text-yellow-800 p-6 rounded-lg mb-8 shadow-md" role="alert">
+                            <div class="flex items-center">
+                                <div class="py-1"><i class="fas fa-exclamation-triangle text-2xl mr-4"></i></div>
+                                <div>
+                                    <p class="font-bold text-lg">Próximo Passo: Sua Cotação Personalizada</p>
+                                    <p class="text-sm">Ao preencher o formulário, você nos enviará os dados necessários para que um de nossos especialistas prepare sua cotação. Não se preocupe, não há contratação automática. Ao prosseguir, você concorda com nossa <a href="/politica-de-privacidade.html" target="_blank" class="font-bold underline hover:text-yellow-900">Política de Privacidade</a>.</p>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <label for="privacy-consent" class="flex items-center cursor-pointer">
+                                    <input type="checkbox" id="privacy-consent" class="h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                    <span class="ml-3 text-gray-700 font-semibold">Li e concordo com os termos.</span>
+                                </label>
                             </div>
                         </div>
-                        <div class="mt-4">
-                            <label for="privacy-consent" class="flex items-center cursor-pointer">
-                                <input type="checkbox" id="privacy-consent" class="h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                                <span class="ml-3 text-gray-700 font-semibold">Li e concordo com os termos.</span>
-                            </label>
-                        </div>
-                    </div>
-                    <form id="quote-form" class="bg-gray-50 rounded-xl p-8 shadow-lg relative">
-                        <!-- O conteúdo do formulário (steps, fieldset, etc.) permanece aqui -->
-                        <!-- ... (código do formulário de 481 a 958) ... -->
-                        <div id="form-notification" class="hidden p-4 mb-4 text-sm text-white rounded-lg transition-opacity duration-300" role="alert">
-                            <span id="notification-message"></span>
-                        </div>
-                        <fieldset id="quote-fieldset" disabled>
-                            <!-- Barra de Progresso -->
-                            <div class="w-full bg-gray-200 rounded-full h-2.5 mb-8">
-                                <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full" style="width: 10%"></div>
-                            </div>
 
-                            <!-- ... (Todos os <div class="form-step"> ... -->
-                            <!-- Passo 1: Tipo de Seguro -->
-                            <div class="form-step" data-step="1">
+                        <form id="quote-form" novalidate>
+                            <fieldset id="quote-fieldset" disabled>
+                                <!-- Cabeçalho da Etapa com Progresso -->
                                 <div class="mb-8">
-                                    <h3 class="text-xl font-bold text-gray-800 mb-6">Tipo de Seguro</h3>
-                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="insurance-types-container">
-                                        <label class="insurance-type-option cursor-pointer flex">
-                                            <input type="radio" name="insurance-type" value="auto" class="hidden insurance-type-radio">
-                                            <div class="insurance-type-card w-full flex flex-col justify-center p-6 border-2 border-gray-300 rounded-lg text-center transition duration-300 hover:border-blue-500">
-                                                <i class="fas fa-car text-4xl text-blue-600 mb-3"></i>
-                                                <h4 class="text-lg font-bold text-gray-800 mb-2">Seguro Automóvel</h4>
-                                                <p class="text-gray-600 text-sm">Proteção para seu veículo</p>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <h3 id="step-title" class="text-2xl font-bold text-gray-800">1. Qual seguro você precisa?</h3>
+                                        <div id="step-summary" class="text-sm text-gray-500 font-medium"></div>
+                                    </div>
+                                    <!-- Barra de Progresso -->
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                        <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-500" style="width: 20%"></div>
+                                    </div>
+                                </div>
+
+
+
+                                <!-- Etapa 1: Tipo de Seguro -->
+                                <div class="form-step" data-step="1">
+                                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                                        <!-- Opções de seguro aqui -->
+                                        <label class="insurance-type-option">
+                                            <input type="radio" name="insurance-type" value="auto" class="sr-only insurance-type-radio" />
+                                            <div class="insurance-type-card p-6 rounded-lg cursor-pointer flex flex-col items-center justify-center h-48">
+                                                <div class="icon-background mb-4">
+                                                    <i class="fas fa-car text-blue-600"></i>
+                                                </div>
+                                                <span class="font-semibold text-gray-800 text-lg mb-2">Automóvel</span>
+                                                <p class="text-xs text-gray-500 text-center">Proteção para seu carro contra roubo, acidentes e danos.</p>
                                             </div>
                                         </label>
-                                        <label class="insurance-type-option cursor-pointer flex">
-                                            <input type="radio" name="insurance-type" value="residencial" class="hidden insurance-type-radio">
-                                            <div class="insurance-type-card w-full flex flex-col justify-center p-6 border-2 border-gray-300 rounded-lg text-center transition duration-300 hover:border-blue-500">
-                                                <i class="fas fa-home text-4xl text-green-600 mb-3"></i>
-                                                <h4 class="text-lg font-bold text-gray-800 mb-2">Seguro Residencial</h4>
-                                                <p class="text-gray-600 text-sm">Sua casa sempre segura</p>
+                                        <label class="insurance-type-option">
+                                            <input type="radio" name="insurance-type" value="residencial" class="sr-only insurance-type-radio" />
+                                            <div class="insurance-type-card p-6 rounded-lg cursor-pointer flex flex-col items-center justify-center h-48">
+                                                <div class="icon-background mb-4">
+                                                    <i class="fas fa-home text-orange-500"></i>
+                                                </div>
+                                                <span class="font-semibold text-gray-800 text-lg mb-2">Residencial</span>
+                                                <p class="text-xs text-gray-500 text-center">Segurança para seu lar contra incêndios, roubos e imprevistos.</p>
                                             </div>
                                         </label>
-                                        <label class="insurance-type-option cursor-pointer flex">
-                                            <input type="radio" name="insurance-type" value="vida" class="hidden insurance-type-radio">
-                                            <div class="insurance-type-card w-full flex flex-col justify-center p-6 border-2 border-gray-300 rounded-lg text-center transition duration-300 hover:border-blue-500">
-                                                <i class="fas fa-heartbeat text-4xl text-red-600 mb-3"></i>
-                                                <h4 class="text-lg font-bold text-gray-800 mb-2">Seguro de Vida</h4>
-                                                <p class="text-gray-600 text-sm">Segurança para sua família</p>
+                                        <label class="insurance-type-option">
+                                            <input type="radio" name="insurance-type" value="vida" class="sr-only insurance-type-radio" />
+                                            <div class="insurance-type-card p-6 rounded-lg cursor-pointer flex flex-col items-center justify-center h-48">
+                                                <div class="icon-background mb-4">
+                                                    <i class="fas fa-heartbeat text-red-500"></i>
+                                                </div>
+                                                <span class="font-semibold text-gray-800 text-lg mb-2">Vida</span>
+                                                <p class="text-xs text-gray-500 text-center">Garanta a tranquilidade financeira de quem você ama.</p>
                                             </div>
                                         </label>
-                                        <label class="insurance-type-option cursor-pointer flex">
-                                            <input type="radio" name="insurance-type" value="consorcio" class="hidden insurance-type-radio">
-                                            <div class="insurance-type-card w-full flex flex-col justify-center p-6 border-2 border-gray-300 rounded-lg text-center transition duration-300 hover:border-blue-500">
-                                                <i class="fas fa-users text-4xl text-purple-600 mb-3"></i>
-                                                <h4 class="text-lg font-bold text-gray-800 mb-2">Consórcio</h4>
-                                                <p class="text-gray-600 text-sm">Realize seus sonhos</p>
+                                        <label class="insurance-type-option">
+                                            <input type="radio" name="insurance-type" value="consorcio" class="sr-only insurance-type-radio" />
+                                            <div class="insurance-type-card p-6 rounded-lg cursor-pointer flex flex-col items-center justify-center h-48">
+                                                <div class="icon-background mb-4">
+                                                    <i class="fas fa-users text-green-500"></i>
+                                                </div>
+                                                <span class="font-semibold text-gray-800 text-lg mb-2">Consórcio</span>
+                                                <p class="text-xs text-gray-500 text-center">Planeje a compra do seu bem de forma inteligente e sem juros.</p>
                                             </div>
                                         </label>
                                     </div>
-                                    
                                 </div>
-                            </div>
-                            
-                            <!-- Dados Pessoais -->
-                            <div class="form-step hidden" data-step="2">
-                                <div class="mb-8">
-                                    <h3 class="text-xl font-bold text-gray-800 mb-6">Dados Pessoais</h3>
-                                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                        <div class="relative">
-                                            <label class="block text-gray-700 font-semibold mb-2">Nome Completo *</label>
-                                            <input type="text" id="nome" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required aria-describedby="nome-error">
-                                            <div id="nome-error" class="error-message text-red-500 text-sm mt-1 hidden"></div>
+
+                                <!-- Etapa 2: Dados Pessoais -->
+                                <div class="form-step hidden" data-step="2">
+                                    <div class="grid md:grid-cols-2 gap-6">                                        <div class="relative">
+                                            <label for="nome" class="block text-gray-700 font-semibold mb-2">Nome Completo *</label>
+                                            <input type="text" id="nome" name="nome" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="Ex: Maria da Silva" required>
+                                            <span class="validation-icon-container"></span>
+                                            <div class="error-message hidden text-red-500 text-sm mt-1"></div>
                                         </div>
                                         <div class="relative">
-                                            <label class="block text-gray-700 font-semibold mb-2">CPF *</label>
-                                            <input type="text" id="cpf" placeholder="000.000.000-00" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required aria-describedby="cpf-error">
-                                            <div id="cpf-error" class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                                            <label for="cpf" class="block text-gray-700 font-semibold mb-2">CPF *</label>
+                                            <input type="text" id="cpf" name="cpf" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="000.000.000-00" required data-validate="cpf">
+                                            <span class="validation-icon-container"></span>
+                                            <div class="error-message hidden text-red-500 text-sm mt-1"></div>
                                         </div>
                                         <div class="relative">
-                                            <label class="block text-gray-700 font-semibold mb-2">Data de Nascimento *</label>
-                                            <input type="date" id="nascimento" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required aria-describedby="nascimento-error">
-                                            <div id="nascimento-error" class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                                            <label for="nascimento" class="block text-gray-700 font-semibold mb-2">Data de Nascimento *</label>
+                                            <input type="date" id="nascimento" name="nascimento" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" required>
+                                            <span class="validation-icon-container"></span>
                                         </div>
                                         <div class="relative">
-                                            <label class="block text-gray-700 font-semibold mb-2">Telefone (11 dígitos) *</label>
-                                            <input type="tel" id="telefone" placeholder="(11) 99999-9999" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required aria-describedby="telefone-error">
-                                            <div id="telefone-error" class="error-message text-red-500 text-sm mt-1 hidden"></div>
-                                        </div>
-                                        <div class="md:col-span-2 relative">
-                                            <label class="block text-gray-700 font-semibold mb-2">E-mail *</label>
-                                            <input type="email" id="email" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required aria-describedby="email-error">
-                                            <div id="email-error" class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                                            <label for="telefone" class="block text-gray-700 font-semibold mb-2">Telefone / WhatsApp *</label>
+                                            <input type="tel" id="telefone" name="telefone" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="(00) 00000-0000" required data-validate="telefone">
+                                            <span class="validation-icon-container"></span>
+                                            <div class="error-message hidden text-red-500 text-sm mt-1"></div>
                                         </div>
                                         <div class="relative">
-                                            <label class="block text-gray-700 font-semibold mb-2">Gênero *</label>
-                                            <select id="genero" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                            <label for="email" class="block text-gray-700 font-semibold mb-2">E-mail *</label>
+                                            <input type="email" id="email" name="email" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="seu@email.com" required data-validate="email">
+                                            <span class="validation-icon-container"></span>
+                                            <div class="error-message hidden text-red-500 text-sm mt-1"></div>
+                                        </div>
+                                        <div class="relative">
+                                            <label for="genero" class="block text-gray-700 font-semibold mb-2">Gênero</label>
+                                            <select id="genero" name="genero" class="w-full p-3 border border-gray-300 rounded-lg bg-white" required>
                                                 <option value="">Selecione</option>
-                                                <option value="feminino">Feminino</option>
                                                 <option value="masculino">Masculino</option>
+                                                <option value="feminino">Feminino</option>
                                             </select>
                                         </div>
                                         <div class="relative">
-                                            <label class="block text-gray-700 font-semibold mb-2">Estado Civil *</label>
-                                            <select id="estado-civil" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                            <label for="estado-civil" class="block text-gray-700 font-semibold mb-2">Estado Civil</label>
+                                            <select id="estado-civil" name="estado-civil" class="w-full p-3 border border-gray-300 rounded-lg bg-white" required>
                                                 <option value="">Selecione</option>
                                                 <option value="solteiro">Solteiro(a)</option>
                                                 <option value="casado">Casado(a)</option>
+                                                <option value="divorciado">Divorciado(a)</option>
+                                                <option value="viuvo">Viúvo(a)</option>
+                                                <option value="uniao-estavel">União Estável</option>
                                             </select>
+                                        </div>
+                                    </div>                                </div></div>
+
+                                <!-- Etapa 3: Endereço -->
+                                <div class="form-step hidden" data-step="3">
+                                    <div class="grid md:grid-cols-4 gap-6">
+                                        <div class="md:col-span-1 relative">
+                                            <label for="cep" class="block text-gray-700 font-semibold mb-2">CEP *</label>
+                                            <input type="text" id="cep" name="cep" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="00000-000" required>
+                                            <i id="cep-spinner" class="fas fa-spinner fa-spin absolute right-3 top-11 text-gray-400 hidden"></i>
+                                        </div>
+                                        <div class="md:col-span-3">
+                                            <label for="rua" class="block text-gray-700 font-semibold mb-2">Rua / Logradouro *</label>
+                                            <input type="text" id="rua" name="rua" class="w-full p-3 border border-gray-300 rounded-lg bg-gray-100" readonly required>
+                                        </div>
+                                        <div class="md:col-span-1 relative">
+                                            <label for="numero" class="block text-gray-700 font-semibold mb-2">Número *</label>
+                                            <input type="text" id="numero" name="numero" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="123" required>
+                                            <span class="validation-icon-container"></span>
+                                        </div>
+                                        <div class="md:col-span-3">
+                                            <label for="complemento" class="block text-gray-700 font-semibold mb-2">Complemento</label>
+                                            <input type="text" id="complemento" name="complemento" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="Apto 101, Bloco B">
+                                        </div>
+                                        <div class="md:col-span-2">
+                                            <label for="bairro" class="block text-gray-700 font-semibold mb-2">Bairro</label>
+                                            <input type="text" id="bairro" name="bairro" class="w-full p-3 border border-gray-300 rounded-lg bg-gray-100" readonly required>
+                                        </div>
+                                        <div class="md:col-span-1">
+                                            <label for="cidade" class="block text-gray-700 font-semibold mb-2">Cidade</label>
+                                            <input type="text" id="cidade" name="cidade" class="w-full p-3 border border-gray-300 rounded-lg bg-gray-100" readonly required>
+                                        </div>
+                                        <div class="md:col-span-1">
+                                            <label for="estado" class="block text-gray-700 font-semibold mb-2">Estado</label>
+                                            <input type="text" id="estado" name="estado" class="w-full p-3 border border-gray-300 rounded-lg bg-gray-100" readonly required>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-            
-                            <!-- Endereço -->
-                            <div class="form-step hidden" data-step="3">
-                                <div class="mb-8">
-                                    <h3 class="text-xl font-bold text-gray-800 mb-6">Endereço</h3>
-                                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                                        <div class="relative">
-                                            <label class="block text-gray-700 font-semibold mb-2">CEP *</label>
-                                            <input type="text" id="cep" placeholder="00000-000" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
-                                            <i id="cep-spinner" class="fas fa-spinner fa-spin text-gray-500 absolute right-3 top-1/2 -translate-y-1/2 hidden"></i>
-                                            <div id="cep-error" class="error-message text-red-500 text-sm mt-1 hidden"></div>
-                                        </div>
-                                        <div class="md:col-span-2 relative">
-                                            <label class="block text-gray-700 font-semibold mb-2">Rua *</label>
-                                            <input type="text" id="rua" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+
+                                <!-- Etapa 4: Detalhes do Seguro (Conteúdo dinâmico) -->
+                                <div class="form-step hidden" data-step="4" data-insurance-type="auto">
+                                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">                                        <div class="relative">
+                                            <label for="marca" class="block text-gray-700 font-semibold mb-2">Marca</label>
+                                            <select id="marca" name="marca" class="w-full p-3 border border-gray-300 rounded-lg bg-white" required></select>
+                                            <i id="marca-spinner" class="fas fa-spinner fa-spin absolute right-3 top-11 text-gray-400 hidden"></i>
                                         </div>
                                         <div class="relative">
-                                            <label class="block text-gray-700 font-semibold mb-2">Número *</label>
-                                            <input type="text" id="numero" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                                            <label for="modelo" class="block text-gray-700 font-semibold mb-2">Modelo</label>
+                                            <select id="modelo" name="modelo" class="w-full p-3 border border-gray-300 rounded-lg bg-white" disabled required></select>
+                                            <i id="modelo-spinner" class="fas fa-spinner fa-spin absolute right-3 top-11 text-gray-400 hidden"></i>
                                         </div>
                                         <div class="relative">
-                                            <label class="block text-gray-700 font-semibold mb-2">Bairro *</label>
-                                            <input type="text" id="bairro" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                                            <label for="ano" class="block text-gray-700 font-semibold mb-2">Ano</label>
+                                            <select id="ano" name="ano" class="w-full p-3 border border-gray-300 rounded-lg bg-white" disabled required></select>
+                                            <i id="ano-spinner" class="fas fa-spinner fa-spin absolute right-3 top-11 text-gray-400 hidden"></i>
+                                        </div>
+                                        <div class="lg:col-span-2">
+                                            <label for="chassi" class="block text-gray-700 font-semibold mb-2">Chassi *</label>                                            
+                                            <input type="text" id="chassi" name="chassi" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="9BW ZZZ 377 VT 000000" required>
+                                            <span class="validation-icon-container"></span>
                                         </div>
                                         <div class="relative">
-                                            <label class="block text-gray-700 font-semibold mb-2">Cidade *</label>
-                                            <input type="text" id="cidade" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                                            <label for="placa" class="block text-gray-700 font-semibold mb-2">Placa</label>
+                                            <input type="text" id="placa" name="placa" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="ABC-1234">
+                                            <span class="validation-icon-container"></span>
                                         </div>
-                                        <div class="relative">
-                                            <label class="block text-gray-700 font-semibold mb-2">Estado *</label>
-                                            <select id="estado" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                                        <div>
+                                            <label for="tipo-uso" class="block text-gray-700 font-semibold mb-2">Tipo de Uso</label>
+                                            <select id="tipo-uso" name="tipo-uso" class="w-full p-3 border border-gray-300 rounded-lg bg-white" required>
                                                 <option value="">Selecione</option>
-                                                <option value="AC">Acre</option><option value="AL">Alagoas</option><option value="AP">Amapá</option><option value="AM">Amazonas</option><option value="BA">Bahia</option><option value="CE">Ceará</option><option value="DF">Distrito Federal</option><option value="ES">Espírito Santo</option><option value="GO">Goiás</option><option value="MA">Maranhão</option><option value="MT">Mato Grosso</option><option value="MS">Mato Grosso do Sul</option><option value="MG">Minas Gerais</option><option value="PA">Pará</option><option value="PB">Paraíba</option><option value="PR">Paraná</option><option value="PE">Pernambuco</option><option value="PI">Piauí</option><option value="RJ">Rio de Janeiro</option><option value="RN">Rio Grande do Norte</option><option value="RS">Rio Grande do Sul</option><option value="RO">Rondônia</option><option value="RR">Roraima</option><option value="SC">Santa Catarina</option><option value="SP">São Paulo</option><option value="SE">Sergipe</option><option value="TO">Tocantins</option>
+                                                <option value="lazer">Lazer</option>
+                                                <option value="trabalho">Lazer e Trabalho</option>
+                                                <option value="uber">Motorista de App (Uber, 99)</option>
                                             </select>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-            
-                            <!-- Dados do Veículo (Seguro Auto) -->
-                            <div class="form-step hidden" data-step="4" data-insurance-type="auto">
-                                <div id="auto-section" class="mb-8 insurance-section">
-                                    <h3 class="text-xl font-bold text-gray-800 mb-6">Dados do Veículo</h3>
-                                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                                         <div class="relative">
-                                            <label for="marca" class="block text-gray-700 font-semibold mb-2">Marca *</label>
-                                            <select id="marca" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-10">
-                                                <option value="">Selecione a marca</option>
-                                            </select>
-                                            <i id="marca-spinner" class="fas fa-spinner fa-spin text-gray-500 absolute right-8 top-1/2 -translate-y-1/2 hidden"></i>
-                                            <div id="marca-error" class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                                            <label for="cep-pernoite" class="block text-gray-700 font-semibold mb-2">CEP de Pernoite *</label>
+                                            <input type="text" id="cep-pernoite" name="cep-pernoite" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="00000-000" required>
+                                            <i id="cep-pernoite-spinner" class="fas fa-spinner fa-spin absolute right-3 top-11 text-gray-400 hidden"></i>
                                         </div>
-                                        <div class="relative">
-                                            <label for="modelo" class="block text-gray-700 font-semibold mb-2">Modelo *</label>
-                                            <select id="modelo" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-10" disabled>
-                                                <option value="">Selecione a marca primeiro</option>
-                                            </select>
-                                            <i id="modelo-spinner" class="fas fa-spinner fa-spin text-gray-500 absolute right-8 top-1/2 -translate-y-1/2 hidden"></i>
-                                            <div id="modelo-error" class="error-message text-red-500 text-sm mt-1 hidden"></div>
-                                        </div>
-                                        <div class="relative">
-                                            <label class="block text-gray-700 font-semibold mb-2">Ano *</label>
-                                            <select id="ano" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-10" disabled>
-                                                <option value="">Selecione o modelo primeiro</option>
-                                            </select>
-                                            <i id="ano-spinner" class="fas fa-spinner fa-spin text-gray-500 absolute right-8 top-1/2 -translate-y-1/2 hidden"></i>
-                                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
-                                        </div>
-                                        <div class="relative">
-                                            <label class="block text-gray-700 font-semibold mb-2">Chassi (17 caracteres) *</label>
-                                            <input type="text" id="chassi" placeholder="17 dígitos do chassi" maxlength="17" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
-                                        </div>
-                                        <div class="relative">
-                                            <label class="block text-gray-700 font-semibold mb-2">Placa (opcional)</label>
-                                            <input type="text" id="placa" placeholder="ABC-1234" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                        </div>
-                                        <div class="relative">
-                                            <label class="block text-gray-700 font-semibold mb-2">Tipo de Uso *</label>
-                                            <select id="tipo-uso" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                                <option value="">Selecione</option>
-                                                <option value="particular">Particular</option>
-                                                <option value="aplicativo">Aplicativo (Uber/99)</option>
-                                                <option value="empresarial">Empresarial</option>
-                                            </select>
-                                        </div>
-                                        <div class="md:col-span-2 lg:col-span-3 relative">
-                                            <label class="block text-gray-700 font-semibold mb-2">CEP de Pernoite *</label>
-                                            <input type="text" id="cep-pernoite" placeholder="Onde o carro fica estacionado à noite" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                            <i id="cep-pernoite-spinner" class="fas fa-spinner fa-spin text-gray-500 absolute right-3 top-1/2 -translate-y-1/2 hidden"></i>
-                                            <div id="cep-pernoite-error" class="error-message text-red-500 text-sm mt-1 hidden"></div>
-                                        </div>
-                                        <div class="relative">
-                                            <label class="block text-gray-700 font-semibold mb-2">Classe de Bônus *</label>
-                                            <select id="classe-bonus" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                        <div>
+                                            <label for="classe-bonus" class="block text-gray-700 font-semibold mb-2">
+                                                Classe de Bônus
+                                                <span class="tooltip ml-1">
+                                                    <i class="fas fa-info-circle text-gray-400"></i>
+                                                    <span class="tooltiptext">Sua pontuação por não ter sinistros. Se é seu primeiro seguro, selecione 0.</span>
+                                                </span>
+                                            </label>
+                                            <select id="classe-bonus" name="classe-bonus" class="w-full p-3 border border-gray-300 rounded-lg bg-white" required>
                                                 <option value="0">0 (Primeiro seguro)</option>
-                                                <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10 (Máximo)</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
                                             </select>
                                         </div>
-                                        <div class="relative">
-                                            <label class="block text-gray-700 font-semibold mb-2">Garagem em Casa? *</label>
-                                            <select id="garagem-casa" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                                <option value="sim">Sim</option><option value="nao">Não</option>
-                                            </select>
-                                            <div id="garagem-casa-error" class="error-message text-red-500 text-sm mt-1 hidden"></div>
-                                        </div>
-                                        <div class="relative">
-                                            <label class="block text-gray-700 font-semibold mb-2">Garagem no Trabalho/Estudo? *</label>
-                                            <select id="garagem-trabalho" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                                <option value="sim">Sim</option><option value="nao">Não</option><option value="nao_aplica">Não se aplica</option>
-                                            </select>
-                                            <div id="garagem-trabalho-error" class="error-message text-red-500 text-sm mt-1 hidden"></div>
-                                        </div>
-                                        <div class="md:col-span-2 lg:col-span-3">
+                                        <div class="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-6">
                                             <div>
-                                                <label class="block text-gray-700 font-semibold mb-2">O proprietário é o principal condutor? *</label>
-                                                <div class="flex items-center space-x-4">
-                                                    <label class="flex items-center"><input type="radio" name="proprietario-condutor" value="sim" class="form-radio h-4 w-4 text-blue-600" checked><span class="ml-2 text-gray-700">Sim</span></label>
-                                                    <label class="flex items-center"><input type="radio" name="proprietario-condutor" value="nao" class="form-radio h-4 w-4 text-blue-600"><span class="ml-2 text-gray-700">Não</span></label>
-                                                </div>
+                                                <p class="block text-gray-700 font-semibold mb-2">Possui garagem em casa?</p>
+                                                <div class="flex gap-6"><label class="flex items-center"><input type="radio" name="garagem-casa" value="sim" class="mr-2" checked> Sim</label><label class="flex items-center"><input type="radio" name="garagem-casa" value="nao" class="mr-2"> Não</label></div>
                                             </div>
-                                            <div id="principal-condutor-fields" class="hidden mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                                                <div class="relative">
-                                                    <label for="condutor-nome" class="block text-gray-700 font-semibold mb-2">Nome do Principal Condutor *</label>
-                                                    <input type="text" id="condutor-nome" name="condutor-nome" class="w-full p-3 border border-gray-300 rounded-lg">
-                                                    <div id="condutor-nome-error" class="error-message text-red-500 text-sm mt-1 hidden"></div>
-                                                </div>
-                                                <div class="relative">
-                                                    <label for="condutor-cpf" class="block text-gray-700 font-semibold mb-2">CPF do Principal Condutor *</label>
-                                                    <input type="text" id="condutor-cpf" name="condutor-cpf" class="w-full p-3 border border-gray-300 rounded-lg">
-                                                    <div id="condutor-cpf-error" class="error-message text-red-500 text-sm mt-1 hidden"></div>
-                                                </div>
+                                            <div>
+                                                <p class="block text-gray-700 font-semibold mb-2">Possui garagem no trabalho/estudo?</p>
+                                                <div class="flex gap-6"><label class="flex items-center"><input type="radio" name="garagem-trabalho" value="sim" class="mr-2" checked> Sim</label><label class="flex items-center"><input type="radio" name="garagem-trabalho" value="nao" class="mr-2"> Não</label></div>
+                                            </div>
+                                        </div>
+                                        <div class="lg:col-span-3 mt-4">
+                                            <p class="block text-gray-700 font-semibold mb-2">O proprietário do veículo é o principal condutor? *</p>
+                                            <div class="flex gap-6">
+                                                <label class="flex items-center"><input type="radio" name="proprietario-condutor" value="sim" class="mr-2" checked> Sim</label>
+                                                <label class="flex items-center"><input type="radio" name="proprietario-condutor" value="nao" class="mr-2"> Não</label>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-            
-                            <!-- Dados do Imóvel (Seguro Residencial) -->
-                            <div class="form-step hidden" data-step="4" data-insurance-type="residencial">
-                                <div id="residencial-section" class="mb-8 insurance-section">
-                                    <div class="space-y-8">
-                                        <div>
-                                            <h3 class="text-xl font-bold text-gray-800 mb-6 border-b pb-2">Características do Imóvel</h3>
-                                            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                                <div class="relative"><label class="block text-gray-700 font-semibold mb-2">Tipo de Imóvel *</label><select id="tipo-imovel" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"><option value="">Selecione</option><option value="casa">Casa</option><option value="apartamento">Apartamento</option><option value="sobrado">Sobrado</option><option value="casa_condominio">Casa em Condomínio</option></select></div>
-                                                <div class="relative"><label class="block text-gray-700 font-semibold mb-2">Uso do Imóvel *</label><select id="finalidade-imovel" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"><option value="">Selecione</option><option value="moradia">Moradia Habitual</option><option value="veraneio">Veraneio / Fim de Semana</option></select></div>
-                                                <div class="relative"><label class="block text-gray-700 font-semibold mb-2">Tipo de Construção *</label><select id="tipo-construcao" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"><option value="">Selecione</option><option value="alvenaria">Alvenaria</option><option value="madeira">Madeira</option><option value="mista">Mista</option></select></div>
-                                                <div class="relative"><label class="block text-gray-700 font-semibold mb-2">Área Construída (m²) *</label><input type="number" id="area-construida" placeholder="Ex: 120" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"></div>
+                                    <div id="principal-condutor-fields" class="hidden mt-6 space-y-6 p-4 bg-gray-50 rounded-lg border">
+                                        <h4 class="text-xl font-bold text-gray-800">Dados do Principal Condutor</h4>
+                                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                            <div class="relative">
+                                                <label for="condutor-nome" class="block text-gray-700 font-semibold mb-2">Nome Completo *</label>                                                
+                                                <input type="text" id="condutor-nome" name="condutor-nome" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="Ex: João Souza">
+                                                <span class="validation-icon-container"></span>
+                                            </div>
+                                            <div class="relative">
+                                                <label for="condutor-cpf" class="block text-gray-700 font-semibold mb-2">CPF *</label>
+                                                <input type="text" id="condutor-cpf" name="condutor-cpf" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="000.000.000-00" data-validate="cpf">
+                                                <span class="validation-icon-container"></span>
+                                            </div>
+                                            <div class="relative">
+                                                <label for="condutor-nascimento" class="block text-gray-700 font-semibold mb-2">Data de Nascimento *</label>
+                                                <input type="date" id="condutor-nascimento" name="condutor-nascimento" class="w-full p-3 pr-10 border border-gray-300 rounded-lg">
+                                                <span class="validation-icon-container"></span>
+                                            </div>
+                                            <div class="relative">
+                                                <label for="condutor-genero" class="block text-gray-700 font-semibold mb-2">Gênero</label>
+                                                <select id="condutor-genero" name="condutor-genero" class="w-full p-3 border border-gray-300 rounded-lg bg-white">
+                                                    <option value="">Selecione</option>
+                                                    <option value="masculino">Masculino</option>
+                                                    <option value="feminino">Feminino</option>
+                                                </select>
+                                            </div>
+                                            <div class="relative">
+                                                <label for="condutor-estado-civil" class="block text-gray-700 font-semibold mb-2">Estado Civil</label>
+                                                <select id="condutor-estado-civil" name="condutor-estado-civil" class="w-full p-3 border border-gray-300 rounded-lg bg-white">
+                                                    <option value="">Selecione</option>
+                                                    <option value="solteiro">Solteiro(a)</option>
+                                                    <option value="casado">Casado(a)</option>
+                                                    <option value="divorciado">Divorciado(a)</option>
+                                                    <option value="viuvo">Viúvo(a)</option>
+                                                    <option value="uniao-estavel">União Estável</option>
+                                                </select>
                                             </div>
                                         </div>
-                                        <div>
-                                            <h3 class="text-xl font-bold text-gray-800 mb-6 border-b pb-2">Valores e Coberturas</h3>
-                                            <div class="grid md:grid-cols-2 gap-6">
-                                                <div class="relative"><label class="block text-gray-700 font-semibold mb-2">Valor de Reconstrução do Imóvel (R$) *</label><input type="text" id="valor-imovel" placeholder="Ex: R$ 500.000,00" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"></div>
-                                                <div class="relative"><label class="block text-gray-700 font-semibold mb-2">Valor dos Bens/Conteúdo (R$) *</label><input type="text" id="valor-conteudo" placeholder="Ex: R$ 80.000,00" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"></div>
-                                            </div>
-                                            <div class="mt-6">
-                                                <label class="block text-gray-700 font-semibold mb-4">Coberturas Adicionais (Opcional)</label>
-                                                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                                                    <label class="flex items-center p-3 border rounded-lg hover:bg-gray-100 cursor-pointer"><input type="checkbox" name="coberturas" value="danos_eletricos" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"><span class="ml-3 text-gray-700">Danos Elétricos</span></label>
-                                                    <label class="flex items-center p-3 border rounded-lg hover:bg-gray-100 cursor-pointer"><input type="checkbox" name="coberturas" value="vendaval" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"><span class="ml-3 text-gray-700">Vendaval e Granizo</span></label>
-                                                    <label class="flex items-center p-3 border rounded-lg hover:bg-gray-100 cursor-pointer"><input type="checkbox" name="coberturas" value="roubo_furto" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"><span class="ml-3 text-gray-700">Roubo e Furto de Bens</span></label>
-                                                    <label class="flex items-center p-3 border rounded-lg hover:bg-gray-100 cursor-pointer"><input type="checkbox" name="coberturas" value="resp_civil" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"><span class="ml-3 text-gray-700">Responsabilidade Civil</span></label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <h3 class="text-xl font-bold text-gray-800 mb-6 border-b pb-2">Sistemas de Segurança</h3>
-                                            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                                                <label class="flex items-center p-3 border rounded-lg hover:bg-gray-100 cursor-pointer"><input type="checkbox" name="seguranca" value="alarme" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"><span class="ml-3 text-gray-700">Alarme Monitorado</span></label>
-                                                <label class="flex items-center p-3 border rounded-lg hover:bg-gray-100 cursor-pointer"><input type="checkbox" name="seguranca" value="camera" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"><span class="ml-3 text-gray-700">Câmeras de Segurança</span></label>
-                                                <label class="flex items-center p-3 border rounded-lg hover:bg-gray-100 cursor-pointer"><input type="checkbox" name="seguranca" value="portaria" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"><span class="ml-3 text-gray-700">Portaria 24h</span></label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-            
-                            <!-- Dados do Segurado (Seguro de Vida) -->
-                            <div class="form-step hidden" data-step="4" data-insurance-type="vida">
-                                <div id="vida-section" class="mb-8 insurance-section">
-                                    <h3 class="text-xl font-bold text-gray-800 mb-6">Dados do Seguro</h3>
-                                    <div class="grid md:grid-cols-2 gap-6">
+                                    </div>                                </div></div>
+                                <!-- Etapa 4: Detalhes do Seguro Residencial -->
+                                <div class="form-step hidden" data-step="4" data-insurance-type="residencial">
+                                    <div class="grid md:grid-cols-2 gap-x-6 gap-y-8">
                                         <div class="relative">
-                                            <label class="block text-gray-700 font-semibold mb-2">Capital Segurado Desejado (R$) *</label>
-                                            <select id="capital-segurado" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                                <option value="">Selecione</option><option value="50000">R$ 50.000</option><option value="100000">R$ 100.000</option><option value="200000">R$ 200.000</option><option value="300000">R$ 300.000</option><option value="500000">R$ 500.000</option><option value="1000000">R$ 1.000.000</option>
+                                            <label for="tipo-imovel" class="block text-gray-700 font-semibold mb-2">Tipo de Imóvel</label>
+                                            <select id="tipo-imovel" name="tipo-imovel" class="w-full p-3 border border-gray-300 rounded-lg bg-white" required>
+                                                <option value="">Selecione</option>
+                                                <option value="casa">Casa</option>
+                                                <option value="apartamento">Apartamento</option>
+                                                <option value="casa-condominio">Casa em Condomínio</option>
                                             </select>
-                                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
                                         </div>
                                         <div class="relative">
-                                            <label class="block text-gray-700 font-semibold mb-2">Profissão *</label>
-                                            <input type="text" id="profissao" placeholder="Ex: Engenheiro" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
-                                        </div>
-                                        <div class="relative">
-                                            <label class="block text-gray-700 font-semibold mb-2">Renda Mensal (R$) *</label>
-                                            <select id="renda-mensal" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                                <option value="">Selecione</option><option value="2000">Até R$ 2.000</option><option value="5000">R$ 2.001 - R$ 5.000</option><option value="10000">R$ 5.001 - R$ 10.000</option><option value="20000">R$ 10.001 - R$ 20.000</option><option value="50000">Acima de R$ 20.000</option>
+                                            <label for="finalidade-imovel" class="block text-gray-700 font-semibold mb-2">Finalidade do Imóvel</label>
+                                            <select id="finalidade-imovel" name="finalidade-imovel" class="w-full p-3 border border-gray-300 rounded-lg bg-white" required>
+                                                <option value="">Selecione</option>
+                                                <option value="moradia-habitual">Moradia Habitual</option>
+                                                <option value="veraneio">Veraneio</option>
+                                                <option value="alugado">Alugado para Terceiros</option>
                                             </select>
-                                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
                                         </div>
-                                        <div class="relative"><label class="block text-gray-700 font-semibold mb-2">Pratica Esportes Radicais?</label><select id="esportes-radicais" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"><option value="nao">Não</option><option value="sim">Sim</option></select></div>
-                                        <div class="relative"><label class="block text-gray-700 font-semibold mb-2">Fumante?</label><select id="fumante" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"><option value="nao">Não</option><option value="sim">Sim</option></select></div>
-                                        <div class="relative"><label class="block text-gray-700 font-semibold mb-2">Histórico de Doenças Graves?</label><select id="doencas-graves" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"><option value="nao">Não</option><option value="sim">Sim</option></select></div>
+                                        <div class="relative">
+                                            <label for="tipo-construcao" class="block text-gray-700 font-semibold mb-2">Tipo de Construção</label>
+                                            <select id="tipo-construcao" name="tipo-construcao" class="w-full p-3 border border-gray-300 rounded-lg bg-white" required>
+                                                <option value="">Selecione</option>
+                                                <option value="alvenaria">Alvenaria</option>
+                                                <option value="madeira">Madeira</option>
+                                                <option value="mista">Mista</option>
+                                            </select>
+                                        </div>
+                                        <div class="relative">
+                                            <label for="area-construida" class="block text-gray-700 font-semibold mb-2">Área Construída (m²) *</label>                                            
+                                            <input type="number" id="area-construida" name="area-construida" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="150" required>
+                                            <span class="validation-icon-container"></span>
+                                        </div>
+                                        <div class="relative">
+                                            <label for="valor-imovel" class="block text-gray-700 font-semibold mb-2">
+                                                Valor de Reconstrução do Imóvel
+                                                <span class="tooltip ml-1">
+                                                    <i class="fas fa-info-circle text-gray-400"></i>
+                                                    <span class="tooltiptext">Custo estimado para reconstruir o imóvel em caso de perda total.</span>
+                                                </span>
+                                            </label>
+                                            <input type="text" id="valor-imovel" name="valor-imovel" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="R$ 0,00" required>
+                                            <span class="validation-icon-container"></span>
+                                        </div>
+                                        <div class="relative">
+                                            <label for="valor-conteudo" class="block text-gray-700 font-semibold mb-2">Valor dos Bens (Conteúdo) *</label>
+                                            <input type="text" id="valor-conteudo" name="valor-conteudo" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="R$ 0,00" required>
+                                            <span class="validation-icon-container"></span>
+                                        </div>
+                                        <div class="md:col-span-2 mt-4">
+                                            <p class="block text-gray-700 font-semibold mb-3">Coberturas Adicionais Desejadas</p>
+                                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                                                <label class="flex items-center"><input type="checkbox" name="coberturas" value="danos-eletricos" class="mr-2"> Danos Elétricos</label>
+                                                <label class="flex items-center"><input type="checkbox" name="coberturas" value="vendaval" class="mr-2"> Vendaval e Granizo</label>
+                                                <label class="flex items-center"><input type="checkbox" name="coberturas" value="vidros" class="mr-2"> Quebra de Vidros</label>
+                                                <label class="flex items-center"><input type="checkbox" name="coberturas" value="responsabilidade-civil" class="mr-2"> Responsabilidade Civil</label>
+                                                <label class="flex items-center"><input type="checkbox" name="coberturas" value="roubo-bens" class="mr-2"> Roubo de Bens</label>
+                                            </div>
+                                        </div>
+                                        <div class="md:col-span-2 mt-4">
+                                            <p class="block text-gray-700 font-semibold mb-3">Possui Sistemas de Segurança?</p>
+                                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                                                <label class="flex items-center"><input type="checkbox" name="seguranca" value="alarme" class="mr-2"> Alarme Monitorado</label>
+                                                <label class="flex items-center"><input type="checkbox" name="seguranca" value="camera" class="mr-2"> Câmeras (CFTV)</label>
+                                                <label class="flex items-center"><input type="checkbox" name="seguranca" value="cerca-eletrica" class="mr-2"> Cerca Elétrica</label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <!-- Seção para Consórcio (Etapa 4) -->
-                            <div class="form-step hidden" data-step="4" data-insurance-type="consorcio">
-                                <h3 class="text-xl font-semibold mb-4">Detalhes do Consórcio</h3>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div class="relative">
-                                        <label for="tipo-consorcio" class="block text-gray-700 font-semibold mb-2">Tipo de Consórcio *</label>
-                                        <select id="tipo-consorcio" name="tipo-consorcio" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                            <option value="">Selecione o tipo</option><option value="Imóvel">Imóvel</option><option value="Veículo">Veículo</option><option value="Serviços">Serviços</option>
-                                        </select>
-                                        <div id="tipo-consorcio-error" class="error-message text-red-500 text-sm mt-1 hidden"></div>
-                                    </div>
-                                    <div class="relative">
-                                        <label for="valor-carta-credito" class="block text-gray-700 font-semibold mb-2">Valor da Carta de Crédito (R$) *</label>
-                                        <input type="text" id="valor-carta-credito" name="valor-carta-credito" placeholder="Ex: R$ 50.000,00" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                        <div id="valor-carta-credito-error" class="error-message text-red-500 text-sm mt-1 hidden"></div>
-                                    </div>
-                                    <div class="relative">
-                                        <label for="prazo-desejado" class="block text-gray-700 font-semibold mb-2">Prazo Desejado (meses) *</label>
-                                        <input type="number" id="prazo-desejado" name="prazo-desejado" placeholder="Ex: 60" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                        <div id="prazo-desejado-error" class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                                <!-- Etapa 4: Detalhes do Seguro de Vida -->
+                                <div class="form-step hidden" data-step="4" data-insurance-type="vida">
+                                    <div class="grid md:grid-cols-2 gap-x-6 gap-y-8">                                        <div class="relative">
+                                            <label for="profissao" class="block text-gray-700 font-semibold mb-2">Profissão *</label>                                            
+                                            <input type="text" id="profissao" name="profissao" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="Ex: Engenheiro de Software" required>
+                                            <span class="validation-icon-container"></span>
+                                        </div>
+                                        <div class="relative">
+                                            <label for="renda-mensal" class="block text-gray-700 font-semibold mb-2">Renda Mensal *</label>
+                                            <input type="text" id="renda-mensal" name="renda-mensal" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="R$ 0,00" required>
+                                            <span class="validation-icon-container"></span>
+                                        </div>
+                                        <div class="relative md:col-span-2">
+                                            <label for="capital-segurado" class="block text-gray-700 font-semibold mb-2">Capital Segurado Desejado *</label>
+                                            <select id="capital-segurado" name="capital-segurado" class="w-full p-3 border border-gray-300 rounded-lg bg-white" required>
+                                                <option value="">Selecione uma faixa de valor</option>
+                                                <option value="50000">R$ 50.000</option>
+                                                <option value="100000">R$ 100.000</option>
+                                                <option value="200000">R$ 200.000</option>
+                                                <option value="300000">R$ 300.000</option>
+                                                <option value="500000">R$ 500.000</option>
+                                                <option value="750000">R$ 750.000</option>
+                                                <option value="1000000">R$ 1.000.000</option>
+                                                <option value="outro">Outro valor (a combinar)</option>
+                                            </select>
+                                        </div>
+                                        <div class="md:col-span-2">
+                                            <p class="block text-gray-700 font-semibold mb-2">Você é fumante?</p>
+                                            <div class="flex gap-6">
+                                                <label class="flex items-center"><input type="radio" name="fumante" value="sim" class="mr-2" required> Sim</label>
+                                                <label class="flex items-center"><input type="radio" name="fumante" value="nao" class="mr-2" checked> Não</label>
+                                            </div>
+                                        </div>
+                                        <div class="md:col-span-2">
+                                            <p class="block text-gray-700 font-semibold mb-2">Pratica esportes de risco regularmente?</p>
+                                            <div class="flex gap-6">
+                                                <label class="flex items-center"><input type="radio" name="esportes-radicais" value="sim" class="mr-2" required> Sim</label>
+                                                <label class="flex items-center"><input type="radio" name="esportes-radicais" value="nao" class="mr-2" checked> Não</label>
+                                            </div>
+                                        </div>
+                                        <div class="md:col-span-2">
+                                            <p class="block text-gray-700 font-semibold mb-2">Possui alguma doença grave pré-existente?</p>
+                                            <div class="flex gap-6">
+                                                <label class="flex items-center"><input type="radio" name="doencas-graves" value="sim" class="mr-2" required> Sim</label>
+                                                <label class="flex items-center"><input type="radio" name="doencas-graves" value="nao" class="mr-2" checked> Não</label>
+                                            </div>
+                                        </div>
+                                    </div>                                </div></div>
+
+                                <!-- Etapa 4: Detalhes do Consórcio -->
+                                <div class="form-step hidden" data-step="4" data-insurance-type="consorcio">
+                                    <div class="grid md:grid-cols-2 gap-x-6 gap-y-8">                                        <div class="relative">
+                                            <label for="tipo-consorcio" class="block text-gray-700 font-semibold mb-2">Tipo de Consórcio</label>
+                                            <select id="tipo-consorcio" name="tipo-consorcio" class="w-full p-3 border border-gray-300 rounded-lg bg-white" required>
+                                                <option value="">Selecione</option>
+                                                <option value="imovel">Imóvel</option>
+                                                <option value="veiculo">Veículo</option>
+                                            </select>
+                                        </div>
+                                        <div class="relative">
+                                            <label for="valor-carta-credito" class="block text-gray-700 font-semibold mb-2">Valor da Carta de Crédito *</label>
+                                            <select id="valor-carta-credito" name="valor-carta-credito" class="w-full p-3 border border-gray-300 rounded-lg bg-white" required>
+                                                <option value="">Selecione uma faixa de valor</option>
+                                                <option value="30000">Até R$ 30.000</option>
+                                                <option value="50000">De R$ 30.001 a R$ 50.000</option>
+                                                <option value="80000">De R$ 50.001 a R$ 80.000</option>
+                                                <option value="120000">De R$ 80.001 a R$ 120.000</option>
+                                                <option value="200000">De R$ 120.001 a R$ 200.000</option>
+                                                <option value="300000">De R$ 200.001 a R$ 300.000</option>
+                                                <option value="500000">Acima de R$ 300.000</option>
+                                                <option value="outro">Outro valor (a combinar)</option>
+                                            </select>
+                                        </div>
+                                        <div class="relative">
+                                            <label for="prazo-desejado" class="block text-gray-700 font-semibold mb-2">Prazo Desejado (em meses) *</label>
+                                            <input type="number" id="prazo-desejado" name="prazo-desejado" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="72" required>
+                                            <span class="validation-icon-container"></span>
+                                        </div>
+                                    </div>                                </div></div>
+
+                                <!-- Etapa 5: Revisão -->
+                                <div class="form-step hidden" data-step="5">
+                                    <div id="review-summary" class="space-y-6">
+                                        <!-- Conteúdo da revisão será injetado aqui -->
                                     </div>
                                 </div>
-                            </div>
 
-                            <!-- Passo 5: Revisão Final -->
-                            <div class="form-step hidden" data-step="5">
-                                <div class="mb-8">
-                                    <h3 class="text-xl font-bold text-gray-800 mb-2">Revise sua Solicitação</h3>
-                                    <p class="text-gray-600 mb-6">Por favor, confirme se todos os dados abaixo estão corretos antes de enviar.</p>
-                                    <div id="review-summary" class="bg-white p-6 rounded-lg border border-gray-200 space-y-4">
-                                        <!-- O resumo completo será injetado aqui pelo JavaScript -->
+                                <!-- Resumo da Simulação (Mobile) -->
+                                <div class="lg:hidden mt-8">
+                                    <button type="button" id="mobile-summary-toggle" class="w-full flex justify-between items-center p-4 bg-gray-100 rounded-lg">
+                                        <span class="font-semibold text-gray-700">Ver Resumo da Simulação</span>
+                                        <i class="fas fa-chevron-down transition-transform"></i>
+                                    </button>
+                                    <div id="mobile-summary-content" class="hidden mt-2 p-4 border rounded-lg bg-gray-50 space-y-4 text-gray-600">
+                                        <!-- Conteúdo do resumo mobile será injetado aqui -->
                                     </div>
                                 </div>
-                            </div>
 
-                            <!-- Botões de Navegação -->
-                            <div class="flex justify-between mt-8">
-                                <button type="button" id="prev-btn" class="bg-gray-300 text-gray-800 px-6 py-2 rounded-lg font-semibold hover:bg-gray-400 hidden" aria-label="Passo anterior do formulário">Anterior</button>
-                                <button type="button" id="next-btn" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700" aria-label="Próximo passo do formulário">Próximo</button>
-                                <button type="submit" id="submit-quote" class="bg-orange-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-orange-600 transition duration-300 hidden" aria-label="Enviar solicitação de cotação">
-                                    Enviar Solicitação
-                                </button>
-                            </div>
+                                <!-- Botões de Navegação -->
+                                <div class="mt-10 flex justify-between">
+                                    <button type="button" id="prev-btn" class="bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-semibold hover:bg-gray-400 transition hidden">
+                                        <i class="fas fa-arrow-left mr-2"></i> Voltar
+                                    </button>
+                                    <button type="button" id="next-btn" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition ml-auto">
+                                        Avançar <i class="fas fa-arrow-right ml-2"></i>
+                                    </button>
+                                    <button type="submit" id="submit-quote" class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition hidden">
+                                        <i class="fas fa-paper-plane mr-2"></i> Enviar Solicitação
+                                    </button>
+                                </div>
+                            </fieldset>
 
-                        </fieldset>
-
-                        <!-- Resultado da Cotação -->
-                        <div id="quote-result" class="mt-8 p-8 bg-green-50 border border-green-200 rounded-lg hidden">
-                            <div class="text-center">
-                                <i class="fas fa-check-circle text-green-500 text-5xl mb-4"></i>
-                                <h3 class="text-2xl font-bold text-green-800 mb-4">Solicitação Enviada!</h3>
-                                <p class="text-green-700 mb-6">
-                                    Recebemos seus dados. Em breve, um de nossos especialistas entrará em contato com sua cotação personalizada.
-                                </p>
-                                <p class="text-gray-600 mb-6">
-                                    Se preferir, fale conosco agora mesmo pelo WhatsApp!
-                                </p>
-                                <div class="mt-6 flex flex-col sm:flex-row justify-center items-center gap-4">
-                                    <a id="whatsapp-redirect-btn" href="#" target="_blank" class="w-full sm:w-auto bg-green-500 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-green-600 transition duration-300 inline-flex items-center justify-center">
-                                        <i class="fab fa-whatsapp mr-3"></i> Falar no WhatsApp
+                            <!-- Resultado da Cotação -->
+                            <div id="quote-result" class="text-center mt-8 p-8 bg-green-50 border-2 border-dashed border-green-300 rounded-lg hidden">
+                                <i class="fas fa-check-circle text-5xl text-green-500 mb-4"></i>
+                                <h3 class="text-2xl font-bold text-gray-800 mb-3">Solicitação Enviada com Sucesso!</h3>
+                                <p class="text-gray-600 mb-6">Um de nossos especialistas já está preparando sua cotação. Entraremos em contato em breve. Para agilizar, fale conosco no WhatsApp!</p>
+                                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                                    <a id="whatsapp-redirect-btn" href="#" target="_blank" class="bg-green-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-600 transition flex items-center justify-center">
+                                        <i class="fab fa-whatsapp mr-2"></i> Falar no WhatsApp
                                     </a>
-                                    <button id="recalculate-btn" type="button" class="w-full sm:w-auto bg-gray-500 text-white px-6 py-2 rounded-lg font-semibold hover:bg-gray-600 transition duration-300"><i class="fas fa-redo-alt mr-2"></i>Fazer Nova Cotação</button>
+                                    <button type="button" id="recalculate-btn" class="bg-gray-200 text-gray-800 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition flex items-center justify-center">
+                                        <i class="fas fa-redo-alt mr-2"></i> Fazer Nova Cotação
+                                    </button>
                                 </div>
                             </div>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- Coluna do Resumo da Cotação (Painel Interativo) -->
-                <div class="lg:col-span-1">
-                    <div class="sticky top-24">
-                        <div id="simulation-panel" class="bg-gray-50 rounded-xl p-8 shadow-lg border border-gray-200">
-                            <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-                                <i class="fas fa-clipboard-list text-blue-600 mr-3"></i>
-                                Resumo da Simulação
-                            </h3>
-                            <div id="simulation-content" class="space-y-4 text-gray-600">
-                                <p class="italic text-gray-500">Preencha os campos do formulário para ver o resumo da sua cotação aqui.</p>
-                                <!-- O conteúdo será injetado aqui pelo JavaScript -->
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="absolute bottom-0 left-0 right-0 h-96 bg-blue-50 section-bg-image -z-10" style="background-image: url('https://images.unsplash.com/photo-1553729459-023a4fae0a3q?q=80&w=2070&auto=format&fit=crop');">
+            <div class="absolute inset-0 bg-gradient-to-t from-gray-100 via-gray-100/80 to-white/50"></div>
+        </div>
     </section>
+
     <!-- Serviços -->
-    <section class="py-20 bg-white">
+    <section id="servicos" class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold text-gray-800 mb-4">Nossos Serviços</h2>
@@ -816,100 +942,106 @@
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="service-card bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-8 text-center hover:shadow-xl transition duration-300 animate-on-scroll">
-                    <div class="text-blue-600 text-6xl mb-6">
-                        <i class="fas fa-car"></i>
+                <div class="service-card bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-8 transition-all duration-300 animate-on-scroll">
+                    <button class="service-toggle-btn w-full text-center">
+                        <div class="text-blue-600 text-6xl mb-6"><i class="fas fa-car"></i></div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Seguro Auto</h3>
+                        <i class="fas fa-chevron-down text-blue-600 text-xs ml-1 transition-transform duration-300"></i>
+                    </button>
+                    <div class="service-details max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <p class="text-gray-600 mb-6">Proteção completa para seu veículo com cobertura contra furto, roubo, acidentes e assistência 24h.</p>
+                        <ul class="text-sm text-gray-600 text-left space-y-2 mb-6">
+                            <li><i class="fas fa-check text-blue-600 mr-2"></i>Cobertura para terceiros</li>
+                            <li><i class="fas fa-check text-blue-600 mr-2"></i>Assistência 24h</li>
+                            <li><i class="fas fa-check text-blue-600 mr-2"></i>Carro reserva</li>
+                            <li><i class="fas fa-check text-blue-600 mr-2"></i>Proteção contra furto/roubo</li>
+                        </ul>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Seguro Auto</h3>
-                    <p class="text-gray-600 mb-6">
-                        Proteção completa para seu veículo com cobertura contra furto, roubo, acidentes e assistência 24h.
-                    </p>
-                    <ul class="text-sm text-gray-600 text-left space-y-2">
-                        <li><i class="fas fa-check text-blue-600 mr-2"></i> Cobertura para terceiros</li>
-                        <li><i class="fas fa-check text-blue-600 mr-2"></i> Assistência 24h</li>
-                        <li><i class="fas fa-check text-blue-600 mr-2"></i> Carro reserva</li>
-                        <li><i class="fas fa-check text-blue-600 mr-2"></i> Proteção contra furto/roubo</li>
-                    </ul>
                 </div>
 
-                <div class="service-card bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-8 text-center hover:shadow-xl transition duration-300 animate-on-scroll">
-                    <div class="text-green-600 text-6xl mb-6">
-                        <i class="fas fa-heartbeat"></i>
+                <div class="service-card bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-8 transition-all duration-300 animate-on-scroll">
+                    <button class="service-toggle-btn w-full text-center">
+                        <div class="text-green-600 text-6xl mb-6"><i class="fas fa-heartbeat"></i></div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Seguro Saúde</h3>
+                        <i class="fas fa-chevron-down text-green-600 text-xs ml-1 transition-transform duration-300"></i>
+                    </button>
+                    <div class="service-details max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <p class="text-gray-600 mb-6">Planos de saúde com cobertura nacional e atendimento em hospitais de referência.</p>
+                        <ul class="text-sm text-gray-600 text-left space-y-2 mb-6">
+                            <li><i class="fas fa-check text-green-600 mr-2"></i>Rede credenciada ampla</li>
+                            <li><i class="fas fa-check text-green-600 mr-2"></i>Cobertura nacional</li>
+                            <li><i class="fas fa-check text-green-600 mr-2"></i>Atendimento emergencial</li>
+                            <li><i class="fas fa-check text-green-600 mr-2"></i>Exames e consultas</li>
+                        </ul>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Seguro Saúde</h3>
-                    <p class="text-gray-600 mb-6">
-                        Planos de saúde com cobertura nacional e atendimento em hospitais de referência.
-                    </p>
-                    <ul class="text-sm text-gray-600 text-left space-y-2">
-                        <li><i class="fas fa-check text-green-600 mr-2"></i> Rede credenciada ampla</li>
-                        <li><i class="fas fa-check text-green-600 mr-2"></i> Cobertura nacional</li>
-                        <li><i class="fas fa-check text-green-600 mr-2"></i> Atendimento emergencial</li>
-                        <li><i class="fas fa-check text-green-600 mr-2"></i> Exames e consultas</li>
-                    </ul>
                 </div>
 
-                <div class="service-card bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-8 text-center hover:shadow-xl transition duration-300 animate-on-scroll">
-                    <div class="text-purple-600 text-6xl mb-6">
-                        <i class="fas fa-users"></i>
+                <div class="service-card bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-8 transition-all duration-300 animate-on-scroll">
+                    <button class="service-toggle-btn w-full text-center">
+                        <div class="text-purple-600 text-6xl mb-6"><i class="fas fa-users"></i></div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Seguro de Vida</h3>
+                        <i class="fas fa-chevron-down text-purple-600 text-xs ml-1 transition-transform duration-300"></i>
+                    </button>
+                    <div class="service-details max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <p class="text-gray-600 mb-6">Tranquilidade para você e sua família com cobertura por morte, invalidez e doenças graves.</p>
+                        <ul class="text-sm text-gray-600 text-left space-y-2 mb-6">
+                            <li><i class="fas fa-check text-purple-600 mr-2"></i>Cobertura por morte</li>
+                            <li><i class="fas fa-check text-purple-600 mr-2"></i>Invalidez permanente</li>
+                            <li><i class="fas fa-check text-purple-600 mr-2"></i>Doenças graves</li>
+                            <li><i class="fas fa-check text-purple-600 mr-2"></i>Assistência funeral</li>
+                        </ul>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Seguro de Vida</h3>
-                    <p class="text-gray-600 mb-6">
-                        Tranquilidade para você e sua família com cobertura por morte, invalidez e doenças graves.
-                    </p>
-                    <ul class="text-sm text-gray-600 text-left space-y-2">
-                        <li><i class="fas fa-check text-purple-600 mr-2"></i> Cobertura por morte</li>
-                        <li><i class="fas fa-check text-purple-600 mr-2"></i> Invalidez permanente</li>
-                        <li><i class="fas fa-check text-purple-600 mr-2"></i> Doenças graves</li>
-                        <li><i class="fas fa-check text-purple-600 mr-2"></i> Assistência funeral</li>
-                    </ul>
                 </div>
 
-                <div class="service-card bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-8 text-center hover:shadow-xl transition duration-300 animate-on-scroll">
-                    <div class="text-orange-600 text-6xl mb-6">
-                        <i class="fas fa-home"></i>
+                <div class="service-card bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-8 transition-all duration-300 animate-on-scroll">
+                    <button class="service-toggle-btn w-full text-center">
+                        <div class="text-orange-600 text-6xl mb-6"><i class="fas fa-home"></i></div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Seguro Residencial</h3>
+                        <i class="fas fa-chevron-down text-orange-600 text-xs ml-1 transition-transform duration-300"></i>
+                    </button>
+                    <div class="service-details max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <p class="text-gray-600 mb-6">Proteja seu lar contra incêndio, roubo, danos elétricos e desastres naturais.</p>
+                        <ul class="text-sm text-gray-600 text-left space-y-2 mb-6">
+                            <li><i class="fas fa-check text-orange-500 mr-2"></i>Cobertura contra incêndio</li>
+                            <li><i class="fas fa-check text-orange-500 mr-2"></i>Proteção contra roubo</li>
+                            <li><i class="fas fa-check text-orange-500 mr-2"></i>Danos elétricos</li>
+                            <li><i class="fas fa-check text-orange-500 mr-2"></i>Responsabilidade civil</li>
+                        </ul>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Seguro Residencial</h3>
-                    <p class="text-gray-600 mb-6">
-                        Proteja seu lar contra incêndio, roubo, danos elétricos e desastres naturais.
-                    </p>
-                    <ul class="text-sm text-gray-600 text-left space-y-2">
-                        <li><i class="fas fa-check text-orange-500 mr-2"></i> Cobertura contra incêndio</li>
-                        <li><i class="fas fa-check text-orange-500 mr-2"></i> Proteção contra roubo</li>
-                        <li><i class="fas fa-check text-orange-500 mr-2"></i> Danos elétricos</li>
-                        <li><i class="fas fa-check text-orange-500 mr-2"></i> Responsabilidade civil</li>
-                    </ul>
                 </div>
 
-                <div class="service-card bg-gradient-to-br from-teal-50 to-teal-100 rounded-xl p-8 text-center hover:shadow-xl transition duration-300 animate-on-scroll">
-                    <div class="text-teal-600 text-6xl mb-6">
-                        <i class="fas fa-building"></i>
+                <div class="service-card bg-gradient-to-br from-teal-50 to-teal-100 rounded-xl p-8 transition-all duration-300 animate-on-scroll">
+                    <button class="service-toggle-btn w-full text-center">
+                        <div class="text-teal-600 text-6xl mb-6"><i class="fas fa-building"></i></div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Seguro Empresarial</h3>
+                        <i class="fas fa-chevron-down text-teal-600 text-xs ml-1 transition-transform duration-300"></i>
+                    </button>
+                    <div class="service-details max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <p class="text-gray-600 mb-6">Soluções completas para proteger seu negócio, funcionários e patrimônio empresarial.</p>
+                        <ul class="text-sm text-gray-600 text-left space-y-2 mb-6">
+                            <li><i class="fas fa-check text-teal-600 mr-2"></i>Responsabilidade civil</li>
+                            <li><i class="fas fa-check text-teal-600 mr-2"></i>Equipamentos</li>
+                            <li><i class="fas fa-check text-teal-600 mr-2"></i>Lucros cessantes</li>
+                            <li><i class="fas fa-check text-teal-600 mr-2"></i>Acidentes de trabalho</li>
+                        </ul>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Seguro Empresarial</h3>
-                    <p class="text-gray-600 mb-6">
-                        Soluções completas para proteger seu negócio, funcionários e patrimônio empresarial.
-                    </p>
-                    <ul class="text-sm text-gray-600 text-left space-y-2">
-                        <li><i class="fas fa-check text-teal-600 mr-2"></i> Responsabilidade civil</li>
-                        <li><i class="fas fa-check text-teal-600 mr-2"></i> Equipamentos</li>
-                        <li><i class="fas fa-check text-teal-600 mr-2"></i> Lucros cessantes</li>
-                        <li><i class="fas fa-check text-teal-600 mr-2"></i> Acidentes de trabalho</li>
-                    </ul>
                 </div>
 
-                <div class="service-card bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-8 text-center hover:shadow-xl transition duration-300 animate-on-scroll">
-                    <div class="text-red-600 text-6xl mb-6">
-                        <i class="fas fa-motorcycle"></i>
+                <div class="service-card bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-8 transition-all duration-300 animate-on-scroll">
+                    <button class="service-toggle-btn w-full text-center">
+                        <div class="text-red-600 text-6xl mb-6"><i class="fas fa-motorcycle"></i></div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Seguro Moto</h3>
+                        <i class="fas fa-chevron-down text-red-600 text-xs ml-1 transition-transform duration-300"></i>
+                    </button>
+                    <div class="service-details max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <p class="text-gray-600 mb-6">Proteção específica para motocicletas com cobertura contra acidentes e assistência especializada.</p>
+                        <ul class="text-sm text-gray-600 text-left space-y-2 mb-6">
+                            <li><i class="fas fa-check text-red-600 mr-2"></i>Cobertura total</li>
+                            <li><i class="fas fa-check text-red-600 mr-2"></i>Assistência 24h</li>
+                            <li><i class="fas fa-check text-red-600 mr-2"></i>Equipamentos</li>
+                            <li><i class="fas fa-check text-red-600 mr-2"></i>Acidentes pessoais</li>
+                        </ul>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Seguro Moto</h3>
-                    <p class="text-gray-600 mb-6">
-                        Proteção específica para motocicletas com cobertura contra acidentes e assistência especializada.
-                    </p>
-                    <ul class="text-sm text-gray-600 text-left space-y-2">
-                        <li><i class="fas fa-check text-red-600 mr-2"></i> Cobertura total</li>
-                        <li><i class="fas fa-check text-red-600 mr-2"></i> Assistência 24h</li>
-                        <li><i class="fas fa-check text-red-600 mr-2"></i> Equipamentos</li>
-                        <li><i class="fas fa-check text-red-600 mr-2"></i> Acidentes pessoais</li>
-                    </ul>
                 </div>
             </div>
         </div>
@@ -917,11 +1049,11 @@
     </section>
 
     <!-- Depoimentos -->
-    <section id="depoimentos" class="py-20 bg-gray-50">
+    <section id="depoimentos" class="py-20 bg-gray-50 section-bg-image" style="background-image: url('https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=2070&auto=format&fit=crop');">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-800 mb-4">O que nossos clientes dizem</h2>
-                <p class="text-xl text-gray-600">
+                <h2 class="text-4xl font-bold text-white mb-4">O que nossos clientes dizem</h2>
+                <p class="text-xl text-gray-200">
                     Depoimentos reais de quem confia na SeguroMax
                 </p>
             </div>
@@ -993,6 +1125,37 @@
                                 </div>
                                 <div class="text-yellow-400 mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                                 <p class="text-gray-600 flex-grow">"Empresa de confiança! Já passei por algumas situações difíceis e sempre foram muito eficientes na resolução. Parceiros de verdade."</p>
+                            </div>
+                        </div>
+                        <!-- Clones para o loop infinito -->
+                        <div class="testimonial-card w-full md:w-1/2 lg:w-1/3 flex-shrink-0 p-4">
+                            <div class="bg-white rounded-xl p-6 shadow-lg h-full flex flex-col">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4"><i class="fas fa-user text-blue-600"></i></div>
+                                    <div><h4 class="font-bold text-gray-800">Maria Silva</h4><p class="text-gray-600 text-sm">Cliente há 3 anos</p></div>
+                                </div>
+                                <div class="text-yellow-400 mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                <p class="text-gray-600 flex-grow">"Excelente atendimento! Quando precisei usar o seguro do meu carro, foram super ágeis e resolveram tudo sem burocracia. Recomendo!"</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-card w-full md:w-1/2 lg:w-1/3 flex-shrink-0 p-4">
+                            <div class="bg-white rounded-xl p-6 shadow-lg h-full flex flex-col">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mr-4"><i class="fas fa-user text-orange-500"></i></div>
+                                    <div><h4 class="font-bold text-gray-800">João Santos</h4><p class="text-gray-600 text-sm">Cliente há 5 anos</p></div>
+                                </div>
+                                <div class="text-yellow-400 mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                <p class="text-gray-600 flex-grow">"A SeguroMax conseguiu um preço muito melhor que outras corretoras. O atendimento é personalizado e sempre que preciso, eles estão disponíveis."</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-card w-full md:w-1/2 lg:w-1/3 flex-shrink-0 p-4">
+                            <div class="bg-white rounded-xl p-6 shadow-lg h-full flex flex-col">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4"><i class="fas fa-user text-blue-600"></i></div>
+                                    <div><h4 class="font-bold text-gray-800">Ana Costa</h4><p class="text-gray-600 text-sm">Cliente há 2 anos</p></div>
+                                </div>
+                                <div class="text-yellow-400 mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                <p class="text-gray-600 flex-grow">"Profissionais competentes e confiáveis. Fizeram uma análise completa das minhas necessidades e encontraram o seguro perfeito para minha família."</p>
                             </div>
                         </div>
                     </div>
@@ -1119,216 +1282,175 @@
         </div>
     </section>
 
-    <!-- Contato -->
-    <section id="contato" class="py-20 bg-gray-50">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+       <!-- Contato -->
+    <section id="contato" class="py-20 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <h2 class="text-4xl font-bold text-gray-800 mb-4">Entre em Contato</h2>
-                <p class="text-xl text-gray-600">
-                    Estamos prontos para atender você e esclarecer todas suas dúvidas
-                </p>
+                <p class="text-xl text-gray-600">Estamos prontos para atender você e esclarecer todas suas dúvidas.</p>
             </div>
 
-            <div class="grid lg:grid-cols-2 gap-12">
-                <div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Fale Conosco</h3>
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
+                <!-- Coluna do Formulário -->
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Envie uma Mensagem</h3>
                     <form id="contact-form" class="space-y-6">
-                        <div>
-                            <label class="block text-gray-700 font-semibold mb-2">Nome Completo *</label>
+                                <div class="relative">
+                            <label for="contact-name" class="block text-gray-700 font-semibold mb-2">Nome Completo *</label>
                             <input type="text" id="contact-name" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
                         </div>
                         <div>
-                            <label class="block text-gray-700 font-semibold mb-2">E-mail *</label>
+                            <label for="contact-email" class="block text-gray-700 font-semibold mb-2">E-mail *</label>
                             <input type="email" id="contact-email" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
                         </div>
                         <div>
-                            <label class="block text-gray-700 font-semibold mb-2">Telefone *</label>
-                            <input type="tel" id="contact-phone" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
-                        </div>
-                        <div>
-                            <label class="block text-gray-700 font-semibold mb-2">Assunto *</label>
+                            <label for="contact-subject" class="block text-gray-700 font-semibold mb-2">Assunto *</label>
                             <select id="contact-subject" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
                                 <option value="">Selecione o assunto</option>
                                 <option value="cotacao">Solicitar Cotação</option>
                                 <option value="duvida">Dúvida sobre Seguros</option>
                                 <option value="sinistro">Informar Sinistro</option>
-                                <option value="suporte">Suporte Técnico</option>
                                 <option value="outros">Outros</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-gray-700 font-semibold mb-2">Mensagem *</label>
+                            <label for="contact-message" class="block text-gray-700 font-semibold mb-2">Mensagem *</label>
                             <textarea id="contact-message" rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required></textarea>
                         </div>
                         <button type="submit" class="w-full bg-orange-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-orange-600 transition duration-300">
                             Enviar Mensagem
                         </button>
                     </form>
-
                     <div id="contact-success" class="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg hidden">
-                        <div class="text-green-800">
-                            <i class="fas fa-check-circle mr-2"></i>
-                            Mensagem enviada com sucesso! Entraremos em contato em breve.
-                        </div>
+                        <div class="text-green-800"><i class="fas fa-check-circle mr-2"></i>Mensagem enviada com sucesso! Entraremos em contato em breve.</div>
                     </div>
                 </div>
 
-                <div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Informações de Contato</h3>
+                <!-- Coluna de Informações -->
+                <div class="bg-white p-8 rounded-xl shadow-lg">
                     <div class="space-y-6">
-                        <div class="bg-white rounded-lg p-6 shadow-lg">
-                            <div class="flex items-center mb-4">
-                                <i class="fas fa-phone text-orange-500 text-2xl mr-4"></i>
+                        <!-- Telefone -->
+                        <div class="bg-gray-50 p-6 rounded-xl border flex items-center justify-between transition-shadow duration-300 hover:shadow-md hover:border-blue-200">
+                            <div class="flex items-center">
+                                <i class="fas fa-phone text-blue-600 text-3xl mr-5"></i>
                                 <div>
-                                    <h4 class="font-bold text-gray-800">Telefone</h4>
-                                    <a href="tel:+551133334444" class="text-gray-600 hover:text-blue-600">(11) 3333-4444</a>
+                                    <h4 class="font-bold text-gray-800 text-lg">Telefone</h4>
+                                    <p class="text-gray-600">(11) 3333-4444</p>
                                 </div>
                             </div>
+                            <a href="tel:+551133334444" class="bg-blue-50 text-blue-700 px-4 py-2 rounded-full font-semibold hover:bg-blue-100 transition-colors text-sm">Ligar</a>
                         </div>
-
-                        <div class="bg-white rounded-lg p-6 shadow-lg">
-                            <div class="flex items-center mb-4">
-                                <i class="fas fa-whatsapp text-green-600 text-2xl mr-4"></i>
+                        <!-- WhatsApp -->
+                        <div class="bg-gray-50 p-6 rounded-xl border flex items-center justify-between transition-shadow duration-300 hover:shadow-md hover:border-green-200">
+                            <div class="flex items-center">
+                                <i class="fab fa-whatsapp text-green-500 text-3xl mr-5"></i>
                                 <div>
-                                    <h4 class="font-bold text-gray-800">WhatsApp</h4>
-                                    <a href="https://wa.me/5511999998888" target="_blank" class="text-gray-600 hover:text-blue-600">(11) 99999-8888</a>
+                                    <h4 class="font-bold text-gray-800 text-lg">WhatsApp</h4>
+                                    <p class="text-gray-600">(11) 99999-8888</p>
                                 </div>
                             </div>
+                            <a href="https://wa.me/5511999998888?text=Olá! Gostaria de mais informações." target="_blank" rel="noopener noreferrer" class="bg-green-50 text-green-700 px-4 py-2 rounded-full font-semibold hover:bg-green-100 transition-colors text-sm">Conversar</a>
                         </div>
-
-                        <div class="bg-white rounded-lg p-6 shadow-lg">
-                            <div class="flex items-center mb-4">
-                                <i class="fas fa-envelope text-blue-600 text-2xl mr-4"></i>
+                        <!-- E-mail -->
+                        <div class="bg-gray-50 p-6 rounded-xl border flex items-center justify-between transition-shadow duration-300 hover:shadow-md hover:border-gray-300">
+                            <div class="flex items-center">
+                                <i class="fas fa-envelope text-gray-600 text-3xl mr-5"></i>
                                 <div>
-                                    <h4 class="font-bold text-gray-800">E-mail</h4>
-                                    <a href="mailto:contato@seguromax.com.br" class="text-gray-600 hover:text-blue-600">contato@seguromax.com.br</a>
+                                    <h4 class="font-bold text-gray-800 text-lg">E-mail</h4>
+                                    <a id="contact-email-link" href="mailto:contato@seguromax.com.br" class="text-gray-600 hover:text-blue-600 break-all">contato@seguromax.com.br</a>
                                 </div>
                             </div>
+                            <button id="copy-email-btn" class="text-gray-500 hover:text-blue-600 p-2 rounded-md transition-colors" title="Copiar e-mail">
+                                <i class="far fa-copy text-xl"></i>
+                            </button>
                         </div>
-
-                        <div class="bg-white rounded-lg p-6 shadow-lg">
-                            <div class="flex items-center mb-4">
-                                <i class="fas fa-clock text-orange-500 text-2xl mr-4"></i>
+                        <!-- Endereço -->
+                        <div class="bg-gray-50 p-6 rounded-xl border flex items-center justify-between transition-shadow duration-300 hover:shadow-md hover:border-red-200">
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt text-red-500 text-3xl mr-5"></i>
                                 <div>
-                                    <h4 class="font-bold text-gray-800">Atendimento</h4>
-                                    <p class="text-gray-600">Segunda a Sexta: 8h às 18h<br>Sábado: 8h às 12h</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-white rounded-lg p-6 shadow-lg">
-                            <div class="flex items-center mb-4">
-                                <i class="fas fa-map-marker-alt text-blue-600 text-2xl mr-4"></i>
-                                <div>
-                                    <h4 class="font-bold text-gray-800">Endereço</h4>
+                                    <h4 class="font-bold text-gray-800 text-lg">Endereço</h4>
                                     <p class="text-gray-600">Av. Paulista, 1000 - Bela Vista<br>São Paulo - SP, 01310-100</p>
                                 </div>
                             </div>
+                            <a href="https://maps.apple.com/?q=Av.+Paulista,+1000+-+Bela+Vista,+São+Paulo+-+SP" onclick="this.href='geo:-23.561684,-46.655652?q=Av. Paulista, 1000 - Bela Vista, São Paulo - SP'" target="_blank" rel="noopener noreferrer" class="bg-red-50 text-red-700 px-4 py-2 rounded-full font-semibold hover:bg-red-100 transition-colors text-sm">Ver Rota</a>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Mapa -->
-            <div class="mt-12">
+            <div class="mt-16">
                 <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Nossa Localização</h3>
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.196256860749!2d-46.655652!3d-23.561684!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8da0aa315%3A0xd59f9431f2c9776a!2sAv.%20Paulista%2C%201000%20-%20Bela%20Vista%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2001310-100!5e0!3m2!1spt!2sbr!4v1640995200000!5m2!1spt!2sbr" 
-                        width="100%" 
-                        height="400" 
-                        style="border:0;" 
-                        allowfullscreen="" 
-                        loading="lazy" 
-                        title="Mapa da localização da SeguroMax"
-                        referrerpolicy="no-referrer-when-downgrade"
-                        class="w-full">
-                    </iframe>
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden relative">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.196256860749!2d-46.655652!3d-23.561684!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8da0aa315%3A0xd59f9431f2c9776a!2sAv.%20Paulista%2C%201000%20-%20Bela%20Vista%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2001310-100!5e0!3m2!1spt!2sbr!4v1640995200000!5m2!1spt!2sbr" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" title="Mapa da localização da SeguroMax" referrerpolicy="no-referrer-when-downgrade" class="w-full"></iframe>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/50 to-transparent text-center no-print">
+                        <a href="https://maps.apple.com/?q=Av.+Paulista,+1000+-+Bela+Vista,+São+Paulo+-+SP" onclick="this.href='geo:-23.561684,-46.655652?q=Av. Paulista, 1000 - Bela Vista, São Paulo - SP'" target="_blank" rel="noopener noreferrer" class="text-white font-semibold hover:underline">
+                            Abrir no Google Maps <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <!-- Rodapé -->
+    <footer class="bg-gray-800 text-white py-12 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Sobre -->
                 <div>
-                    <div class="flex items-center mb-6">
+                    <div class="flex items-center justify-center md:justify-start mb-4">
                         <i class="fas fa-shield-alt text-blue-400 text-2xl mr-3"></i>
-                        <span class="text-xl font-bold">SeguroMax</span>
+                        <span class="text-xl font-bold text-white">SeguroMax</span>
                     </div>
-                    <p class="text-gray-300 mb-6">
-                        Protegendo o que mais importa para você há mais de 15 anos. 
-                        Confiança, qualidade e excelência no atendimento.
-                    </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-300 hover:text-blue-400 transition duration-300">
-                            <i class="fab fa-facebook text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-300 hover:text-blue-400 transition duration-300">
-                            <i class="fab fa-instagram text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-300 hover:text-blue-400 transition duration-300">
-                            <i class="fab fa-linkedin text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-300 hover:text-blue-400 transition duration-300">
-                            <i class="fab fa-youtube text-xl"></i>
-                        </a>
+                    <p class="text-gray-400 text-sm mb-4">Sua tranquilidade é nossa prioridade. Encontre o seguro ideal com a ajuda de nossos especialistas.</p>
+                    <div class="text-sm text-gray-400 space-y-2">
+                        <p><i class="fas fa-map-marker-alt w-4 mr-2"></i>Av. Paulista, 1000, São Paulo - SP</p>
+                        <p><i class="fas fa-phone w-4 mr-2"></i>(11) 3333-4444</p>
+                        <p><i class="fas fa-envelope w-4 mr-2"></i>contato@seguromax.com.br</p>
                     </div>
                 </div>
-
+                <!-- Navegação -->
                 <div>
-                    <h3 class="text-lg font-bold mb-6">Links Rápidos</h3>
-                    <ul class="space-y-3">
-                        <li><a href="#home" class="text-gray-300 hover:text-blue-400 transition duration-300">Home</a></li>
-                        <li><a href="#quem-somos" class="text-gray-300 hover:text-blue-400 transition duration-300">Quem Somos</a></li>
-                        <li><a href="#beneficios" class="text-gray-300 hover:text-blue-400 transition duration-300">Benefícios</a></li>
-                        <li><a href="#cotacao" class="text-gray-300 hover:text-blue-400 transition duration-300">Solicitar Cotação</a></li>
-                        <li><a href="#contato" class="text-gray-300 hover:text-blue-400 transition duration-300">Contato</a></li>
+                    <h4 class="text-lg font-bold mb-4">Navegação</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#home" class="text-gray-400 hover:text-blue-400">Home</a></li>
+                        <li><a href="#quem-somos" class="text-gray-400 hover:text-blue-400">Quem Somos</a></li>
+                        <li><a href="#beneficios" class="text-gray-400 hover:text-blue-400">Benefícios</a></li>
+                        <li><a href="#cotacao" class="text-gray-400 hover:text-blue-400">Cotação</a></li>
                     </ul>
                 </div>
-
+                <!-- Serviços -->
                 <div>
-                    <h3 class="text-lg font-bold mb-6">Nossos Seguros</h3>
-                    <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-300 hover:text-blue-400 transition duration-300">Seguro Auto</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-blue-400 transition duration-300">Seguro Residencial</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-blue-400 transition duration-300">Seguro de Vida</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-blue-400 transition duration-300">Seguro Empresarial</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-blue-400 transition duration-300">Seguro Saúde</a></li>
+                    <h4 class="text-lg font-bold mb-4">Serviços</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#servicos" class="text-gray-400 hover:text-blue-400">Seguro Auto</a></li>
+                        <li><a href="#servicos" class="text-gray-400 hover:text-blue-400">Seguro Residencial</a></li>
+                        <li><a href="#servicos" class="text-gray-400 hover:text-blue-400">Seguro de Vida</a></li>
+                        <li><a href="#servicos" class="text-gray-400 hover:text-blue-400">Seguro Saúde</a></li>
                     </ul>
                 </div>
-
+                <!-- Contato e Redes Sociais -->
                 <div>
-                    <h3 class="text-lg font-bold mb-6">Contato</h3>
-                    <div class="space-y-3">
-                        <div class="flex items-center">
-                            <i class="fas fa-map-marker-alt text-blue-400 mr-3"></i>
-                            <span class="text-gray-300">Rua das Seguradoras, 123<br>São Paulo, SP</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-phone text-blue-400 mr-3"></i>
-                            <span class="text-gray-300">(11) 3333-4444</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-envelope text-blue-400 mr-3"></i>
-                            <span class="text-gray-300">contato@seguromax.com.br</span>
-                        </div>
+                    <h4 class="text-lg font-bold mb-4">Siga-nos</h4>
+                    <div class="flex justify-center md:justify-start space-x-4">
+                        <a href="https://www.facebook.com/seguromax" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-blue-400 text-2xl"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/seguromax" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-blue-400 text-2xl"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
             </div>
-
-            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
-                <p class="text-gray-300">
+            <div class="mt-12 border-t border-gray-700 pt-8 text-center text-sm">
+                <p class="text-gray-400">
                     © 2024 SeguroMax Corretora de Seguros. Todos os direitos reservados.
                 </p>
-                <p class="text-gray-400 text-sm mt-2">
+                <p class="text-gray-500 mt-2">
                     CNPJ: 12.345.678/0001-90 | SUSEP: 12345.678901/2024-56
                 </p>
-                <div class="mt-4 text-sm">
+                <div class="mt-4">
                     <a href="#" id="privacy-policy-link" class="text-gray-400 hover:text-blue-400 transition duration-300">Política de Privacidade</a>
                     <span class="text-gray-600 mx-2">|</span>
                     <a href="#" id="cookie-policy-link" class="text-gray-400 hover:text-blue-400 transition duration-300">Política de Cookies</a>
@@ -1340,6 +1462,7 @@
     <!-- WhatsApp Floating Button -->
     <a href="https://wa.me/5511999998888?text=Olá! Gostaria de solicitar uma cotação de seguro." 
        target="_blank" 
+       rel="noopener noreferrer"
        class="whatsapp-float fixed bottom-6 right-6 bg-green-500 text-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg hover:bg-green-600 transition duration-300 z-50"
        aria-label="Falar no WhatsApp">
         <i class="fab fa-whatsapp text-3xl"></i>
@@ -1419,7 +1542,7 @@
     </div>
 
     <!-- Toast Notification Container -->
-    <div id="toast-container" class="fixed top-5 right-5 z-[120] w-full max-w-xs space-y-3">
+    <div id="toast-container" class="fixed top-5 right-5 z-[120] w-full max-w-xs space-y-3" role="status" aria-live="polite">
     </div>
 
     <script src="script.js"></script>
