@@ -231,6 +231,11 @@ button:hover {
     background-color: #fef2f2;
 }
 
+.field-wrapper {
+    position: relative;
+    /* Adicione outros estilos que você possa precisar para o wrapper */
+}
+
 /* Loading overlay */
 .loading-overlay {
     position: fixed;
@@ -397,3 +402,49 @@ button:hover {
   .form-step-fade-out {
     animation: fadeOut 0.3s ease-in forwards;
   }
+
+/* Toast Notification Styles */
+@keyframes toast-in {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes toast-out {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* Estilos para o painel de simulação */
+.summary-item {
+    animation: summary-item-in 0.5s ease-out forwards;
+    border-left: 3px solid #3b82f6; /* Borda azul */
+    padding-left: 1rem;
+    margin-bottom: 1rem;
+}
+
+@keyframes summary-item-in {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.summary-item strong {
+    color: #1f2937; /* text-gray-800 */
+}
