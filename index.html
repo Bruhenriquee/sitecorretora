@@ -10,7 +10,7 @@
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE2IDJMMjYgOFYyMkMyNiAyNC4yMDkxIDI0LjIwOTEgMjYgMjIgMjZIMTBDNy43OTA4NiAyNiA2IDI0LjIwOTEgNiAyMlY4TDE2IDJaIiBmaWxsPSIjMjU2M0VCIi8+CjxwYXRoIGQ9Ik0xNiA2TDIyIDEwVjIwQzIyIDIxLjEwNDYgMjEuMTA0NiAyMiAyMCAyMkgxMkMxMC44OTU0IDIyIDEwIDIxLjEwNDYgMTAgMjBWMTBMMTYgNloiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPg==">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 
     <!-- SEO: Structured Data (JSON-LD) para Corretora de Seguros -->
     <script type="application/ld+json">
@@ -471,7 +471,7 @@
                                 <div class="form-step" data-step="1">
                                     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
                                         <!-- Opções de seguro aqui -->
-                                        <label class="insurance-type-option">
+                                        <label class="insurance-type-option cursor-pointer">
                                             <input type="radio" name="insurance-type" value="auto" class="sr-only insurance-type-radio" />
                                             <div class="insurance-type-card p-6 rounded-lg cursor-pointer flex flex-col items-center justify-center h-48">
                                                 <div class="icon-background mb-4">
@@ -481,7 +481,7 @@
                                                 <p class="text-xs text-gray-500 text-center">Proteção para seu carro contra roubo, acidentes e danos.</p>
                                             </div>
                                         </label>
-                                        <label class="insurance-type-option">
+                                        <label class="insurance-type-option cursor-pointer">
                                             <input type="radio" name="insurance-type" value="residencial" class="sr-only insurance-type-radio" />
                                             <div class="insurance-type-card p-6 rounded-lg cursor-pointer flex flex-col items-center justify-center h-48">
                                                 <div class="icon-background mb-4">
@@ -491,7 +491,7 @@
                                                 <p class="text-xs text-gray-500 text-center">Segurança para seu lar contra incêndios, roubos e imprevistos.</p>
                                             </div>
                                         </label>
-                                        <label class="insurance-type-option">
+                                        <label class="insurance-type-option cursor-pointer">
                                             <input type="radio" name="insurance-type" value="vida" class="sr-only insurance-type-radio" />
                                             <div class="insurance-type-card p-6 rounded-lg cursor-pointer flex flex-col items-center justify-center h-48">
                                                 <div class="icon-background mb-4">
@@ -501,7 +501,7 @@
                                                 <p class="text-xs text-gray-500 text-center">Garanta a tranquilidade financeira de quem você ama.</p>
                                             </div>
                                         </label>
-                                        <label class="insurance-type-option">
+                                        <label class="insurance-type-option cursor-pointer">
                                             <input type="radio" name="insurance-type" value="consorcio" class="sr-only insurance-type-radio" />
                                             <div class="insurance-type-card p-6 rounded-lg cursor-pointer flex flex-col items-center justify-center h-48">
                                                 <div class="icon-background mb-4">
@@ -516,26 +516,28 @@
 
                                 <!-- Etapa 2: Dados Pessoais -->
                                 <div class="form-step hidden" data-step="2">
-                                    <div class="grid md:grid-cols-2 gap-6">                                        <div class="relative">
+                                    <div class="grid md:grid-cols-2 gap-6">
+                                        <div class="relative">
                                             <label for="nome" class="block text-gray-700 font-semibold mb-2">Nome Completo *</label>
-                                            <input type="text" id="nome" name="nome" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="Ex: Maria da Silva" required>
+                                            <input type="text" id="nome" name="nome" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="Ex: Maria da Silva" required data-validate="required">
                                             <span class="validation-icon-container"></span>
                                             <div class="error-message hidden text-red-500 text-sm mt-1"></div>
                                         </div>
                                         <div class="relative">
                                             <label for="cpf" class="block text-gray-700 font-semibold mb-2">CPF *</label>
-                                            <input type="text" id="cpf" name="cpf" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="000.000.000-00" required data-validate="cpf">
+                                            <input type="text" id="cpf" name="cpf" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="000.000.000-00" required data-validate="cpf" data-mask="formatCPF">
                                             <span class="validation-icon-container"></span>
                                             <div class="error-message hidden text-red-500 text-sm mt-1"></div>
                                         </div>
                                         <div class="relative">
                                             <label for="nascimento" class="block text-gray-700 font-semibold mb-2">Data de Nascimento *</label>
-                                            <input type="date" id="nascimento" name="nascimento" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" required>
+                                            <input type="date" id="nascimento" name="nascimento" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" required data-validate="date">
                                             <span class="validation-icon-container"></span>
+                                            <div class="error-message hidden text-red-500 text-sm mt-1"></div>
                                         </div>
                                         <div class="relative">
                                             <label for="telefone" class="block text-gray-700 font-semibold mb-2">Telefone / WhatsApp *</label>
-                                            <input type="tel" id="telefone" name="telefone" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="(00) 00000-0000" required data-validate="telefone">
+                                            <input type="tel" id="telefone" name="telefone" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="(00) 00000-0000" required data-validate="telefone" data-mask="formatPhone">
                                             <span class="validation-icon-container"></span>
                                             <div class="error-message hidden text-red-500 text-sm mt-1"></div>
                                         </div>
@@ -547,31 +549,31 @@
                                         </div>
                                         <div class="relative">
                                             <label for="genero" class="block text-gray-700 font-semibold mb-2">Gênero</label>
-                                            <select id="genero" name="genero" class="w-full p-3 border border-gray-300 rounded-lg bg-white" required>
+                                            <select id="genero" name="genero" class="w-full p-3 border border-gray-300 rounded-lg bg-white">
                                                 <option value="">Selecione</option>
                                                 <option value="masculino">Masculino</option>
                                                 <option value="feminino">Feminino</option>
                                             </select>
                                         </div>
-                                        <div class="relative">
+                                        <div class="relative md:col-span-2">
                                             <label for="estado-civil" class="block text-gray-700 font-semibold mb-2">Estado Civil</label>
-                                            <select id="estado-civil" name="estado-civil" class="w-full p-3 border border-gray-300 rounded-lg bg-white" required>
+                                            <select id="estado-civil" name="estado-civil" class="w-full p-3 border border-gray-300 rounded-lg bg-white">
                                                 <option value="">Selecione</option>
                                                 <option value="solteiro">Solteiro(a)</option>
                                                 <option value="casado">Casado(a)</option>
                                                 <option value="divorciado">Divorciado(a)</option>
                                                 <option value="viuvo">Viúvo(a)</option>
                                                 <option value="uniao-estavel">União Estável</option>
-                                            </select>
-                                        </div>
-                                    </div>                                </div></div>
+                                            </select>                                        </div>
+                                    </div>
+                                </div>
 
                                 <!-- Etapa 3: Endereço -->
                                 <div class="form-step hidden" data-step="3">
                                     <div class="grid md:grid-cols-4 gap-6">
                                         <div class="md:col-span-1 relative">
                                             <label for="cep" class="block text-gray-700 font-semibold mb-2">CEP *</label>
-                                            <input type="text" id="cep" name="cep" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="00000-000" required>
+                                            <input type="text" id="cep" name="cep" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="00000-000" required data-mask="formatCEP">
                                             <i id="cep-spinner" class="fas fa-spinner fa-spin absolute right-3 top-11 text-gray-400 hidden"></i>
                                         </div>
                                         <div class="md:col-span-3">
@@ -580,7 +582,7 @@
                                         </div>
                                         <div class="md:col-span-1 relative">
                                             <label for="numero" class="block text-gray-700 font-semibold mb-2">Número *</label>
-                                            <input type="text" id="numero" name="numero" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="123" required>
+                                            <input type="text" id="numero" name="numero" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="123" required data-validate="required">
                                             <span class="validation-icon-container"></span>
                                         </div>
                                         <div class="md:col-span-3">
@@ -604,7 +606,8 @@
 
                                 <!-- Etapa 4: Detalhes do Seguro (Conteúdo dinâmico) -->
                                 <div class="form-step hidden" data-step="4" data-insurance-type="auto">
-                                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">                                        <div class="relative">
+                                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                        <div class="relative">
                                             <label for="marca" class="block text-gray-700 font-semibold mb-2">Marca</label>
                                             <select id="marca" name="marca" class="w-full p-3 border border-gray-300 rounded-lg bg-white" required></select>
                                             <i id="marca-spinner" class="fas fa-spinner fa-spin absolute right-3 top-11 text-gray-400 hidden"></i>
@@ -620,7 +623,7 @@
                                             <i id="ano-spinner" class="fas fa-spinner fa-spin absolute right-3 top-11 text-gray-400 hidden"></i>
                                         </div>
                                         <div class="lg:col-span-2">
-                                            <label for="chassi" class="block text-gray-700 font-semibold mb-2">Chassi *</label>                                            
+                                            <label for="chassi" class="block text-gray-700 font-semibold mb-2">Chassi *</label>
                                             <input type="text" id="chassi" name="chassi" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="9BW ZZZ 377 VT 000000" required>
                                             <span class="validation-icon-container"></span>
                                         </div>
@@ -631,7 +634,7 @@
                                         </div>
                                         <div>
                                             <label for="tipo-uso" class="block text-gray-700 font-semibold mb-2">Tipo de Uso</label>
-                                            <select id="tipo-uso" name="tipo-uso" class="w-full p-3 border border-gray-300 rounded-lg bg-white" required>
+                                            <select id="tipo-uso" name="tipo-uso" class="w-full p-3 border border-gray-300 rounded-lg bg-white">
                                                 <option value="">Selecione</option>
                                                 <option value="lazer">Lazer</option>
                                                 <option value="trabalho">Lazer e Trabalho</option>
@@ -640,7 +643,7 @@
                                         </div>
                                         <div class="relative">
                                             <label for="cep-pernoite" class="block text-gray-700 font-semibold mb-2">CEP de Pernoite *</label>
-                                            <input type="text" id="cep-pernoite" name="cep-pernoite" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="00000-000" required>
+                                            <input type="text" id="cep-pernoite" name="cep-pernoite" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="00000-000" required data-mask="formatCEP">
                                             <i id="cep-pernoite-spinner" class="fas fa-spinner fa-spin absolute right-3 top-11 text-gray-400 hidden"></i>
                                         </div>
                                         <div>
@@ -651,7 +654,7 @@
                                                     <span class="tooltiptext">Sua pontuação por não ter sinistros. Se é seu primeiro seguro, selecione 0.</span>
                                                 </span>
                                             </label>
-                                            <select id="classe-bonus" name="classe-bonus" class="w-full p-3 border border-gray-300 rounded-lg bg-white" required>
+                                            <select id="classe-bonus" name="classe-bonus" class="w-full p-3 border border-gray-300 rounded-lg bg-white">
                                                 <option value="0">0 (Primeiro seguro)</option>
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
@@ -686,19 +689,19 @@
                                     <div id="principal-condutor-fields" class="hidden mt-6 space-y-6 p-4 bg-gray-50 rounded-lg border">
                                         <h4 class="text-xl font-bold text-gray-800">Dados do Principal Condutor</h4>
                                         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                            <div class="relative">
-                                                <label for="condutor-nome" class="block text-gray-700 font-semibold mb-2">Nome Completo *</label>                                                
-                                                <input type="text" id="condutor-nome" name="condutor-nome" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="Ex: João Souza">
+                                            <div class="relative lg:col-span-3">
+                                                <label for="condutor-nome" class="block text-gray-700 font-semibold mb-2">Nome Completo *</label>
+                                                <input type="text" id="condutor-nome" name="condutor-nome" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="Ex: João Souza" required>
                                                 <span class="validation-icon-container"></span>
                                             </div>
                                             <div class="relative">
                                                 <label for="condutor-cpf" class="block text-gray-700 font-semibold mb-2">CPF *</label>
-                                                <input type="text" id="condutor-cpf" name="condutor-cpf" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="000.000.000-00" data-validate="cpf">
+                                                <input type="text" id="condutor-cpf" name="condutor-cpf" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="000.000.000-00" data-validate="cpf" data-mask="formatCPF" required>
                                                 <span class="validation-icon-container"></span>
                                             </div>
                                             <div class="relative">
                                                 <label for="condutor-nascimento" class="block text-gray-700 font-semibold mb-2">Data de Nascimento *</label>
-                                                <input type="date" id="condutor-nascimento" name="condutor-nascimento" class="w-full p-3 pr-10 border border-gray-300 rounded-lg">
+                                                <input type="date" id="condutor-nascimento" name="condutor-nascimento" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" required>
                                                 <span class="validation-icon-container"></span>
                                             </div>
                                             <div class="relative">
@@ -721,7 +724,8 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>                                </div></div>
+                                    </div>
+                                </div>
                                 <!-- Etapa 4: Detalhes do Seguro Residencial -->
                                 <div class="form-step hidden" data-step="4" data-insurance-type="residencial">
                                     <div class="grid md:grid-cols-2 gap-x-6 gap-y-8">
@@ -753,19 +757,19 @@
                                             </select>
                                         </div>
                                         <div class="relative">
-                                            <label for="area-construida" class="block text-gray-700 font-semibold mb-2">Área Construída (m²) *</label>                                            
+                                            <label for="area-construida" class="block text-gray-700 font-semibold mb-2">Área Construída (m²) *</label>
                                             <input type="number" id="area-construida" name="area-construida" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="150" required>
                                             <span class="validation-icon-container"></span>
                                         </div>
                                         <div class="relative">
                                             <label for="valor-imovel" class="block text-gray-700 font-semibold mb-2">
-                                                Valor de Reconstrução do Imóvel
+                                                Valor de Reconstrução do Imóvel *
                                                 <span class="tooltip ml-1">
                                                     <i class="fas fa-info-circle text-gray-400"></i>
                                                     <span class="tooltiptext">Custo estimado para reconstruir o imóvel em caso de perda total.</span>
                                                 </span>
                                             </label>
-                                            <input type="text" id="valor-imovel" name="valor-imovel" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="R$ 0,00" required>
+                                            <input type="text" id="valor-imovel" name="valor-imovel" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="R$ 0,00" required data-mask="formatCurrency">
                                             <span class="validation-icon-container"></span>
                                         </div>
                                         <div class="relative">
@@ -776,19 +780,19 @@
                                         <div class="md:col-span-2 mt-4">
                                             <p class="block text-gray-700 font-semibold mb-3">Coberturas Adicionais Desejadas</p>
                                             <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                                                <label class="flex items-center"><input type="checkbox" name="coberturas" value="danos-eletricos" class="mr-2"> Danos Elétricos</label>
-                                                <label class="flex items-center"><input type="checkbox" name="coberturas" value="vendaval" class="mr-2"> Vendaval e Granizo</label>
-                                                <label class="flex items-center"><input type="checkbox" name="coberturas" value="vidros" class="mr-2"> Quebra de Vidros</label>
-                                                <label class="flex items-center"><input type="checkbox" name="coberturas" value="responsabilidade-civil" class="mr-2"> Responsabilidade Civil</label>
-                                                <label class="flex items-center"><input type="checkbox" name="coberturas" value="roubo-bens" class="mr-2"> Roubo de Bens</label>
+                                                <label class="flex items-center"><input type="checkbox" name="coberturas" value="danos-eletricos" data-label="Danos Elétricos" class="mr-2"> Danos Elétricos</label>
+                                                <label class="flex items-center"><input type="checkbox" name="coberturas" value="vendaval" data-label="Vendaval e Granizo" class="mr-2"> Vendaval e Granizo</label>
+                                                <label class="flex items-center"><input type="checkbox" name="coberturas" value="vidros" data-label="Quebra de Vidros" class="mr-2"> Quebra de Vidros</label>
+                                                <label class="flex items-center"><input type="checkbox" name="coberturas" value="responsabilidade-civil" data-label="Responsabilidade Civil" class="mr-2"> Responsabilidade Civil</label>
+                                                <label class="flex items-center"><input type="checkbox" name="coberturas" value="roubo-bens" data-label="Roubo de Bens" class="mr-2"> Roubo de Bens</label>
                                             </div>
                                         </div>
                                         <div class="md:col-span-2 mt-4">
                                             <p class="block text-gray-700 font-semibold mb-3">Possui Sistemas de Segurança?</p>
                                             <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                                                <label class="flex items-center"><input type="checkbox" name="seguranca" value="alarme" class="mr-2"> Alarme Monitorado</label>
-                                                <label class="flex items-center"><input type="checkbox" name="seguranca" value="camera" class="mr-2"> Câmeras (CFTV)</label>
-                                                <label class="flex items-center"><input type="checkbox" name="seguranca" value="cerca-eletrica" class="mr-2"> Cerca Elétrica</label>
+                                                <label class="flex items-center"><input type="checkbox" name="seguranca" value="alarme" data-label="Alarme Monitorado" class="mr-2"> Alarme Monitorado</label>
+                                                <label class="flex items-center"><input type="checkbox" name="seguranca" value="camera" data-label="Câmeras (CFTV)" class="mr-2"> Câmeras (CFTV)</label>
+                                                <label class="flex items-center"><input type="checkbox" name="seguranca" value="cerca-eletrica" data-label="Cerca Elétrica" class="mr-2"> Cerca Elétrica</label>
                                             </div>
                                         </div>
                                     </div>
@@ -796,15 +800,24 @@
 
                                 <!-- Etapa 4: Detalhes do Seguro de Vida -->
                                 <div class="form-step hidden" data-step="4" data-insurance-type="vida">
-                                    <div class="grid md:grid-cols-2 gap-x-6 gap-y-8">                                        <div class="relative">
-                                            <label for="profissao" class="block text-gray-700 font-semibold mb-2">Profissão *</label>                                            
+                                    <div class="grid md:grid-cols-2 gap-x-6 gap-y-8">
+                                        <div class="relative">
+                                            <label for="profissao" class="block text-gray-700 font-semibold mb-2">Profissão *</label>
                                             <input type="text" id="profissao" name="profissao" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="Ex: Engenheiro de Software" required>
                                             <span class="validation-icon-container"></span>
                                         </div>
                                         <div class="relative">
                                             <label for="renda-mensal" class="block text-gray-700 font-semibold mb-2">Renda Mensal *</label>
-                                            <input type="text" id="renda-mensal" name="renda-mensal" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="R$ 0,00" required>
-                                            <span class="validation-icon-container"></span>
+                                            <select id="renda-mensal" name="renda-mensal" class="w-full p-3 border border-gray-300 rounded-lg bg-white" required>
+                                                <option value="">Selecione uma faixa de valor</option>
+                                                <option value="3000">Até R$ 3.000</option>
+                                                <option value="5000">De R$ 3.001 a R$ 5.000</option>
+                                                <option value="8000">De R$ 5.001 a R$ 8.000</option>
+                                                <option value="12000">De R$ 8.001 a R$ 12.000</option>
+                                                <option value="15000">De R$ 12.001 a R$ 15.000</option>
+                                                <option value="20000">Acima de R$ 15.000</option>
+                                                <option value="outro">Outro valor (a combinar)</option>
+                                            </select>
                                         </div>
                                         <div class="relative md:col-span-2">
                                             <label for="capital-segurado" class="block text-gray-700 font-semibold mb-2">Capital Segurado Desejado *</label>
@@ -823,36 +836,38 @@
                                         <div class="md:col-span-2">
                                             <p class="block text-gray-700 font-semibold mb-2">Você é fumante?</p>
                                             <div class="flex gap-6">
-                                                <label class="flex items-center"><input type="radio" name="fumante" value="sim" class="mr-2" required> Sim</label>
+                                                <label class="flex items-center"><input type="radio" name="fumante" value="sim" class="mr-2"> Sim</label>
                                                 <label class="flex items-center"><input type="radio" name="fumante" value="nao" class="mr-2" checked> Não</label>
                                             </div>
                                         </div>
                                         <div class="md:col-span-2">
                                             <p class="block text-gray-700 font-semibold mb-2">Pratica esportes de risco regularmente?</p>
                                             <div class="flex gap-6">
-                                                <label class="flex items-center"><input type="radio" name="esportes-radicais" value="sim" class="mr-2" required> Sim</label>
+                                                <label class="flex items-center"><input type="radio" name="esportes-radicais" value="sim" class="mr-2"> Sim</label>
                                                 <label class="flex items-center"><input type="radio" name="esportes-radicais" value="nao" class="mr-2" checked> Não</label>
                                             </div>
                                         </div>
                                         <div class="md:col-span-2">
                                             <p class="block text-gray-700 font-semibold mb-2">Possui alguma doença grave pré-existente?</p>
                                             <div class="flex gap-6">
-                                                <label class="flex items-center"><input type="radio" name="doencas-graves" value="sim" class="mr-2" required> Sim</label>
+                                                <label class="flex items-center"><input type="radio" name="doencas-graves" value="sim" class="mr-2"> Sim</label>
                                                 <label class="flex items-center"><input type="radio" name="doencas-graves" value="nao" class="mr-2" checked> Não</label>
                                             </div>
                                         </div>
-                                    </div>                                </div></div>
+                                    </div>
+                                </div>
 
                                 <!-- Etapa 4: Detalhes do Consórcio -->
                                 <div class="form-step hidden" data-step="4" data-insurance-type="consorcio">
-                                    <div class="grid md:grid-cols-2 gap-x-6 gap-y-8">                                        <div class="relative">
+                                    <div class="grid md:grid-cols-2 gap-x-6 gap-y-8">
+                                        <div class="relative">
                                             <label for="tipo-consorcio" class="block text-gray-700 font-semibold mb-2">Tipo de Consórcio</label>
                                             <select id="tipo-consorcio" name="tipo-consorcio" class="w-full p-3 border border-gray-300 rounded-lg bg-white" required>
                                                 <option value="">Selecione</option>
                                                 <option value="imovel">Imóvel</option>
                                                 <option value="veiculo">Veículo</option>
                                             </select>
-                                        </div>
+                                        </div>                                        
                                         <div class="relative">
                                             <label for="valor-carta-credito" class="block text-gray-700 font-semibold mb-2">Valor da Carta de Crédito *</label>
                                             <select id="valor-carta-credito" name="valor-carta-credito" class="w-full p-3 border border-gray-300 rounded-lg bg-white" required>
@@ -872,7 +887,8 @@
                                             <input type="number" id="prazo-desejado" name="prazo-desejado" class="w-full p-3 pr-10 border border-gray-300 rounded-lg" placeholder="72" required>
                                             <span class="validation-icon-container"></span>
                                         </div>
-                                    </div>                                </div></div>
+                                    </div>
+                                </div>
 
                                 <!-- Etapa 5: Revisão -->
                                 <div class="form-step hidden" data-step="5">
@@ -880,32 +896,21 @@
                                         <!-- Conteúdo da revisão será injetado aqui -->
                                     </div>
                                 </div>
-
-                                <!-- Resumo da Simulação (Mobile) -->
-                                <div class="lg:hidden mt-8">
-                                    <button type="button" id="mobile-summary-toggle" class="w-full flex justify-between items-center p-4 bg-gray-100 rounded-lg">
-                                        <span class="font-semibold text-gray-700">Ver Resumo da Simulação</span>
-                                        <i class="fas fa-chevron-down transition-transform"></i>
-                                    </button>
-                                    <div id="mobile-summary-content" class="hidden mt-2 p-4 border rounded-lg bg-gray-50 space-y-4 text-gray-600">
-                                        <!-- Conteúdo do resumo mobile será injetado aqui -->
-                                    </div>
-                                </div>
-
-                                <!-- Botões de Navegação -->
-                                <div class="mt-10 flex justify-between">
-                                    <button type="button" id="prev-btn" class="bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-semibold hover:bg-gray-400 transition hidden">
-                                        <i class="fas fa-arrow-left mr-2"></i> Voltar
-                                    </button>
-                                    <button type="button" id="next-btn" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition ml-auto">
-                                        Avançar <i class="fas fa-arrow-right ml-2"></i>
-                                    </button>
-                                    <button type="submit" id="submit-quote" class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition hidden">
-                                        <i class="fas fa-paper-plane mr-2"></i> Enviar Solicitação
-                                    </button>
-                                </div>
                             </fieldset>
 
+                            <!-- Botões de Navegação -->
+                            <div class="mt-10 flex justify-between">
+                                <button type="button" id="prev-btn" class="bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-semibold hover:bg-gray-400 transition hidden">
+                                    <i class="fas fa-arrow-left mr-2"></i> Voltar
+                                </button>
+                                <button type="button" id="next-btn" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition ml-auto opacity-50 cursor-not-allowed" disabled>
+                                    Avançar <i class="fas fa-arrow-right ml-2"></i>
+                                </button>
+                                <button type="submit" id="submit-quote" class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition hidden">
+                                    <i class="fas fa-paper-plane mr-2"></i> Enviar Solicitação
+                                </button>
+                            </div>
+                            
                             <!-- Resultado da Cotação -->
                             <div id="quote-result" class="text-center mt-8 p-8 bg-green-50 border-2 border-dashed border-green-300 rounded-lg hidden">
                                 <i class="fas fa-check-circle text-5xl text-green-500 mb-4"></i>
@@ -926,7 +931,7 @@
             </div>
         </div>
 
-        <div class="absolute bottom-0 left-0 right-0 h-96 bg-blue-50 section-bg-image -z-10" style="background-image: url('https://images.unsplash.com/photo-1553729459-023a4fae0a3q?q=80&w=2070&auto=format&fit=crop');">
+        <div class="absolute bottom-0 left-0 right-0 h-96 bg-blue-50 section-bg-image -z-10" style="background-image: url('./assets/background-form.jpg');">
             <div class="absolute inset-0 bg-gradient-to-t from-gray-100 via-gray-100/80 to-white/50"></div>
         </div>
     </section>
