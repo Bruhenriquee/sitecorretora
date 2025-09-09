@@ -86,6 +86,46 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollObserver.observe(el);
     });
 
+    // --- Hero Carousel ---
+    function initializeHeroCarousel() {
+        const carousel = document.getElementById('hero-carousel');
+        if (!carousel) return;
+
+        const slides = carousel.querySelectorAll('.hero-slide');
+        const prevBtn = document.getElementById('hero-prev');
+        const nextBtn = document.getElementById('hero-next');
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+        let autoPlayInterval;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            showSlide(currentIndex);
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            showSlide(currentIndex);
+        }
+
+        function startAutoPlay() {
+            autoPlayInterval = setInterval(nextSlide, 5000); // Muda a cada 5 segundos
+        }
+
+        nextBtn.addEventListener('click', () => { clearInterval(autoPlayInterval); nextSlide(); });
+        prevBtn.addEventListener('click', () => { clearInterval(autoPlayInterval); prevSlide(); });
+
+        startAutoPlay();
+    }
+
+    initializeHeroCarousel();
+
     // --- Infinite Carousel for Partners ---
     function initializeInfiniteCarousel() {
         const carousel = document.getElementById('insurance-carousel');

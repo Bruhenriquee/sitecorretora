@@ -470,6 +470,52 @@ button:hover {
 }
 
 /* Ajuste específico para a seção de depoimentos com fundo escuro */
-#depoimentos.section-bg-image::before {
-    background: linear-gradient(to right, rgba(17, 24, 39, 0.9), rgba(55, 65, 81, 0.85)); /* Gradiente de cinza escuro */
+.section-bg-image {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Efeito parallax */
+}
+
+.section-bg-image::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to right, rgba(17, 24, 39, 0.92), rgba(31, 41, 55, 0.9));
+    z-index: 0;
+}
+
+/* Ajuste específico para a seção de depoimentos com fundo escuro */
+.section-bg-image > * {
+    position: relative;
+    z-index: 1;
+}
+
+#depoimentos.section-bg-image {
+    /* Imagem de fundo mais profissional e sutil */
+    background-image: url('https://akadseguros.com.br/content/uploads/2024/09/casal-feliz-usando-smartphone-em-casa-1920x0-c-default.webp');
+}
+
+/* --- Fundo Profissional com Gradiente Sutil e Sóbrio --- */
+body {
+    /* Gradiente muito suave de cinza claro para branco, criando um efeito sóbrio e profissional */
+    background: linear-gradient(to bottom, #f9fafb, #ffffff);
+    /* Padrão SVG sutil para uma textura profissional e leve */
+    background-color: #f9fafb; /* Cor de fundo base (bg-gray-50) */
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d1d5db' fill-opacity='0.3' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+    background-attachment: fixed; /* Mantém o fundo fixo durante o scroll */
+}
+
+/* --- Hero Carousel --- */
+.hero-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.7s ease-in-out;
+    z-index: 0;
+}
+
+.hero-slide.active {
+    opacity: 1;
+    z-index: 1;
 }
