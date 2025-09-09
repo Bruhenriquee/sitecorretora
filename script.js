@@ -274,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
             condutorFields: document.getElementById('principal-condutor-fields'),
             quoteCard: document.getElementById('quote-card'),
             stepTitle: document.getElementById('step-title'),
-            reviewContainer: document.getElementById('review-summary'),
+            stepSummary: document.getElementById('step-summary'), toastContainer: document.getElementById('toast-container'), reviewContainer: document.getElementById('review-summary'),
         };
 
         const state = {
@@ -462,6 +462,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     errorDiv.textContent = isValid ? '' : message;
                     errorDiv.classList.toggle('hidden', isValid);
                 }
+            },
+            showNotification(message, type = 'error') {
+                if (!DOM.toastContainer) return;
+                const toast = document.createElement('div');
+                toast.className = `p-4 text-white rounded-lg shadow-lg flex items-center gap-3 ${type === 'error' ? 'bg-red-600' : 'bg-green-600'}`;
+                toast.innerHTML = `<i class="fas ${type === 'error' ? 'fa-exclamation-circle' : 'fa-check-circle'} text-xl"></i><span>${message}</span>`;
+                toast.style.animation = 'toast-in 0.5s ease';
+                DOM.toastContainer.appendChild(toast);
+                setTimeout(() => {
+                    toast.style.animation = 'toast-out 0.5s ease forwards';
+                    toast.addEventListener('animationend', () => toast.remove());
+                }, 5000);
             },
             generateReviewSummary() {
                 const formData = new FormData(form);
