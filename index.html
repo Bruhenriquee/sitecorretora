@@ -118,28 +118,63 @@
 
     <main id="main-content">
     <!-- Hero Section -->
-    <section id="home" class="pt-16 bg-gradient-to-br from-blue-600 to-blue-800 text-white">
+    <section id="home" class="pt-20 bg-gradient-to-br from-blue-600 to-blue-800 text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="hero-content">
-                    <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                        Proteja o que mais <span class="text-yellow-300">importa</span> para você
+                <div class="hero-content text-center md:text-left">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight animate-on-scroll is-visible" style="animation-delay: 0.1s;">
+                        O seguro ideal para <span class="text-yellow-300">sua tranquilidade</span>
                     </h1>
-                    <p class="text-xl mb-8 text-blue-100">
-                        Somos especialistas em seguros com mais de 15 anos de experiência. 
-                        Oferecemos as melhores coberturas do mercado com atendimento personalizado.
+                    <p class="text-lg md:text-xl mb-8 text-blue-100 max-w-xl mx-auto md:mx-0 animate-on-scroll is-visible" style="animation-delay: 0.2s;">
+                        Encontre as melhores cotações de seguro Auto, Residencial e de Vida com nosso atendimento especializado e mais de 15 anos de experiência.
                     </p>
-                    <a href="#cotacao" class="bg-orange-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-orange-600 transition duration-300 inline-block">
-                        Solicitar Cotação Agora
-                    </a>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start animate-on-scroll is-visible" style="animation-delay: 0.3s;">
+                        <a href="#cotacao" class="bg-orange-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-orange-600 transition duration-300 inline-block">
+                            Solicitar Cotação Agora
+                        </a>
+                        <a href="#servicos" class="bg-white/20 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white/30 transition duration-300 inline-block backdrop-blur-sm">
+                            Nossos Serviços
+                        </a>
+                    </div>
                 </div>
-                <div class="hero-image">
-                    <div class="bg-white/10 rounded-2xl p-8 backdrop-blur-sm">
-                        <i class="fas fa-car text-8xl text-yellow-300 mb-4 block text-center"></i>
-                        <div class="text-center">
-                            <h3 class="text-2xl font-bold mb-2">Seguro Auto</h3>
-                            <p class="text-blue-100">Proteção completa para seu veículo</p>
+                <div class="hero-image relative">
+                    <div id="hero-carousel" class="relative bg-white/10 rounded-2xl backdrop-blur-sm overflow-hidden h-80 flex items-end p-8">
+                        <!-- Slide 1: Auto -->
+                        <div class="hero-slide active" data-slide="0">
+                            <img src="https://images.unsplash.com/photo-1617531322438-4e52934be93a?fit=crop&w=500&h=400" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Chave de carro com um carro moderno ao fundo">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                            <div class="relative z-10">
+                                <h3 class="text-3xl font-bold mb-2">Seguro Auto</h3>
+                                <p class="text-blue-100">Proteção completa para seu veículo</p>
+                            </div>
                         </div>
+                        <!-- Slide 2: Residencial -->
+                        <div class="hero-slide" data-slide="1">
+                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?fit=crop&w=500&h=400" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Casa moderna">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                            <div class="relative z-10">
+                                <h3 class="text-3xl font-bold mb-2">Seguro Residencial</h3>
+                                <p class="text-blue-100">Seu lar seguro contra imprevistos</p>
+                            </div>
+                        </div>
+                        <!-- Slide 3: Vida -->
+                        <div class="hero-slide" data-slide="2">
+                            <img src="https://images.unsplash.com/photo-1560363394-9b935a76c5b6?fit=crop&w=500&h=400" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Família feliz">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                            <div class="relative z-10">
+                                <h3 class="text-3xl font-bold mb-2">Seguro de Vida</h3>
+                                <p class="text-blue-100">Garanta a tranquilidade de quem você ama</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Navigation -->
+                    <div class="absolute bottom-4 right-4 z-20 flex space-x-2">
+                        <button id="hero-prev" class="bg-white/20 hover:bg-white/40 text-white w-8 h-8 rounded-full transition"><i class="fas fa-chevron-left"></i></button>
+                        <button id="hero-next" class="bg-white/20 hover:bg-white/40 text-white w-8 h-8 rounded-full transition"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <!-- Progress Indicators -->
+                    <div id="hero-indicators" class="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 flex space-x-3">
+                        <!-- Indicators will be generated by JS -->
                     </div>
                 </div>
             </div>

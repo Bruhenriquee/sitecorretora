@@ -91,39 +91,83 @@ document.addEventListener('DOMContentLoaded', () => {
         const carousel = document.getElementById('hero-carousel');
         if (!carousel) return;
 
+        const container = carousel.parentElement;
         const slides = carousel.querySelectorAll('.hero-slide');
         const prevBtn = document.getElementById('hero-prev');
         const nextBtn = document.getElementById('hero-next');
+        const indicatorsContainer = document.getElementById('hero-indicators');
         let currentIndex = 0;
         const totalSlides = slides.length;
+        const autoPlayTime = 5000; // 5 segundos
         let autoPlayInterval;
 
+        // Create indicators
+        for (let i = 0; i < totalSlides; i++) {
+            const indicator = document.createElement('button');
+            indicator.classList.add('hero-indicator');
+            indicator.setAttribute('aria-label', `Ir para o slide ${i + 1}`);
+            indicator.dataset.index = i;
+            indicator.innerHTML = '<div class="progress"></div>';
+            indicatorsContainer.appendChild(indicator);
+        }
+        const indicators = indicatorsContainer.querySelectorAll('.hero-indicator');
+
         function showSlide(index) {
+            currentIndex = index;
             slides.forEach((slide, i) => {
                 slide.classList.toggle('active', i === index);
             });
+            indicators.forEach((indicator, i) => {
+                indicator.classList.toggle('active', i === index);
+                // Reset progress bar on all indicators
+                indicator.querySelector('.progress').style.transition = 'none';
+                indicator.querySelector('.progress').style.width = '0%';
+            });
+            // Force reflow to apply the transition reset immediately
+            void indicators[currentIndex].querySelector('.progress').offsetWidth;
+
+            // Start progress animation on the active indicator
+            indicators[currentIndex].querySelector('.progress').style.transition = `width ${autoPlayTime}ms linear`;
+            indicators[currentIndex].querySelector('.progress').style.width = '100%';
         }
 
         function nextSlide() {
-            currentIndex = (currentIndex + 1) % totalSlides;
-            showSlide(currentIndex);
+            const nextIndex = (currentIndex + 1) % totalSlides;
+            showSlide(nextIndex);
         }
 
         function prevSlide() {
-            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-            showSlide(currentIndex);
+            const prevIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            showSlide(prevIndex);
         }
 
         function startAutoPlay() {
-            autoPlayInterval = setInterval(nextSlide, 5000); // Muda a cada 5 segundos
+            stopAutoPlay(); // Prevent multiple intervals
+            autoPlayInterval = setInterval(nextSlide, autoPlayTime);
+            showSlide(currentIndex); // Start the progress bar immediately
         }
 
-        nextBtn.addEventListener('click', () => { clearInterval(autoPlayInterval); nextSlide(); });
-        prevBtn.addEventListener('click', () => { clearInterval(autoPlayInterval); prevSlide(); });
+        function stopAutoPlay() {
+            clearInterval(autoPlayInterval);
+        }
+
+        nextBtn?.addEventListener('click', () => { clearInterval(autoPlayInterval); nextSlide(); });
+        prevBtn?.addEventListener('click', () => { clearInterval(autoPlayInterval); prevSlide(); });
 
         startAutoPlay();
-    }
 
+        indicators?.forEach(indicator => {
+            indicator.addEventListener('click', (e) => {
+                stopAutoPlay();
+                showSlide(parseInt(e.currentTarget.dataset.index));
+            });
+        });
+
+        container?.addEventListener('mouseenter', stopAutoPlay);
+        container?.addEventListener('mouseleave', startAutoPlay);
+
+        showSlide(0); // Initialize first slide
+    }
     initializeHeroCarousel();
 
     // --- Infinite Carousel for Partners ---
@@ -178,40 +222,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- Services Accordion ---
-    function initializeServicesAccordion() {
-        document.querySelectorAll('.service-toggle-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                const currentCard = button.closest('.service-card');
-                const currentDetails = currentCard.querySelector('.service-details');
-                const currentIcon = button.querySelector('.fa-chevron-down');
-                const isOpening = !currentDetails.style.maxHeight || currentDetails.style.maxHeight === '0px';
+    // --- Services Tabs ---
+    function initializeServiceTabs() {
+        const tabButtons = document.querySelectorAll('.service-tab-btn');
+        const tabContents = document.querySelectorAll('.service-tab-content');
 
-                // Fecha todos os outros acordeões abertos
-                document.querySelectorAll('.service-card').forEach(otherCard => {
-                    if (otherCard !== currentCard) {
-                        const otherDetails = otherCard.querySelector('.service-details');
-                        const otherIcon = otherCard.querySelector('.fa-chevron-down');
-                        otherDetails.style.maxHeight = '0px';
-                        otherDetails.style.paddingTop = '0';
-                        otherIcon.classList.remove('rotate-180');
-                    }
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.dataset.target;
+
+                // Update buttons
+                tabButtons.forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.target === targetId);
                 });
 
-                // Abre ou fecha o acordeão clicado
-                if (isOpening) {
-                    currentDetails.style.paddingTop = '1.5rem'; // Adiciona padding-top (equivale a mb-6)
-                    currentDetails.style.maxHeight = currentDetails.scrollHeight + 'px';
-                    currentIcon.classList.add('rotate-180');
-                } else {
-                    currentDetails.style.maxHeight = '0px';
-                    currentDetails.style.paddingTop = '0';
-                    currentIcon.classList.remove('rotate-180');
-                }
+                // Update content
+                tabContents.forEach(content => {
+                    content.classList.toggle('active', content.id === `tab-${targetId}`);
+                });
             });
         });
     }
-    initializeServicesAccordion();
+    initializeServiceTabs();
 
     // --- Modal Logic ---
     const legalModal = document.getElementById('legal-modal');
